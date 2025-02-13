@@ -1,25 +1,25 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import './real-estate.scss'
 import '../ad-post.scss'
 import type { RealEstateTypes } from '../types/RealEstate'
+import './real-estate.scss'
 
-import HandWithKeySvg from '../icons/real-estate/rental-or-sell/HandWithKeySvg.vue'
 import ContractAgreeSvg from '../icons/real-estate/rental-or-sell/ContractAgreeSvg.vue'
+import HandWithKeySvg from '../icons/real-estate/rental-or-sell/HandWithKeySvg.vue'
 import ApartmentColorSvg from '../icons/real-estate/type-of-property/ApartmentColorSvg.vue'
-import HouseColorSvg from '../icons/real-estate/type-of-property/HouseColorSvg.vue'
-import WareHouseSvg from '../icons/real-estate/type-of-property/WareHouseSvg.vue'
-import BuildingColorSvg from '../icons/real-estate/type-of-property/BuildingColorSvg.vue'
-import ShopColorSvg from '../icons/real-estate/type-of-property/ShopColorSvg.vue'
 import BedColorSvg from '../icons/real-estate/type-of-property/BedColorSvg.vue'
-import HotelColorSvg from '../icons/real-estate/type-of-property/HotelColorSvg.vue'
-import FincaColorSvg from '../icons/real-estate/type-of-property/FincaColorSvg.vue'
+import BuildingColorSvg from '../icons/real-estate/type-of-property/BuildingColorSvg.vue'
 import ConsultorioColorSvg from '../icons/real-estate/type-of-property/ConsultorioColorSvg.vue'
+import FincaColorSvg from '../icons/real-estate/type-of-property/FincaColorSvg.vue'
+import HotelColorSvg from '../icons/real-estate/type-of-property/HotelColorSvg.vue'
+import HouseColorSvg from '../icons/real-estate/type-of-property/HouseColorSvg.vue'
+import ShopColorSvg from '../icons/real-estate/type-of-property/ShopColorSvg.vue'
 import TerrenoColorSvg from '../icons/real-estate/type-of-property/TerrenoColorSvg.vue'
+import WareHouseSvg from '../icons/real-estate/type-of-property/WareHouseSvg.vue'
 
-import TitlePost from '../title/TitlePost.vue'
-import GoBack from '~/components/organisms/ad-post/go-back/GoBack.vue'
+import GoBack from '~/c../../title-post.vuepost/go-back/GoBack.vue'
+import TitlePost from '../title/title-post.vue'
 
 const isRentingOrSelling = ref(true)
 const propertyOptionsSection = ref(false)
