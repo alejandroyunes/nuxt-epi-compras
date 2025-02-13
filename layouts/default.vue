@@ -38,6 +38,7 @@ useHead({
   <Loading v-if="loading" />
 
   <div v-else>
+    
     <Header />
     <article>
       <NuxtPage />
