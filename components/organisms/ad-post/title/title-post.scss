@@ -1,0 +1,9 @@
+.title-post {
+  font-size: 24px;
+  margin-top: 44px;
+  text-align: center;
+  color: var(--color-heading);
+  @media (max-width: 1024px) {
+    margin-top: 24px;
+  }
+}
