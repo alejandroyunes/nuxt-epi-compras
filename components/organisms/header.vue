@@ -5,7 +5,6 @@ import { setDarkMode } from '~/utils/utils'
 import InputSearch from '~/components/atoms/input-search.vue'
 import MoonSvg from '~/components/icons/header/MoonSvg.vue'
 import SunSvg from '~/components/icons/header/SunSvg.vue'
-import HamburgerSvg from '~/components/icons/header/HamburgerSvg.vue'
 
 import LocationSlider from '~/components/organisms/right-slider/LocationSlider.vue'
 import UserMenu from '~/components/organisms/user-menu/UserMenu.vue'
@@ -47,9 +46,9 @@ const toggleSlider = () => {
       <div class="nav-two">
 
         <div class="nav-left">
-          <div class="nav-logo-mobile">
-            <NuxtImg src="/logo.png" alt="Denatl Irrigator" format="png" />
-          </div>
+          <NuxtLink to="/" class="nav-logo-mobile">
+            <h1>Epi<span>Compras</span></h1>
+          </NuxtLink>
           <div>
             <LocationSlider />
           </div>
@@ -73,8 +72,8 @@ const toggleSlider = () => {
 <style lang="scss" scoped>
 .header {
   width: 100%;
-  outline: 1px solid red;
-
+  background-color: var(--background-soft);
+  
   .nav {
     display: flex;
     flex-direction: row;
@@ -138,6 +137,16 @@ const toggleSlider = () => {
           @media (max-width: 1024px) {
             display: flex;
             margin-right: 8px;
+            cursor: pointer;
+
+            h1 {
+              color: var(--primary);
+              font-weight: 600;
+            }
+            span {
+              color: var(--heading);
+            }
+            
           }
         }
       }
