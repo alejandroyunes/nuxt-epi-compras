@@ -1,13 +1,14 @@
 <template>
-<svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="12" cy="12" r="5" stroke="var(--background-opposite)" stroke-width="1.5"/>
-<path d="M12 2V4" stroke="var(--background-opposite)" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M12 20V22" stroke="var(--background-opposite)" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M4 12L2 12" stroke="var(--background-opposite)" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M22 12L20 12" stroke="var(--background-opposite)" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M19.7778 4.22266L17.5558 6.25424" stroke="var(--background-opposite)" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M4.22217 4.22266L6.44418 6.25424" stroke="var(--background-opposite)" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M6.44434 17.5557L4.22211 19.7779" stroke="var(--background-opposite)" stroke-width="1.5" stroke-linecap="round"/>
-<path d="M19.7778 19.7773L17.5558 17.5551" stroke="var(--background-opposite)" stroke-width="1.5" stroke-linecap="round"/>
-</svg>
+    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="path-1" clipPath="url(#a)" strokeWidth="1.5" strokeMiterlimit="10">
+        <path d="M5 12H1M23 12h-4M7.05 7.05 4.222 4.222M19.778 19.778 16.95 16.95M7.05 16.95l-2.828 2.828M19.778 4.222 16.95 7.05" strokeLinecap="round" />
+        <path id="path-1" d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"  />
+        <path d="M12 19v4M12 1v4" strokeLinecap="round" />
+      </g>
+      <defs>
+        <clipPath id="a">
+          <path id="path-2" d="M0 0h24v24H0z" />
+        </clipPath>
+      </defs>
+    </svg>
 </template>

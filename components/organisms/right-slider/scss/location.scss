@@ -1,0 +1,138 @@
+.location-outer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .location-icon {
+    margin-right: 10px;
+    @media (max-width: 1024px) {
+      order: 1;
+    }
+  }
+  .location-city {
+    font-size: 16px;
+    color: var(--color-heading);
+    margin-right: 10px;
+  }
+}
+
+.location-search {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 20px;
+
+  .location-form {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .location-input {
+    height: 40px;
+    border-radius: 12px;
+    padding: 8px 0px 8px 36px;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    outline: 1px solid var(--color-border-hover);
+    background-color: var(--color-hover);
+    color: var(--color-heading);
+
+    &:focus {
+      outline: 1px solid var(--primary);
+    }
+  }
+
+  .search {
+    position: absolute;
+    top: 50%;
+    left: 8;
+    transform: translateY(-50%);
+    margin: 0 8px;
+  }
+  .arrow {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 2px;
+    margin-right: 8px;
+    transform: translateY(-50%);
+  }
+}
+
+.location-current {
+  padding: 0 20px;
+  width: 100%;
+
+  .location-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    p {
+      font-size: 18px;
+
+      @media (max-width: 1024px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .location-current-inner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+    padding: 20px 10px;
+    border: 1px solid var(--color-border-hover);
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--color-heading);
+    margin-top: 20px;
+  }
+}
+
+.location-result {
+  width: 100%;
+  padding: 0 20px;
+  margin-top: 20px;
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--color-border-hover);
+    border-radius: 12px;
+    overflow-y: auto;
+    max-height: 200px;
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+      display: block;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-border);
+      border-radius: 10px;
+    }
+
+    li {
+      padding: 10px 20px;
+      cursor: pointer;
+      width: 100%;
+      color: var(--color-heading);
+      &:hover {
+        background-color: var(--color-border-hover);
+        &:first-of-type {
+          border-top-left-radius: 12px;
+          border-top-right-radius: 12px;
+        }
+        &:last-of-type {
+          border-bottom-left-radius: 12px;
+          border-bottom-right-radius: 12px;
+        }
+      }
+    }
+  }
+}

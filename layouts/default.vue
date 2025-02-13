@@ -21,7 +21,7 @@ onMounted(() => {
 
 useHead({
   htmlAttrs: {
-    lang: 'en'
+    lang: 'es'
   },
   link: [
     {
