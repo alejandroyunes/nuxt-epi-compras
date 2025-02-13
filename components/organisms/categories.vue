@@ -95,7 +95,6 @@ const categories: Category[] = [
   }
 ]
 
-
 </script>
 
 <template>

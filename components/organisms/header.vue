@@ -61,7 +61,9 @@ const toggleSlider = () => {
 
           <UserMenu />
 
-          <PlusSvg class="icon" />
+          <NuxtLink to="/publicar">
+            <PlusSvg class="icon" />
+          </NuxtLink>
         </div>
       </div>
 
