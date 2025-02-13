@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import CategoriesC from '~/components/organisms/categories/CategoriesC.vue';
+import ThreeCardSiteInfo from '~/components/organisms/card/3-card-site-info/ThreeCardSiteInfo.vue';
+import AdsC from '~/components/organisms/ads/AdsC.vue';
 
 const title = 'Expert advice and products to improve your oral health'
 const description = 'Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions'
@@ -22,7 +25,9 @@ useSeoMeta({
 </script>
 
 <template>
-  <h1 class="title">Dental Irrigator</h1>
-  <p class="description">Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions</p>
+  <CategoriesC />
+  <AdsC />
+
+  <ThreeCardSiteInfo />
 
 </template>
