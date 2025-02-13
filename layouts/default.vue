@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Header from '~/components/organisms/header.vue'
+import Footer from '~/components/organisms/footer.vue'
 import Loading from '~/components/atoms/loading/loading-background/index.vue'
 
 const loading = ref(true)
@@ -43,6 +44,6 @@ useHead({
     <article>
       <NuxtPage />
     </article>
-
+    <Footer />
   </div>
 </template>

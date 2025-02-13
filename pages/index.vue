@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Categories from '~/components/organisms/categories/categories.vue'
+import Categories from '~/components/organisms/categories.vue'
 
 import ThreeCardSiteInfo from '~/components/organisms/card/3-card-site-info/ThreeCardSiteInfo.vue'
 import RecentAds from '~/components/organisms/recent-ads.vue'
