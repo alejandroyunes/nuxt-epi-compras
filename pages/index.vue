@@ -27,7 +27,5 @@ useSeoMeta({
 <template>
   <CategoriesC />
   <AdsC />
-
   <ThreeCardSiteInfo />
-
 </template>

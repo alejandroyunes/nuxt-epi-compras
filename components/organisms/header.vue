@@ -39,7 +39,7 @@ const toggleSlider = () => {
 
       <div class="nav-one">
         <NuxtLink to="/" class="logo">
-          <HamburgerSvg />
+          <h1>Epi<span>Compras</span></h1>
         </NuxtLink>
         <InputSearch />
       </div>
@@ -73,6 +73,7 @@ const toggleSlider = () => {
 <style lang="scss" scoped>
 .header {
   width: 100%;
+  outline: 1px solid red;
 
   .nav {
     display: flex;
@@ -80,7 +81,7 @@ const toggleSlider = () => {
     justify-content: space-between;
     margin: 0 auto;
     max-width: var(--max-width);
-    padding: 20px 0 20px;
+    padding: 1rem;
 
     @media (max-width: 1024px) {
       flex-direction: column;
@@ -106,11 +107,12 @@ const toggleSlider = () => {
         display: block;
         cursor: pointer;
 
-        svg {
-          width: 32x;
-          height: 32px;
-          fill: red;
-          stroke: red;
+        h1 {
+          color: var(--primary);
+          font-weight: 600;
+        }
+        span {
+          color: var(--heading);
         }
 
         @media (max-width: 1024px) {
@@ -151,6 +153,7 @@ const toggleSlider = () => {
         }
       }
     }
+
   }
 }
 </style>
