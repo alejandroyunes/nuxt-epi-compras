@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { ref } from 'vue'
-import ArrowDownSvg from '~/components/icons/ArrowDownSvg.vue'
+import ArrowDownSvg from '~/components/icons/arrows/ArrowDownSvg.vue'
 
 const isClicked = ref(false)
 

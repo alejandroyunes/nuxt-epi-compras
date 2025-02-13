@@ -14,8 +14,8 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
-      title: 'Best Dental Irrigators for Healthy Teeth & Gums in 2025',
+      htmlAttrs: { lang: 'es' },
+      title: '',
       titleTemplate: '%s',
       link: [
         {
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
       ],
     },
     rootAttrs: {
-      id: 'dental-irrigator',
+      id: 'epicompras',
     },
   },
   image: {

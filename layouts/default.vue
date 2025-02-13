@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import Header from '~/components/organisms/header.vue'
 import Loading from '~/components/atoms/loading/loading-background/index.vue'
 
 const loading = ref(true)
@@ -38,7 +38,7 @@ useHead({
   <Loading v-if="loading" />
 
   <div v-else>
-
+    <Header />
     <article>
       <NuxtPage />
     </article>

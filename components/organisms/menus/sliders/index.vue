@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import ExitSvg from '~/components/icons/ExitSvg.vue'
 
+import ArrowDownSvg from '~/components/icons/arrows/ArrowDownSvg.vue'
 import FacebookSvg from '~/components/icons/social/FacebookSvg.vue'
-import TwitterSvg from '~/components/icons/social/TwitterSvg.vue'
 import InstagramSvg from '~/components/icons/social/InstagramSvg.vue'
-import ArrowDownSvg from '~/components/icons/ArrowDownSvg.vue'
+import TwitterSvg from '~/components/icons/social/TwitterSvg.vue'
 
 const isSubMenuOpen = ref(false)
 
