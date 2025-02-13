@@ -1,44 +1,34 @@
 <script setup lang="ts">
-import './go-back.scss'
-import ArrowRightSvg from '@/components/icons/shared/ArrowRightSvg.vue'
+import ArrowRightSvg from '~/components/icons/shared/ArrowRightSvg.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
 const { goBack } = defineProps<{
-  goBack?: () => void
+  goBack: string
 }>()
 
 </script>
 
 <template>
-  <section class="go-back-wrapper">
-    <div class="go-back" @click="goBack ? goBack() : router.back()">
-      <ArrowRightSvg class="icon" />
-      <p>Volver</p>
-    </div>
-  </section>
+  <div class="go-back" @click="router.push(goBack)">
+    <ArrowRightSvg class="icon" />
+    <p>Volver</p>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-.go-back-wrapper {
-  margin-top: 16px;
-  display: flex;
+.go-back {
+  display: inline-flex;
+  cursor: pointer;
+  color: var(--heading);
+  border-radius: 20px;
+  padding: 6px 13px 6px 10px;
+  border: 1px solid var(--border);
 
-  .go-back {
-    display: flex;
-    width: auto;
-    align-items: center;
-    cursor: pointer;
-    color: var(--color-heading);
-    border-radius: 20px;
-    padding: 6px 13px 6px 10px;
-    border: 1px solid var(--color-border-hover);
-
-    .icon {
-      margin-right: 6px;
-      transform: rotate(180deg);
-    }
+  .icon {
+    margin-right: 6px;
+    transform: rotate(180deg);
   }
 
   @media (max-width: 1024px) {

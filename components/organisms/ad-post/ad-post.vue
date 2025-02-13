@@ -7,24 +7,21 @@ import HouseServiceSvg from '~/components/icons/ad-post/HouseServiceSvg.vue'
 import ServicesSvg from '~/components/icons/ad-post/ServicesSvg.vue'
 
 import TitlePost from './title-post.vue'
+import GoBack from './go-back.vue'
 
 const router = useRouter()
-
-const goBack = () => {
-  router.push('/')
-}
 
 </script>
 
 <template>
   <section>
     <TitlePost title="¡Hola! ¿qué vas a publicar?" />
-    <GoBack :goBack="goBack"  />
+    <GoBack :goBack="'/'" />
 
     <div class="ad-post">
 
-      <NuxtLink :to="'/publicar-anuncio/inmobiliaria'">
-        <div class="ad-post-item">
+      <NuxtLink :to="'/publicar/inmuebles'">
+        <div class="item">
           <p>Inmuebles</p>
           <div class="ad-post-svg">
             <HouseServiceSvg />
@@ -32,21 +29,21 @@ const goBack = () => {
         </div>
       </NuxtLink>
 
-      <div class="ad-post-item">
+      <div class="item">
         <p>Productos</p>
         <div class="ad-post-svg">
           <GamePadSvg />
         </div>
       </div>
 
-      <div class="ad-post-item">
+      <div class="item">
         <p>Vehículos</p>
         <div class="ad-post-svg">
           <CarServiceSvg />
         </div>
       </div>
 
-      <div class="ad-post-item">
+      <div class="item">
         <p>Servicios</p>
         <div class="ad-post-svg">
           <ServicesSvg />
@@ -69,19 +66,23 @@ const goBack = () => {
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
+
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-.ad-post-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  p {
-    color: var(--color-text);
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      color: var(--text);
+    }
   }
 }
+
+
 
 .ad-post-svg {
   width: 180px;
@@ -93,6 +94,7 @@ const goBack = () => {
   margin-top: 20px;
   border: 1px solid var(--primary);
   cursor: pointer;
+
   @media (hover: hover) {
     &:hover {
       background-color: var(--primary);
@@ -103,10 +105,10 @@ const goBack = () => {
     width: 140px;
     height: 120px;
   }
+
   @media (max-width: 480px) {
     width: 120px;
     height: 100px;
   }
 }
-
 </style>

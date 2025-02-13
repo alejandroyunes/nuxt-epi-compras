@@ -1,25 +1,26 @@
 <script setup lang="ts">
-import RealEstate from '~/components/organisms/ad-post/real-estate.vue'
+import RealEstate from '~/components/organisms/ad-post/real-estate.vue';
+
+const title = 'Expert advice and products to improve your oral health'
+const description = 'Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions'
+
+useSeoMeta({
+  title: title,
+  description: description,
+  ogSiteName: 'https://epicompras.com',
+  ogTitle: title,
+  ogDescription: description,
+  ogImage: '/open-graph.webp',
+  ogUrl: 'https://epicompras.com',
+  ogLocale: 'es_CO',
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterImage: '/open-graph.webp',
+  twitterCard: 'summary_large_image',
+})
 
 </script>
 
 <template>
-  <section class="real-estate-post-outer">
-    <div class="real-estate-post-inner">
-      <RealEstate />
-    </div>
-  </section>
+  <RealEstate />
 </template>
-
-
-<style lang="scss">
-.real-estate-post-outer {
-  width: 100%;
-}
-
-.real-estate-post-inner {
-  max-width: var(--tablet-width);
-  margin: 0 auto;
-  padding: 0 20px;
-}
-</style>

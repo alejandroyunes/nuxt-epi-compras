@@ -140,7 +140,7 @@ const previousStep = () => {
 
   <section v-if="isRentingOrSelling">
     <TitlePost title="¿Está buscando vender o arrendar su propiedad?" />
-    <GoBack />
+    <GoBack :goBack="'/'" />
 
     <div class="rent-or-sell">
       <div class="ad-post-item" @click="selectPostType('isRenting')">
@@ -162,7 +162,7 @@ const previousStep = () => {
 
   <section v-if="propertyOptionsSection">
     <TitlePost title="¿Qué tipo de inmueble es?" />
-    <GoBack :goBack="goBack" />
+    <GoBack :goBack="'goBack'" />
 
     <div class="real-estate-options">
       <div v-for="property in propertyTypes" :key="property" class="ad-post-item"
@@ -178,7 +178,7 @@ const previousStep = () => {
 
   <section v-if="propertyDetails">
     <TitlePost title="Empezemos describiendo el inmueble" />
-    <GoBack :goBack="goBack" />
+    <GoBack :goBack="'goBack'" />
 
     <div class="real-estate-info">
       <FormKit type="form" id="property-form" #default="{ value, state }" @submit="submitHandler">
