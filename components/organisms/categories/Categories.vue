@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import TitleC from '~/components/atoms/title/TitleC.vue'
+import Title from '~/components/atoms/title/Title.vue'
 import CategoriesList from '~/components/organisms/categories/CategoriesList.vue'
 </script>
 
 <template>
   <section>
-    <TitleC :view="'ver más'" :title="'Categorías'" :border="true" />
+    <Title :view="'ver más'" :title="'Categorías'" />
     <CategoriesList />
   </section>
 </template>

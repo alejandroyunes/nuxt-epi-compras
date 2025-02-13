@@ -3,25 +3,24 @@
 type Props = {
   view: string
   title: string
-  border: boolean
 }
 
-const { view, title, border } = defineProps<Props>()
+const { view, title } = defineProps<Props>()
 
 </script>
 
 <template>
-  <section class="title-inner" :class="{ 'border': border }">
+  <div class="title-inner">
     <div>
       <h2>{{ title }}</h2>
     </div>
     <div>
       <p>{{ view }}</p>
     </div>
-  </section>
+  </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .title-inner {
   display: flex;
   justify-content: space-between;
@@ -39,8 +38,4 @@ const { view, title, border } = defineProps<Props>()
   }
 }
 
-.border {
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 10px;
-}
 </style>

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import AdsList from '~/components/organisms/ads/AdsList.vue'
-import TitleC from '~/components/atoms/title/TitleC.vue'
+import AdsList from '~/components/organisms/ads/AdsList.vue';
+import Title from '~/components/atoms/title/Title.vue'
 </script>
 
 <template>
-  <TitleC :view="'ver más'" :title="'Anuncios Recientes'" :border="false" />
+  <Title :view="'ver más'" :title="'Anuncios Recientes'" />
   <AdsList />
 </template>
