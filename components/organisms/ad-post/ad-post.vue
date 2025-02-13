@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-import CarServiceSvg from './icons/ad-post/CarServiceSvg.vue'
-import GamePadSvg from './icons/ad-post/GamePadSvg.vue'
-import HouseServiceSvg from './icons/ad-post/HouseServiceSvg.vue'
-import ServicesSvg from './icons/ad-post/ServicesSvg.vue'
+import CarServiceSvg from '~/components/icons/ad-post/CarServiceSvg.vue'
+import GamePadSvg from '~/components/icons/ad-post/GamePadSvg.vue'
+import HouseServiceSvg from '~/components/icons/ad-post/HouseServiceSvg.vue'
+import ServicesSvg from '~/components/icons/ad-post/ServicesSvg.vue'
 
 import TitlePost from './title-post.vue'
 

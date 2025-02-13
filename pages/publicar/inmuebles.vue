@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RealEstate from '~/components/organisms/ad-post/real-estate/RealEstate.vue'
+import RealEstate from '~/components/organisms/ad-post/real-estate.vue'
 
 </script>
 

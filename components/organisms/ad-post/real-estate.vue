@@ -1,25 +1,32 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import '../ad-post.scss'
-import type { RealEstateTypes } from '../types/RealEstate'
-import './real-estate.scss'
+import ContractAgreeSvg from '~/components/icons/ad-post/real-estate/rental-or-sell/ContractAgreeSvg.vue'
+import HandWithKeySvg from '~/components/icons/ad-post//real-estate/rental-or-sell/HandWithKeySvg.vue'
+import ApartmentColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ApartmentColorSvg.vue'
+import BedColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/BedColorSvg.vue'
+import BuildingColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/BuildingColorSvg.vue'
+import ConsultorioColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ConsultorioColorSvg.vue'
+import FincaColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/FincaColorSvg.vue'
+import HotelColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/HotelColorSvg.vue'
+import HouseColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/HouseColorSvg.vue'
+import ShopColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ShopColorSvg.vue'
+import TerrenoColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/TerrenoColorSvg.vue'
+import WareHouseSvg from '~/components/icons/ad-post//real-estate/type-of-property/WareHouseSvg.vue'
 
-import ContractAgreeSvg from '../icons/real-estate/rental-or-sell/ContractAgreeSvg.vue'
-import HandWithKeySvg from '../icons/real-estate/rental-or-sell/HandWithKeySvg.vue'
-import ApartmentColorSvg from '../icons/real-estate/type-of-property/ApartmentColorSvg.vue'
-import BedColorSvg from '../icons/real-estate/type-of-property/BedColorSvg.vue'
-import BuildingColorSvg from '../icons/real-estate/type-of-property/BuildingColorSvg.vue'
-import ConsultorioColorSvg from '../icons/real-estate/type-of-property/ConsultorioColorSvg.vue'
-import FincaColorSvg from '../icons/real-estate/type-of-property/FincaColorSvg.vue'
-import HotelColorSvg from '../icons/real-estate/type-of-property/HotelColorSvg.vue'
-import HouseColorSvg from '../icons/real-estate/type-of-property/HouseColorSvg.vue'
-import ShopColorSvg from '../icons/real-estate/type-of-property/ShopColorSvg.vue'
-import TerrenoColorSvg from '../icons/real-estate/type-of-property/TerrenoColorSvg.vue'
-import WareHouseSvg from '../icons/real-estate/type-of-property/WareHouseSvg.vue'
+import TitlePost from './title-post.vue'
+import GoBack from './go-back.vue'
 
-import GoBack from '~/c../../title-post.vuepost/go-back/GoBack.vue'
-import TitlePost from '../title/title-post.vue'
+interface PropertyAddress {
+  propertyAddress: string
+  propertyTown: string
+  propertyState: string
+  propertyCity: string
+}
+
+export interface RealEstateTypes {
+  [propertyDetails: string]: PropertyAddress
+}
 
 const isRentingOrSelling = ref(true)
 const propertyOptionsSection = ref(false)
@@ -231,3 +238,141 @@ const previousStep = () => {
   </section>
 
 </template>
+
+
+<style lang="scss" scoped>
+.rent-or-sell {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.real-estate-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 20px;
+  gap: 20px;
+
+  @media (hover: hover) {
+    a:hover {
+      background-color: var(--primary);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.real-estate-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 24px auto 0;
+
+  .formkit-form .formkit-actions {
+    display: none;
+  }
+
+  .formkit-messages {
+    list-style-type: none;
+    color: red;
+  }
+
+  .label {
+    color: var(--color-heading);
+    font-size: 1rem;
+  }
+
+  input {
+    margin-top: 6px;
+    height: 40px;
+    border-radius: 12px;
+    padding: 10px;
+    border: none;
+    outline: 1px solid var(--color-border-hover);
+    width: 100%;
+    background-color: transparent;
+    color: var(--color-heading);
+    font-size: 1.2rem;
+
+    &:focus {
+      outline: 1px solid var(--primary);
+    }
+
+    &::placeholder {
+      color: var(--color-text);
+      font-size: 1rem;
+    }
+  }
+
+  .grid-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 28px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .option {
+      position: relative;
+
+      .formkit-messages {
+        position: absolute;
+        top: 70px;
+        background: transparent;
+        list-style-type: none;
+        left: -29px;
+        color: red;
+      }
+    }
+  }
+
+  .grid-column:first-of-type {
+    margin-top: 20px;
+  }
+
+  .form-action-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 12px;
+    width: 100%;
+    max-width: 830px;
+    gap: 28px;
+
+    .btn-disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .btn-custom {
+      width: 100%;
+      height: 50px;
+      font-size: 15px;
+      border-radius: 5px;
+      font-weight: 700;
+      margin-top: 30px;
+      cursor: pointer;
+      background-color: var(--primary);
+    }
+
+    .btn-cancel-previous {
+      border: 1px solid var(--primary);
+      background-color: transparent;
+      color: var(--color-heading);
+    }
+
+    .btn-next-submit {
+      border: none;
+      color: white;
+    }
+  }
+}
+</style>
