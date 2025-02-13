@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import AdsC from '~/components/organisms/ads/AdsC.vue';
-import ThreeCardSiteInfo from '~/components/organisms/card/3-card-site-info/ThreeCardSiteInfo.vue';
-import Categories from '~/components/organisms/categories/categories.vue';
+import Categories from '~/components/organisms/categories/categories.vue'
+
+import ThreeCardSiteInfo from '~/components/organisms/card/3-card-site-info/ThreeCardSiteInfo.vue'
+import RecentAds from '~/components/organisms/recent-ads.vue'
 
 const title = 'Expert advice and products to improve your oral health'
 const description = 'Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions'
@@ -25,6 +26,6 @@ useSeoMeta({
 
 <template>
   <Categories />
-  <AdsC />
+  <RecentAds />
   <ThreeCardSiteInfo />
 </template>
