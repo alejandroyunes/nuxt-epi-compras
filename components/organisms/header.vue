@@ -7,7 +7,7 @@ import MoonSvg from '~/components/icons/header/MoonSvg.vue'
 import SunSvg from '~/components/icons/header/SunSvg.vue'
 
 import LocationSlider from '~/components/organisms/right-slider/LocationSlider.vue'
-import UserMenu from '~/components/organisms/user-menu/UserMenu.vue'
+import UserMenu from '~/components/organisms/menus/user-menu.vue'
 import PlusSvg from '~/components/icons/header/PlusSvg.vue'
 
 const isSliderOpen = ref<boolean | undefined>(undefined)
