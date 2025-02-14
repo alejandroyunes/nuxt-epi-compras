@@ -7,8 +7,10 @@ import MessageSvg from "~/components/icons/menu/MessagesSvg.vue"
 import AdsSvg from "~/components/icons/menu/AdsSvg.vue"
 import HeartSvg from "~/components/icons/shared/HeartSvg.vue"
 import ProfileSvg from "~/components/icons/menu/ProfileSvg.vue"
-import NotificationSlider from '~/components/organisms/right-slider/NotificationSlider.vue'
 import CircleLoader from '~/components/atoms/loaders/circle-icon/CircleLoader.vue'
+
+import NotificationSlider from '~/components/organisms/right-slider/notification-slider.vue'
+
 
 const showDropdown = ref(false)
 const logged = ref(false)

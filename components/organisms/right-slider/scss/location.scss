@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+
   .location-icon {
     margin-right: 10px;
     @media (max-width: 1024px) {
@@ -10,7 +11,7 @@
   }
   .location-city {
     font-size: 16px;
-    color: var(--color-heading);
+    color: var(--heading);
     margin-right: 10px;
   }
 }
@@ -35,8 +36,8 @@
     width: 100%;
     border: none;
     font-size: 16px;
-    outline: 1px solid var(--color-border-hover);
-    background-color: var(--color-hover);
+    outline: 1px solid var(--border);
+    background-color: var(--background);
     color: var(--color-heading);
 
     &:focus {
@@ -86,10 +87,10 @@
     gap: 10px;
     flex-direction: row;
     padding: 20px 10px;
-    border: 1px solid var(--color-border-hover);
+    border: 1px solid var(--border);
     border-radius: 12px;
     cursor: pointer;
-    color: var(--color-heading);
+    color: var(--heading);
     margin-top: 20px;
   }
 }
@@ -102,7 +103,7 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-    border: 1px solid var(--color-border-hover);
+    border: 1px solid var(--border);
     border-radius: 12px;
     overflow-y: auto;
     max-height: 200px;
