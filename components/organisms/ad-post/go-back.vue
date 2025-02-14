@@ -4,15 +4,25 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
-const { goBackUrl } = defineProps<{
-  goBackUrl: string
-
+const { goBackUrl, goBack } = defineProps<{
+  goBackUrl?: string
+  goBack?: () => void
 }>()
+
+const handleGoBack = () => {
+  if (goBackUrl) {
+    router.push(goBackUrl)
+  } else if (goBack) {
+    goBack()
+  } else {
+    router.back()
+  }
+}
 
 </script>
 
 <template>
-  <div class="go-back" @click="router.push(goBackUrl)">
+  <div class="go-back" @click="handleGoBack">
     <div class="inner">
       <ArrowRightSvg class="icon" />
       <p>Volver</p>

@@ -25,16 +25,13 @@ interface PropertyAddress {
 }
 
 export interface RealEstateTypes {
-  [propertyDetails: string]: PropertyAddress
+  [isFormDetails: string]: PropertyAddress
 }
 
 const isRentingOrSelling = ref(true)
-const selectedTypeOfPropery = ref(false)
-const propertyDetails = ref(false)
+const isTypeOfProperySelected = ref(false)
+const isFormDetails = ref(false)
 const isFormSubmitting = ref(false)
-const next = ref(false)
-const totalSteps = 6
-let currentStep = ref(1)
 
 const typeOfPost = ref<'isRenting' | 'isSelling' | undefined>(undefined)
 const selectedPropertyType = ref<string | undefined>(undefined)
@@ -43,22 +40,29 @@ const propertyTypes = ref(['Apartmentos', 'Casas', 'Bodega', 'Locales', 'Edifici
 const selectPostType = (selection: 'isRenting' | 'isSelling') => {
   typeOfPost.value = selection
   isRentingOrSelling.value = false
-  selectedTypeOfPropery.value = true
+  isTypeOfProperySelected.value = true
 }
 
 const handlePropertySelection = (propertyType: string) => {
   selectedPropertyType.value = propertyType
-  selectedTypeOfPropery.value = false
-  propertyDetails.value = true
+  isTypeOfProperySelected.value = false
+  isFormDetails.value = true
 }
 
-const goBack = () => {
-  if (selectedTypeOfPropery.value) {
+const goBackFirstStep = () => {
+  if (isTypeOfProperySelected.value) {
     isRentingOrSelling.value = true
-    selectedTypeOfPropery.value = false
-  } else if (propertyDetails.value) {
-    selectedTypeOfPropery.value = true
-    propertyDetails.value = false
+    isTypeOfProperySelected.value = false
+  } else if (isFormDetails.value) {
+    isTypeOfProperySelected.value = true
+    isFormDetails.value = false
+  }
+}
+
+const goBackSecondStep = () => {
+  if (isFormDetails.value) {
+    isTypeOfProperySelected.value = true
+    isFormDetails.value = false
   }
 }
 
@@ -93,44 +97,6 @@ const submitHandler = async (form: any) => {
   // }
 }
 
-const onGetStepName = () => {
-  switch (currentStep.value) {
-    case 1:
-      return 'propertyDetails'
-    case 2:
-      return 'propertyDimensions'
-    case 3:
-      return 'propertyFeatures'
-    default:
-      return ''
-  }
-}
-
-
-const objectCompleted = (object: RealEstateTypes): boolean => {
-  if (!object) return false
-  console.log('object', object)
-  return true
-}
-
-const nextStep = (value: RealEstateTypes) => {
-  // if (!objectCompleted(value[onGetStepName()])) {
-  //   next.value = false
-  //   return
-  // }
-
-  if (currentStep.value < totalSteps) {
-    currentStep.value++
-  }
-}
-
-const previousStep = () => {
-  if (currentStep.value > 1) {
-    next.value = true
-    currentStep.value--
-  }
-}
-
 </script>
 
 <template>
@@ -154,15 +120,14 @@ const previousStep = () => {
         </div>
       </div>
     </div>
-
   </section>
 
-  <section v-if="selectedTypeOfPropery">
+  <section v-if="isTypeOfProperySelected">
     <TitlePost title="¿Qué tipo de inmueble es?" />
-    <GoBack :goBackUrl="'goBack'" />
+    <GoBack :goBack="goBackFirstStep" />
 
-    <div class="real-estate-options">
-      <div v-for="property in propertyTypes" :key="property" class="ad-post-item"
+    <div class="type-of-property">
+      <div v-for="property in propertyTypes" :key="property" class="item"
         @click="handlePropertySelection(property)">
         <p>{{ property }}</p>
         <div class="ad-post-svg">
@@ -173,14 +138,14 @@ const previousStep = () => {
 
   </section>
 
-  <section v-if="propertyDetails">
+  <section v-if="isFormDetails">
     <TitlePost title="Empezemos describiendo el inmueble" />
-    <GoBack :goBackUrl="'goBack'" />
+    <GoBack :goBack="goBackSecondStep" />
 
-    <div class="real-estate-info">
+    <div class="form-details">
       <FormKit type="form" id="property-form" #default="{ value, state }" @submit="submitHandler">
 
-        <FormKit type="group" name="propertyDetails" v-if="currentStep === 1">
+        <FormKit type="group" name="isFormDetails">
 
           <div class="grid-column">
 
@@ -214,19 +179,10 @@ const previousStep = () => {
         </FormKit>
 
         <div class="form-action-buttons">
-          <button class="btn-custom btn-cancel-previous" type="button" @click="previousStep" v-show="currentStep > 1">
+          <button class="btn-custom btn-cancel-previous" type="button">
             Atrás
           </button>
 
-          <button class="btn-custom btn-next-submit" @click="nextStep(value as RealEstateTypes)"
-            v-show="currentStep < totalSteps" :class="{ 'btn-disabled': !next }" type="button">
-            Siguiente
-          </button>
-
-          <button class="btn-custom btn-next-submit" :class="{ 'btn-disabled': !state.valid }"
-            v-show="currentStep === totalSteps" type="submit" :disabled="isFormSubmitting">
-            Enviar
-          </button>
         </div>
 
       </FormKit>
@@ -247,28 +203,19 @@ const previousStep = () => {
   margin: 20px auto 0;
 }
 
-.real-estate-options {
+.type-of-property {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
-
-  @media (hover: hover) {
-    a:hover {
-      background-color: var(--primary);
-    }
-  }
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  max-width: var(--max-width);
+  margin: 20px auto 0;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 }
 
-.real-estate-info {
+.form-details {
   display: flex;
   flex-direction: column;
   max-width: 800px;
@@ -374,7 +321,7 @@ const previousStep = () => {
     }
   }
 }
-
+//shared
 .item {
   display: flex;
   flex-direction: column;
