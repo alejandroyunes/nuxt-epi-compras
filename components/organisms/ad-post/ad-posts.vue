@@ -13,7 +13,7 @@ import GoBack from './go-back.vue'
 <template>
   <section>
     <TitlePost title="¡Hola! ¿qué vas a publicar?" />
-    <GoBack :goBack="'/'" />
+    <GoBack :goBackUrl="'/'" />
 
     <div class="ad-post">
 

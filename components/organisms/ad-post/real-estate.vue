@@ -29,13 +29,12 @@ export interface RealEstateTypes {
 }
 
 const isRentingOrSelling = ref(true)
-const propertyOptionsSection = ref(false)
+const selectedTypeOfPropery = ref(false)
 const propertyDetails = ref(false)
 const isFormSubmitting = ref(false)
 const next = ref(false)
 const totalSteps = 6
 let currentStep = ref(1)
-
 
 const typeOfPost = ref<'isRenting' | 'isSelling' | undefined>(undefined)
 const selectedPropertyType = ref<string | undefined>(undefined)
@@ -44,21 +43,21 @@ const propertyTypes = ref(['Apartmentos', 'Casas', 'Bodega', 'Locales', 'Edifici
 const selectPostType = (selection: 'isRenting' | 'isSelling') => {
   typeOfPost.value = selection
   isRentingOrSelling.value = false
-  propertyOptionsSection.value = true
+  selectedTypeOfPropery.value = true
 }
 
 const handlePropertySelection = (propertyType: string) => {
   selectedPropertyType.value = propertyType
-  propertyOptionsSection.value = false
+  selectedTypeOfPropery.value = false
   propertyDetails.value = true
 }
 
 const goBack = () => {
-  if (propertyOptionsSection.value) {
+  if (selectedTypeOfPropery.value) {
     isRentingOrSelling.value = true
-    propertyOptionsSection.value = false
+    selectedTypeOfPropery.value = false
   } else if (propertyDetails.value) {
-    propertyOptionsSection.value = true
+    selectedTypeOfPropery.value = true
     propertyDetails.value = false
   }
 }
@@ -138,7 +137,7 @@ const previousStep = () => {
 
   <section v-if="isRentingOrSelling">
     <TitlePost title="¿Está buscando vender o arrendar su propiedad?" />
-    <GoBack :goBack="'/publicar'" />
+    <GoBack :goBackUrl="'/publicar'" />
 
     <div class="rent-or-sell">
       <div class="item" @click="selectPostType('isRenting')">
@@ -158,9 +157,9 @@ const previousStep = () => {
 
   </section>
 
-  <section v-if="propertyOptionsSection">
+  <section v-if="selectedTypeOfPropery">
     <TitlePost title="¿Qué tipo de inmueble es?" />
-    <GoBack :goBack="'goBack'" />
+    <GoBack :goBackUrl="'goBack'" />
 
     <div class="real-estate-options">
       <div v-for="property in propertyTypes" :key="property" class="ad-post-item"
@@ -176,7 +175,7 @@ const previousStep = () => {
 
   <section v-if="propertyDetails">
     <TitlePost title="Empezemos describiendo el inmueble" />
-    <GoBack :goBack="'goBack'" />
+    <GoBack :goBackUrl="'goBack'" />
 
     <div class="real-estate-info">
       <FormKit type="form" id="property-form" #default="{ value, state }" @submit="submitHandler">
