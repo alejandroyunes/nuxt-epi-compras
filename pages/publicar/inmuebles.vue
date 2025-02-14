@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import RealEstate from '~/components/organisms/ad-post/real-estate.vue'
+import SafetyTips from '~/components/organisms/safety-tips.vue'
 
 const title = 'Expert advice and products to improve your oral health'
 const description = 'Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions'
@@ -23,4 +24,5 @@ useSeoMeta({
 
 <template>
   <RealEstate />
+  <SafetyTips />
 </template>

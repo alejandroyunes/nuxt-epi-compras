@@ -6,7 +6,7 @@ import PostSvg from '~/components/icons/safety-tips/PostSvg.vue'
 </script>
 
 <template>
-  <div class="site-info-container">
+  <section class="site-info-container">
     <div class="column">
       <PostSvg />
       <h2>Publica tu Anuncio</h2>
@@ -22,7 +22,7 @@ import PostSvg from '~/components/icons/safety-tips/PostSvg.vue'
       <h2>Cierra el Trato</h2>
       <p>En esta fase, podrás concretar la venta y cerrar el trato de manera segura y en un lugar confiable.</p>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped lang="scss">
@@ -30,18 +30,25 @@ import PostSvg from '~/components/icons/safety-tips/PostSvg.vue'
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  margin-top: 44px;
+  max-width: var(--max-width);
+  margin: 100px auto 0;
+
   .column {
     text-align: center;
 
     h2 {
       font-size: 20px;
       margin-bottom: 10px;
-      color: var(--color-heading);
+      color: var(--heading);
     }
 
     p {
       font-size: 16px;
+    }
+
+    svg {
+      width: 60px;
+      height: 60px;
     }
   }
 

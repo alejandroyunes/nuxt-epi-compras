@@ -16,6 +16,7 @@ import WareHouseSvg from '~/components/icons/ad-post//real-estate/type-of-proper
 
 import TitlePost from './title-post.vue'
 import GoBack from './go-back.vue'
+import ContactForm from '../contact-form/contact-form.vue'
 
 interface PropertyAddress {
   propertyAddress: string
@@ -127,8 +128,7 @@ const submitHandler = async (form: any) => {
     <GoBack :goBack="goBackFirstStep" />
 
     <div class="type-of-property">
-      <div v-for="property in propertyTypes" :key="property" class="item"
-        @click="handlePropertySelection(property)">
+      <div v-for="property in propertyTypes" :key="property" class="item" @click="handlePropertySelection(property)">
         <p>{{ property }}</p>
         <div class="ad-post-svg">
           <component :is="getPropertyIcon(property)" />
@@ -141,55 +141,8 @@ const submitHandler = async (form: any) => {
   <section v-if="isFormDetails">
     <TitlePost title="Empezemos describiendo el inmueble" />
     <GoBack :goBack="goBackSecondStep" />
-
-    <div class="form-details">
-      <FormKit type="form" id="property-form" #default="{ value, state }" @submit="submitHandler">
-
-        <FormKit type="group" name="isFormDetails">
-
-          <div class="grid-column">
-
-            <div class="option">
-              <label class="label" for="propertyAddress">Dirección</label>
-              <FormKit type="text" name="propertyAddress" validation="required"
-                placeholder="Incluye calle, número, comuna y ciudad." />
-            </div>
-
-            <div class="option">
-              <label class="label" for="propertyTown">Barrio</label>
-              <FormKit type="text" name="propertyTown" validation="required" placeholder="Belén" />
-            </div>
-
-          </div>
-
-          <div class="grid-column">
-
-            <div class="option">
-              <label class="label" for="propertyState">Departamento</label>
-              <FormKit type="text" name="propertyState" validation="required" placeholder="Antioquia" />
-            </div>
-
-            <div class="option">
-              <label class="label" for="propertyCity">Municipio o ciudad</label>
-              <FormKit type="text" name="propertyCity" validation="required" placeholder="Medellín" />
-            </div>
-
-          </div>
-
-        </FormKit>
-
-        <div class="form-action-buttons">
-          <button class="btn-custom btn-cancel-previous" type="button">
-            Atrás
-          </button>
-
-        </div>
-
-      </FormKit>
-
-    </div>
+    <ContactForm />
   </section>
-
 </template>
 
 
@@ -221,41 +174,45 @@ const submitHandler = async (form: any) => {
   max-width: 800px;
   margin: 24px auto 0;
 
-  .formkit-form .formkit-actions {
-    display: none;
-  }
 
-  .formkit-messages {
-    list-style-type: none;
-    color: red;
-  }
+  .formkit-form {
+    // display: none;
+    // border: 1px solid red;
+    // outline: 1px solid red;
 
-  .label {
-    color: var(--color-heading);
-    font-size: 1rem;
-  }
-
-  input {
-    margin-top: 6px;
-    height: 40px;
-    border-radius: 12px;
-    padding: 10px;
-    border: none;
-    outline: 1px solid var(--color-border-hover);
-    width: 100%;
-    background-color: transparent;
-    color: var(--color-heading);
-    font-size: 1.2rem;
-
-    &:focus {
-      outline: 1px solid var(--primary);
+    .formkit-messages {
+      list-style-type: none;
+      color: var(--warning);
     }
 
-    &::placeholder {
-      color: var(--color-text);
+    .label {
+      color: var(--heading);
       font-size: 1rem;
     }
+
+    input {
+      margin-top: 6px;
+      height: 40px;
+      border-radius: 12px;
+      padding: 10px;
+      border: none;
+      outline: 1px solid var(--border);
+      width: 100%;
+      background-color: transparent;
+      color: var(--heading);
+      font-size: 1.2rem;
+      outline: 10px solid red;
+      &:focus {
+        outline: 1px solid var(--primary);
+      }
+
+      &::placeholder {
+        color: var(--text);
+        font-size: 1rem;
+      }
+    }
   }
+
 
   .grid-column {
     display: grid;
@@ -276,7 +233,7 @@ const submitHandler = async (form: any) => {
         background: transparent;
         list-style-type: none;
         left: -29px;
-        color: red;
+        color: var(--warning);
       }
     }
   }
@@ -321,6 +278,7 @@ const submitHandler = async (form: any) => {
     }
   }
 }
+
 //shared
 .item {
   display: flex;
