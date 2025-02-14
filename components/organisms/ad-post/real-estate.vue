@@ -94,8 +94,6 @@ const submitHandler = async (form: any) => {
   // }
 }
 
-
-
 const onGetStepName = () => {
   switch (currentStep.value) {
     case 1:
@@ -140,17 +138,17 @@ const previousStep = () => {
 
   <section v-if="isRentingOrSelling">
     <TitlePost title="¿Está buscando vender o arrendar su propiedad?" />
-    <GoBack :goBack="'/'" />
+    <GoBack :goBack="'/publicar'" />
 
     <div class="rent-or-sell">
-      <div class="ad-post-item" @click="selectPostType('isRenting')">
+      <div class="item" @click="selectPostType('isRenting')">
         <p>Arrendar</p>
         <div class="ad-post-svg">
           <HandWithKeySvg />
         </div>
       </div>
 
-      <div class="ad-post-item" @click="selectPostType('isSelling')">
+      <div class="item" @click="selectPostType('isSelling')">
         <p>Vender</p>
         <div class="ad-post-svg">
           <ContractAgreeSvg />
@@ -244,8 +242,10 @@ const previousStep = () => {
 .rent-or-sell {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  margin-top: 20px;
+  justify-content: center;
   gap: 20px;
+  max-width: var(--max-width);
+  margin: 20px auto 0;
 }
 
 .real-estate-options {
@@ -373,6 +373,44 @@ const previousStep = () => {
       border: none;
       color: white;
     }
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    color: var(--text);
+  }
+}
+
+.ad-post-svg {
+  width: 180px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  border: 1px solid var(--primary);
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--primary);
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 140px;
+    height: 120px;
+  }
+
+  @media (max-width: 480px) {
+    width: 120px;
+    height: 100px;
   }
 }
 </style>

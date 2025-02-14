@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
 
 import CarServiceSvg from '~/components/icons/ad-post/CarServiceSvg.vue'
 import GamePadSvg from '~/components/icons/ad-post/GamePadSvg.vue'
@@ -8,8 +7,6 @@ import ServicesSvg from '~/components/icons/ad-post/ServicesSvg.vue'
 
 import TitlePost from './title-post.vue'
 import GoBack from './go-back.vue'
-
-const router = useRouter()
 
 </script>
 
@@ -59,8 +56,9 @@ const router = useRouter()
 .ad-post {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin-top: 20px;
+  margin: 20px auto 0;
   gap: 20px;
+  max-width: var(--max-width);
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(3, 1fr);
@@ -80,35 +78,33 @@ const router = useRouter()
       color: var(--text);
     }
   }
-}
 
+  .ad-post-svg {
+    width: 180px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    border: 1px solid var(--primary);
+    cursor: pointer;
 
-
-.ad-post-svg {
-  width: 180px;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  border: 1px solid var(--primary);
-  cursor: pointer;
-
-  @media (hover: hover) {
-    &:hover {
-      background-color: var(--primary);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--primary);
+      }
     }
-  }
 
-  @media (max-width: 768px) {
-    width: 140px;
-    height: 120px;
-  }
+    @media (max-width: 768px) {
+      width: 140px;
+      height: 120px;
+    }
 
-  @media (max-width: 480px) {
-    width: 120px;
-    height: 100px;
+    @media (max-width: 480px) {
+      width: 120px;
+      height: 100px;
+    }
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import RealEstate from '~/components/organisms/ad-post/real-estate.vue';
+import RealEstate from '~/components/organisms/ad-post/real-estate.vue'
 
 const title = 'Expert advice and products to improve your oral health'
 const description = 'Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions'
