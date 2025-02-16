@@ -6,6 +6,7 @@ import InputSearch from '~/components/atoms/input-search.vue'
 import MoonSvg from '~/components/icons/header/MoonSvg.vue'
 import SunSvg from '~/components/icons/header/SunSvg.vue'
 
+import ToolTip from '~/components/atoms/tool-tip.vue'
 import PlusSvg from '~/components/icons/header/PlusSvg.vue'
 import UserMenu from '~/components/organisms/menus/user-menu.vue'
 import LocationSlider from '~/components/organisms/right-slider/location.vue'
@@ -56,12 +57,15 @@ const handleTheme = () => {
 
           <UserMenu />
 
-          <NuxtLink to="/publicar">
-            <PlusSvg class="icon" />
-          </NuxtLink>
+          <div class="publish">
+            <NuxtLink to="/publicar">
+              <PlusSvg />
+            </NuxtLink>
+            <ToolTip :text="'Publicar'" :position="'right'" />
+          </div>
+
         </div>
       </div>
-
     </nav>
   </header>
 </template>
@@ -108,6 +112,7 @@ const handleTheme = () => {
           color: var(--primary);
           font-weight: 600;
         }
+
         span {
           color: var(--heading);
         }
@@ -141,10 +146,11 @@ const handleTheme = () => {
               color: var(--primary);
               font-weight: 600;
             }
+
             span {
               color: var(--heading);
             }
-            
+
           }
         }
       }
@@ -157,6 +163,11 @@ const handleTheme = () => {
         .sun,
         .moon {
           margin-right: 10px;
+        }
+
+        .publish {
+          position: relative;
+          cursor: pointer;
         }
       }
     }
