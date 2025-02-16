@@ -114,6 +114,7 @@ const handleFavorite = (adId: string) => {
     favorites.value = favorites.value.filter(id => id !== adId)
   }
 }
+
 </script>
 
 <template>
@@ -125,9 +126,9 @@ const handleFavorite = (adId: string) => {
         <div class="li-container">
 
           <div class="li-item">
-            <RouterLink :to="ad.url">
-              <img class="ad-image" :src="ad.image" alt="" width="300px" height="165px">
-            </RouterLink>
+            <NuxtLink :to="ad.url">
+              <NuxtImg class="ad-image" :src="ad.image" alt="" width="300px" height="165px" />
+            </NuxtLink>
             <div class="ads-info-inner">
               <div class="ads-title">
                 <h3>{{ ad.title }}</h3>
@@ -169,7 +170,7 @@ const handleFavorite = (adId: string) => {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--color-border);
+    background-color: var(--border);
     border-radius: 10px;
   }
 
@@ -183,12 +184,12 @@ const handleFavorite = (adId: string) => {
       margin-right: 16px;
       position: relative;
       list-style-type: none;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      box-shadow: var(--shadow);
       border-top-left-radius: 12px;
       border-top-right-radius: 12px;
       border-bottom-left-radius: 12px;
       border-bottom-right-radius: 12px;
-      background-color: var(--color-background-mute);
+      background-color: var(--background);
 
       img {
         width: 280px;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import Categories from '~/components/organisms/categories.vue'
-import RecentAds from '~/components/organisms/product-card.vue'
+import ProductCard from '~/components/organisms/product-card.vue'
 import SafetyTips from '~/components/organisms/safety-tips.vue'
 
 const title = 'Expert advice and products to improve your oral health'
@@ -26,6 +26,6 @@ useSeoMeta({
 
 <template>
   <Categories />
-  <RecentAds />
+  <ProductCard />
   <SafetyTips />
 </template>

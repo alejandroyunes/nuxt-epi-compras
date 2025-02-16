@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/seo',
     '@nuxt/image',
-    '@zadigetvoltaire/nuxt-gtm',
+    // '@zadigetvoltaire/nuxt-gtm',
     '@nuxtjs/sitemap',
   ],
 
@@ -38,17 +38,17 @@ export default defineNuxtConfig({
     },
   },
 
-  gtm: {
-    id: '',
-    defer: false,
-    compatibility: false,
-    enabled: true,
-    debug: false,
-    loadScript: true,
-    enableRouterSync: true,
-    trackOnNextTick: false,
-    devtools: false,
-  },
+  // gtm: {
+  //   id: '',
+  //   defer: false,
+  //   compatibility: false,
+  //   enabled: true,
+  //   debug: false,
+  //   loadScript: true,
+  //   enableRouterSync: true,
+  //   trackOnNextTick: false,
+  //   devtools: false,
+  // },
 
   compatibilityDate: '2025-02-11',
 })

@@ -69,15 +69,16 @@ const handleTheme = () => {
 <style lang="scss" scoped>
 .header {
   width: 100%;
-  background-color: var(--background-soft);
-  
+  background-color: var(--background);
+  box-shadow: var(--shadow);
+
   .nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 0 auto;
     max-width: var(--max-width);
-    padding: 1rem;
+    padding: .6rem;
 
     @media (max-width: 1024px) {
       flex-direction: column;
