@@ -105,7 +105,7 @@ const isLoading = ref(true)
 
 setTimeout(() => {
   isLoading.value = false
-}, 3000)
+}, 300)
 
 const handleFavorite = (adId: string) => {
   if (!favorites.value.includes(adId)) {
@@ -155,7 +155,8 @@ const handleFavorite = (adId: string) => {
   display: flex;
   justify-content: space-between;
   padding-bottom: 12px;
-  margin-top: 20px;
+  margin: 20px auto 0;
+  max-width: var(--max-width);
   list-style: none;
   overflow-x: scroll;
   overflow-y: hidden;

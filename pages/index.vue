@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
 import Categories from '~/components/organisms/categories.vue'
+import RecentAds from '~/components/organisms/product-card.vue'
 import SafetyTips from '~/components/organisms/safety-tips.vue'
-import RecentAds from '~/components/organisms/recent-ads.vue'
 
 const title = 'Expert advice and products to improve your oral health'
 const description = 'Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions'

@@ -39,7 +39,7 @@ export default defineNuxtConfig({
   },
 
   gtm: {
-    id: 'GTM-TPWWTX3Z',
+    id: '',
     defer: false,
     compatibility: false,
     enabled: true,

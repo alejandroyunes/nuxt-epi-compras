@@ -120,7 +120,8 @@ ul {
   list-style: none;
   overflow-x: scroll;
   overflow-y: hidden;
-  margin-top: 24px;
+  margin: 24px auto 0; 
+  max-width: var(--max-width);
   scroll-snap-type: x mandatory;
 
   &::-webkit-scrollbar {

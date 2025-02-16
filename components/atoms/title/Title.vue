@@ -10,7 +10,7 @@ const { view, title } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="title-inner">
+  <div class="title">
     <div>
       <h2>{{ title }}</h2>
     </div>
@@ -21,21 +21,13 @@ const { view, title } = defineProps<Props>()
 </template>
 
 <style lang="scss" scoped>
-.title-inner {
+.title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--color-heading);
-  margin-top: 24px;
-
-  p {
-    cursor: pointer;
-  }
-
-  p:hover {
-    text-decoration: underline;
-    color: var(--color-text);
-  }
+  margin: 24px auto 0; 
+  max-width: var(--max-width);
 }
 
 </style>

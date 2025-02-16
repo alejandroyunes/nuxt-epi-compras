@@ -9,7 +9,7 @@ import HeartSvg from "~/components/icons/shared/HeartSvg.vue"
 import ProfileSvg from "~/components/icons/menu/ProfileSvg.vue"
 import CircleLoader from '~/components/atoms/loaders/circle-icon/CircleLoader.vue'
 
-import NotificationSlider from '~/components/organisms/right-slider/notification-slider.vue'
+import NotificationSlider from '~/components/organisms/right-slider/notification.vue'
 
 
 const showDropdown = ref(false)

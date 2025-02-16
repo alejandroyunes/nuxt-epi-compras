@@ -6,11 +6,10 @@ import InputSearch from '~/components/atoms/input-search.vue'
 import MoonSvg from '~/components/icons/header/MoonSvg.vue'
 import SunSvg from '~/components/icons/header/SunSvg.vue'
 
-import LocationSlider from '~/components/organisms/right-slider/location-slider.vue'
-import UserMenu from '~/components/organisms/menus/user-menu.vue'
 import PlusSvg from '~/components/icons/header/PlusSvg.vue'
+import UserMenu from '~/components/organisms/menus/user-menu.vue'
+import LocationSlider from '~/components/organisms/right-slider/location.vue'
 
-const isSliderOpen = ref<boolean | undefined>(undefined)
 const isDarkMode = ref(false)
 
 onMounted(() => {
@@ -24,10 +23,6 @@ onMounted(() => {
 const handleTheme = () => {
   isDarkMode.value = !isDarkMode.value
   setDarkMode(isDarkMode.value)
-}
-
-const toggleSlider = () => {
-  isSliderOpen.value = !isSliderOpen.value
 }
 
 </script>
