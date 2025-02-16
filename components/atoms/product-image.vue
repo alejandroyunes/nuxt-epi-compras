@@ -3,9 +3,9 @@ import { ref } from "vue"
 
 // const { images } = defineProps(['images'])
 const images = ref([
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
+  "https://random.imagecdn.app/500/300",
+  "https://random.imagecdn.app/500/300",
+  "https://random.imagecdn.app/500/300",
 ])
 
 const currentIndex = ref(0);
@@ -54,8 +54,8 @@ const nextSlide = () => {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: var(--background);
+  background-color: var(--primary);
+  color: var(--white);
   border: none;
   padding: .8rem .6rem;
   cursor: pointer;

@@ -200,15 +200,6 @@ const images = ref([
       width: 300px;
       height: 100%;
 
-      // .ads-image {
-      //   width: 300px;
-
-      //   img {
-      //     border-top-left-radius: 12px;
-      //     border-top-right-radius: 12px;
-      //   }
-      // }
-
       .ads-info-inner {
         padding: 16px;
 
