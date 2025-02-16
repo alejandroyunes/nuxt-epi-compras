@@ -14,7 +14,6 @@ const { text, position = 'center' } = defineProps<{
 
 <template>
   <div v-if="!closeTooltip" class="tooltip" :class=[position]>
-    
     <span v-if="text">{{ text }}</span>
   </div>
 </template>
@@ -26,7 +25,7 @@ const { text, position = 'center' } = defineProps<{
   position: absolute;
   z-index: 1;
   background-color: var(--background-opposite-soft);
-  top: 160%;
+  top: 180%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 6px;

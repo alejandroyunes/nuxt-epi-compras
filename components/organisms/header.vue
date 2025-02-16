@@ -76,17 +76,22 @@ const handleTheme = () => {
   background-color: var(--background);
   box-shadow: var(--shadow);
 
+  @media(max-width: 1024px) {
+    box-shadow: none;
+  }
+
   .nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 0 auto;
     max-width: var(--max-width);
-    padding: .6rem;
+    padding: .5rem 0;
 
     @media (max-width: 1024px) {
       flex-direction: column;
-      gap: 20px;
+      gap: .4rem;
+      padding: .6rem;
 
       .nav-one {
         order: 1;
@@ -168,6 +173,13 @@ const handleTheme = () => {
         .publish {
           position: relative;
           cursor: pointer;
+
+          a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
         }
       }
     }
