@@ -4,6 +4,7 @@ import Title from '~/components/atoms/title/Title.vue'
 import HeartFillSvg from '@/components/icons/shared/HeartFillSvg.vue'
 import HeartSvg from '@/components/icons/shared/HeartSvg.vue'
 import AdsSkeleton from '~/components/atoms/loaders/skeleton/AdsSkeleton.vue'
+import ProductImage from '~/components/atoms/product-image.vue'
 
 interface AdType {
   id: string
@@ -115,20 +116,26 @@ const handleFavorite = (adId: string) => {
   }
 }
 
+const images = ref([
+  "https://placehold.co/600x400",
+  "https://placehold.co/600x400",
+  "https://placehold.co/600x400",
+]);
+
 </script>
 
 <template>
   <section v-if="!isLoading">
+
     <Title :view="'ver más'" :title="'Anuncios Recientes'" />
 
-    <ul class="ads-container">
+    <ul class="product-card">
       <li v-for="ad in ads" :key="ad.id">
         <div class="li-container">
 
           <div class="li-item">
-            <NuxtLink :to="ad.url">
-              <NuxtImg class="ad-image" :src="ad.image" alt="" width="300px" height="165px" />
-            </NuxtLink>
+            <ProductImage />
+            
             <div class="ads-info-inner">
               <div class="ads-title">
                 <h3>{{ ad.title }}</h3>
@@ -152,7 +159,7 @@ const handleFavorite = (adId: string) => {
 </template>
 
 <style scoped lang="scss">
-.ads-container {
+.product-card {
   display: flex;
   justify-content: space-between;
   padding-bottom: 12px;
@@ -190,13 +197,17 @@ const handleFavorite = (adId: string) => {
       border-bottom-left-radius: 12px;
       border-bottom-right-radius: 12px;
       background-color: var(--background);
+      width: 300px;
+      height: 100%;
 
-      img {
-        width: 280px;
-        height: auto;
-        border-top-left-radius: 12px;
-        border-top-right-radius: 12px;
-      }
+      // .ads-image {
+      //   width: 300px;
+
+      //   img {
+      //     border-top-left-radius: 12px;
+      //     border-top-right-radius: 12px;
+      //   }
+      // }
 
       .ads-info-inner {
         padding: 16px;
