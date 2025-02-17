@@ -45,7 +45,6 @@
 }
 
 .ads-skeleton {
-  margin-top: 20px;
 
   ul {
     display: flex;
@@ -55,7 +54,7 @@
     overflow-x: scroll;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    margin: 20px auto 0;
+    margin: 0 auto;
     max-width: var(--max-width);
 
     &::-webkit-scrollbar {

@@ -3,14 +3,14 @@
 </script>
 
 <template>
-  <div class="title">
+  <section class="title">
     <div>
       <p class="shine-line card-title"></p>
     </div>
     <div>
       <p class="shine-line  card-title card-details"></p>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
@@ -28,7 +28,6 @@
     background-repeat: no-repeat;
     background-position: left -40px top 0;
     animation: shine-animation 1s ease infinite;
-
 
     @keyframes shine-animation {
       to {

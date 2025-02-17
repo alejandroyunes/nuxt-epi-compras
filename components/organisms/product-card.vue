@@ -118,7 +118,7 @@ const handleFavorite = (adId: string) => {
 }
 
 const images = ref([
-"https://random.imagecdn.app/500/300",
+  "https://random.imagecdn.app/500/300",
   "https://random.imagecdn.app/500/300",
   "https://random.imagecdn.app/500/300",
 ])
@@ -132,19 +132,20 @@ const images = ref([
 
     <ul class="product-card">
       <li v-for="ad in ads" :key="ad.id">
-        <div class="li-container">
+        <div class="items">
 
-          <div class="li-item">
+          <div class="item">
             <ProductImage :images="images" />
-            
-            <div class="ads-info-inner">
-              <div class="ads-title">
+
+            <div class="details">
+              <div class="title">
                 <h3>{{ ad.title }}</h3>
                 <HeartSvg v-show="!favorites.includes(ad.id)" @click="handleFavorite(ad.id)" class="ad-heart" />
                 <HeartFillSvg v-show="favorites.includes(ad.id)" @click="handleFavorite(ad.id)" class="ad-heart-fill" />
               </div>
+
               <p>{{ ad.description }}</p>
-              <p>{{ ad.price }}</p>
+              <p>Precio: {{ ad.price }}</p>
               <p>{{ ad.location }}</p>
               <p>{{ ad.date }}</p>
             </div>
@@ -183,25 +184,22 @@ const images = ref([
   }
 
   li {
-    .li-container {
+    .items {
       scroll-snap-align: start;
     }
 
-    .li-item {
+    .item {
       margin-left: 5px;
       margin-right: 16px;
       position: relative;
       list-style-type: none;
       box-shadow: var(--shadow);
-      border-top-left-radius: 12px;
-      border-top-right-radius: 12px;
-      border-bottom-left-radius: 12px;
-      border-bottom-right-radius: 12px;
+      border-radius: 12px;
       background-color: var(--background);
       width: 300px;
       height: 100%;
 
-      .ads-info-inner {
+      .details {
         padding: 16px;
 
         h3 {
@@ -217,7 +215,7 @@ const images = ref([
           margin-bottom: 8px;
         }
 
-        .ads-title {
+        .title {
           display: flex;
           justify-content: space-between;
 
@@ -225,7 +223,7 @@ const images = ref([
             cursor: pointer;
 
             #path-1 {
-              stroke: var(--color-background-oposite);
+              stroke: var(--background-opposite);
             }
 
             #path-2 {
