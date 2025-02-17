@@ -18,6 +18,7 @@ const prevSlide = () => {
 const nextSlide = () => {
   currentIndex.value = (currentIndex.value + 1) % images.value.length;
 }
+
 </script>
 
 <template>
@@ -26,8 +27,8 @@ const nextSlide = () => {
       <NuxtImg v-for="(image, index) in images" :key="index" :src="image" class="slide" alt="Slider Image" />
     </div>
 
-    <button class="prev-button" @click="prevSlide">&#10094;</button>
-    <button class="next-button" @click="nextSlide">&#10095;</button>
+    <button class="prev-button" @click="prevSlide" aria-label="Previous Slide">&#10094;</button>
+    <button class="next-button" @click="nextSlide" aria-label="Next Slide">&#10095;</button>
   </div>
 </template>
 

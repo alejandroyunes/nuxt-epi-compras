@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Title from '~/components/atoms/title/Title.vue'
 import ProductCardSkeleton from '~/components/atoms/loaders/skeleton/product-card.vue'
 import TitleSkeleton from '~/components/atoms/loaders/skeleton/title.vue'
 import ProductImage from '~/components/atoms/product-image.vue'
+import Title from '~/components/atoms/title/Title.vue'
 
 interface AdType {
   id: string
@@ -16,7 +16,7 @@ interface AdType {
   url: string
 }
 
-const ads: AdType[] = [
+const ads = ref<AdType[]>([
   {
     id: '1',
     title: 'Car for Sale',
@@ -98,7 +98,7 @@ const ads: AdType[] = [
     date: '2021-01-08',
     url: ''
   }
-]
+])
 
 const isLoading = ref(true)
 
@@ -106,29 +106,61 @@ setTimeout(() => {
   isLoading.value = false
 }, 3000)
 
+// Swipe detection
+let touchStartX = 0
+let touchEndX = 0
 
-const images = ref([
-  "https://random.imagecdn.app/500/300",
-  "https://random.imagecdn.app/500/300",
-  "https://random.imagecdn.app/500/300",
-])
+const handleTouchStart = (event: TouchEvent) => {
+  touchStartX = event.touches[0].clientX
+}
 
+const handleTouchEnd = () => {
+  if (touchStartX - touchEndX > 50) {
+    // Detected swipe left
+    loadMoreAds()
+  }
+}
+
+const loadMoreAds = () => {
+  ads.value.push(
+    {
+      id: String(ads.value.length + 1),
+      title: 'New Item ' + (ads.value.length + 1),
+      description: 'Dynamically added item.',
+      image: '/ads/default.jpg',
+      price: 900,
+      location: 'New Location',
+      date: new Date().toISOString().split('T')[0],
+      url: ''
+    },
+    {
+      id: String(ads.value.length + 2),
+      title: 'New Item ' + (ads.value.length + 2),
+      description: 'Dynamically added item.',
+      image: '/ads/default.jpg',
+      price: 950,
+      location: 'New Location',
+      date: new Date().toISOString().split('T')[0],
+      url: ''
+    }
+  )
+}
 </script>
 
 <template>
   <section v-if="!isLoading">
-
     <Title :view="'ver más'" :title="'Anuncios Recientes'" />
 
     <ul class="product-card">
-      <li v-for="ad in ads" :key="ad.id">
+      <li v-for="(ad, index) in ads" :key="ad.id"
+        @touchstart="index === ads.length - 1 ? handleTouchStart($event) : null"
+        @touchend="index === ads.length - 1 ? handleTouchEnd() : null">
         <div class="items">
-
           <div class="item">
             <div class="condition">
               <p>usado</p>
             </div>
-            <ProductImage :images="images" />
+            <ProductImage />
 
             <div class="details">
               <div class="title">
@@ -141,15 +173,14 @@ const images = ref([
               <p>{{ ad.date }}</p>
             </div>
           </div>
-
         </div>
       </li>
     </ul>
   </section>
   <TitleSkeleton v-if="isLoading" />
   <ProductCardSkeleton v-if="isLoading" />
-
 </template>
+
 
 <style scoped lang="scss">
 .product-card {
@@ -196,8 +227,8 @@ const images = ref([
         right: .4rem;
         padding: .2rem .6rem;
         border-radius: 1rem;
-        background-color: var(--white);
-        color: var(--color-text);
+        background-color: var(--black);
+        color: var(--white);
         z-index: 2;
 
         p {

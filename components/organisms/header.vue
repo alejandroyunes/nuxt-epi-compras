@@ -74,7 +74,7 @@ const handleTheme = () => {
 .header {
   width: 100%;
   background-color: var(--background);
-  box-shadow: var(--shadow);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 
   @media(max-width: 1024px) {
     box-shadow: none;
