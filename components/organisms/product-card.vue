@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
+import Title from '~/components/atoms/title/Title.vue'
 import ProductCardSkeleton from '~/components/atoms/loaders/skeleton/product-card.vue'
 import TitleSkeleton from '~/components/atoms/loaders/skeleton/title.vue'
 import ProductImage from '~/components/atoms/product-image.vue'
-import Title from '~/components/atoms/title/Title.vue'
 
 interface AdType {
   id: string
@@ -17,90 +17,14 @@ interface AdType {
 }
 
 const ads = ref<AdType[]>([
-  {
-    id: '1',
-    title: 'Car for Sale',
-    description: 'Well-maintained car available for sale. Low mileage and excellent condition.',
-    image: '/ads/carro.jpg',
-    price: 100,
-    location: 'New York, NY',
-    date: '2021-01-01',
-    url: ''
-  },
-  {
-    id: '2',
-    title: 'Spacious House for Rent',
-    description: 'Beautiful house with multiple bedrooms and amenities. Ideal for families.',
-    image: '/ads/casa.jpg',
-    price: 200,
-    location: 'Los Angeles, CA',
-    date: '2021-01-02',
-    url: ''
-  },
-  {
-    id: '3',
-    title: 'Kitchen Stove for Sale',
-    description: 'Brand new kitchen stove available at a discounted price. Limited stock!',
-    image: '/ads/estufa.jpg',
-    price: 300,
-    location: 'Chicago, IL',
-    date: '2021-01-03',
-    url: ''
-  },
-  {
-    id: '4',
-    title: 'Refurbished Laptop',
-    description:
-      'Powerful laptop with upgraded specifications. Perfect for work and entertainment.',
-    image: '/ads/laptop.jpg',
-    price: 400,
-    location: 'Houston, TX',
-    date: '2021-01-04',
-    url: ''
-  },
-  {
-    id: '5',
-    title: 'Electric Stove for Sale',
-    description: 'Modern electric stove available for sale. Energy-efficient and easy to use.',
-    image: '/ads/estufa.jpg',
-    price: 500,
-    location: 'Phoenix, AZ',
-    date: '2021-01-05',
-    url: ''
-  },
-  {
-    id: '6',
-    title: 'Gaming Laptop',
-    description: 'High-performance gaming laptop with advanced graphics capabilities.',
-    image: '/ads/laptop.jpg',
-    price: 600,
-    location: 'Philadelphia, PA',
-    date: '2021-01-06',
-    url: ''
-  },
-  {
-    id: '7',
-    title: 'Mountain Bike for Sale',
-    description: 'Durable mountain bike available for sale. Suitable for off-road adventures.',
-    image: '/ads/casa.jpg',
-    price: 700,
-    location: 'San Antonio, TX',
-    date: '2021-01-07',
-    url: ''
-  },
-  {
-    id: '8',
-    title: 'Beach House for Rent',
-    description: 'Luxurious beach house with stunning ocean views. Perfect for vacations.',
-    image: '/ads/casa.jpg',
-    price: 800,
-    location: 'San Diego, CA',
-    date: '2021-01-08',
-    url: ''
-  }
+  { id: '1', title: 'Car for Sale', description: 'Low mileage and excellent condition.', image: '/ads/carro.jpg', price: 100, location: 'New York, NY', date: '2021-01-01', url: '' },
+  { id: '2', title: 'Spacious House', description: 'Beautiful house for rent.', image: '/ads/casa.jpg', price: 200, location: 'Los Angeles, CA', date: '2021-01-02', url: '' },
+  { id: '3', title: 'Kitchen Stove', description: 'Brand new kitchen stove.', image: '/ads/estufa.jpg', price: 300, location: 'Chicago, IL', date: '2021-01-03', url: '' }
 ])
 
 const isLoading = ref(true)
+const adsListRef = ref<HTMLElement | null>(null) // Reference for the list container
+const lastItemRef = ref<HTMLElement | null>(null) // Reference for the last item
 
 setTimeout(() => {
   isLoading.value = false
@@ -116,12 +40,12 @@ const handleTouchStart = (event: TouchEvent) => {
 
 const handleTouchEnd = () => {
   if (touchStartX - touchEndX > 50) {
-    // Detected swipe left
+    // Left swipe detected
     loadMoreAds()
   }
 }
 
-const loadMoreAds = () => {
+const loadMoreAds = async () => {
   ads.value.push(
     {
       id: String(ads.value.length + 1),
@@ -144,6 +68,13 @@ const loadMoreAds = () => {
       url: ''
     }
   )
+
+  await nextTick() // Wait for DOM to update
+
+  // Scroll to the newly added last item
+  if (lastItemRef.value) {
+    lastItemRef.value.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+  }
 }
 </script>
 
@@ -151,22 +82,21 @@ const loadMoreAds = () => {
   <section v-if="!isLoading">
     <Title :view="'ver más'" :title="'Anuncios Recientes'" />
 
-    <ul class="product-card">
-      <li v-for="(ad, index) in ads" :key="ad.id"
+    <!-- Scrollable container -->
+    <ul ref="adsListRef" class="product-card">
+      <li
+        v-for="(ad, index) in ads"
+        :key="ad.id"
+        :ref="index === ads.length - 1 ? (el) => (lastItemRef = el) : null"
         @touchstart="index === ads.length - 1 ? handleTouchStart($event) : null"
-        @touchend="index === ads.length - 1 ? handleTouchEnd() : null">
+        @touchend="index === ads.length - 1 ? handleTouchEnd() : null"
+      >
         <div class="items">
           <div class="item">
-            <div class="condition">
-              <p>usado</p>
-            </div>
+            <div class="condition"><p>usado</p></div>
             <ProductImage />
-
             <div class="details">
-              <div class="title">
-                <h3>{{ ad.title }}</h3>
-              </div>
-
+              <h3>{{ ad.title }}</h3>
               <p>{{ ad.description }}</p>
               <p class="price">Precio: {{ ad.price }}</p>
               <p>{{ ad.location }}</p>
@@ -180,7 +110,6 @@ const loadMoreAds = () => {
   <TitleSkeleton v-if="isLoading" />
   <ProductCardSkeleton v-if="isLoading" />
 </template>
-
 
 <style scoped lang="scss">
 .product-card {
