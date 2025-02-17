@@ -1,7 +1,13 @@
 <script setup>
 import { ref } from "vue"
 
-const { images } = defineProps(['images'])
+// const { images } = defineProps(['images'])
+
+const images = ref([
+  "https://random.imagecdn.app/500/300",
+  "https://random.imagecdn.app/500/300",
+  "https://random.imagecdn.app/500/300",
+])
 
 const currentIndex = ref(0);
 

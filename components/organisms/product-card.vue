@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import Title from '~/components/atoms/title/Title.vue'
-import HeartFillSvg from '@/components/icons/shared/HeartFillSvg.vue'
-import HeartSvg from '@/components/icons/shared/HeartSvg.vue'
 import ProductCardSkeleton from '~/components/atoms/loaders/skeleton/product-card.vue'
 import TitleSkeleton from '~/components/atoms/loaders/skeleton/title.vue'
 import ProductImage from '~/components/atoms/product-image.vue'
@@ -102,20 +100,12 @@ const ads: AdType[] = [
   }
 ]
 
-const favorites = ref<string[]>([])
 const isLoading = ref(true)
 
 setTimeout(() => {
   isLoading.value = false
 }, 3000)
 
-const handleFavorite = (adId: string) => {
-  if (!favorites.value.includes(adId)) {
-    favorites.value.push(adId)
-  } else {
-    favorites.value = favorites.value.filter(id => id !== adId)
-  }
-}
 
 const images = ref([
   "https://random.imagecdn.app/500/300",
@@ -135,17 +125,18 @@ const images = ref([
         <div class="items">
 
           <div class="item">
+            <div class="condition">
+              <p>usado</p>
+            </div>
             <ProductImage :images="images" />
 
             <div class="details">
               <div class="title">
                 <h3>{{ ad.title }}</h3>
-                <HeartSvg v-show="!favorites.includes(ad.id)" @click="handleFavorite(ad.id)" class="ad-heart" />
-                <HeartFillSvg v-show="favorites.includes(ad.id)" @click="handleFavorite(ad.id)" class="ad-heart-fill" />
               </div>
 
               <p>{{ ad.description }}</p>
-              <p>Precio: {{ ad.price }}</p>
+              <p class="price">Precio: {{ ad.price }}</p>
               <p>{{ ad.location }}</p>
               <p>{{ ad.date }}</p>
             </div>
@@ -199,14 +190,29 @@ const images = ref([
       width: 300px;
       height: 100%;
 
+      .condition {
+        position: absolute;
+        top: .4rem;
+        right: .4rem;
+        padding: .2rem .6rem;
+        border-radius: 1rem;
+        background-color: var(--white);
+        color: var(--color-text);
+        z-index: 2;
+
+        p {
+          font-weight: 500;
+        }
+      }
+
       .details {
-        padding: 16px;
+        padding: .5rem .9rem;
 
         h3 {
           font-size: 1.25rem;
-          color: var(--color-heading);
-          margin-bottom: 8px;
-          margin-right: 8px;
+          color: var(--heading);
+          padding-bottom: .3rem;
+          font-weight: 600;
         }
 
         p {
@@ -218,19 +224,6 @@ const images = ref([
         .title {
           display: flex;
           justify-content: space-between;
-
-          svg {
-            cursor: pointer;
-
-            #path-1 {
-              stroke: var(--background-opposite);
-            }
-
-            #path-2 {
-              stroke: var(--primary);
-              fill: var(--primary);
-            }
-          }
         }
       }
     }
