@@ -31,8 +31,6 @@
 
 <style scoped lang="scss">
 .shine-line {
-  background-color: var(--color-border-hover);
-
   background-image: linear-gradient(90deg, rgba(#fff, 0), rgba(#fff, 0.5), rgba(#fff, 0));
   background-size: 40px 100%;
   background-repeat: no-repeat;
@@ -57,6 +55,9 @@
     overflow-x: scroll;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
+    margin: 20px auto 0;
+    max-width: var(--max-width);
+
     &::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -64,7 +65,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--color-border);
+      background-color: var(--border);
       border-radius: 10px;
     }
 
@@ -82,18 +83,21 @@
         border-top-right-radius: 12px;
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
-        background-color: var(--color-background-mute);
+        background-color: var(--background);
+        width: 300px;
+        height: 100%;
+
         .card-img {
           height: 165px;
           width: 280px;
           position: relative;
-          background-color: var(--color-border-hover);
+          background-color: var(--card-background);
           border-top-left-radius: 12px;
           border-top-right-radius: 12px;
           .circle {
             height: 75px;
             width: 75px;
-            background-color: var(--color-border);
+            background-color: var(--text-soft);
             border-radius: 50%;
             display: inline-block;
             position: absolute;
@@ -112,13 +116,13 @@
             max-width: 180px;
             margin: 16px 0 20px;
             border-radius: 8px;
-            background-color: var(--color-border);
+            background-color: var(--text-soft);
           }
           .card-description-long {
             min-height: 8px;
             max-width: 230px;
             border-radius: 8px;
-            background-color: var(--color-border);
+            background-color: var(--text-soft);
           }
           .card-description-medium {
             margin-top: 8px;
@@ -126,7 +130,7 @@
             max-width: 200px;
             margin: 10px 0;
             border-radius: 8px;
-            background-color: var(--color-border);
+            background-color: var(--text-soft);
           }
           .card-description-short {
             margin-top: 8px;
@@ -134,7 +138,7 @@
             min-height: 8px;
             max-width: 160px;
             margin: 10px 0 36px;
-            background-color: var(--color-border);
+            background-color: var(--text-soft);
           }
           .card-description-shorter {
             margin-top: 8px;
@@ -142,7 +146,7 @@
             max-width: 128px;
             margin: 10px 0;
             border-radius: 8px;
-            background-color: var(--color-border);
+            background-color: var(--text-soft);
 
             &.margin-top-24 {
               margin-top: 24px;

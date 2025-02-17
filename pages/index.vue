@@ -29,5 +29,4 @@ useSeoMeta({
   <Categories />
   <ProductCard />
   <SafetyTips />
-  <ProductImage :images="['https://source.unsplash.com/random', 'https://placehold.co/600x400', 'https://placehold.co/600x400']" />
 </template>

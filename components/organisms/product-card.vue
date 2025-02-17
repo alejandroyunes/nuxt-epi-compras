@@ -3,7 +3,8 @@ import { ref } from 'vue'
 import Title from '~/components/atoms/title/Title.vue'
 import HeartFillSvg from '@/components/icons/shared/HeartFillSvg.vue'
 import HeartSvg from '@/components/icons/shared/HeartSvg.vue'
-import AdsSkeleton from '~/components/atoms/loaders/skeleton/AdsSkeleton.vue'
+import ProductCardSkeleton from '~/components/atoms/loaders/skeleton/product-card.vue'
+import TitleSkeleton from '~/components/atoms/loaders/skeleton/title.vue'
 import ProductImage from '~/components/atoms/product-image.vue'
 
 interface AdType {
@@ -106,7 +107,7 @@ const isLoading = ref(true)
 
 setTimeout(() => {
   isLoading.value = false
-}, 300)
+}, 3000)
 
 const handleFavorite = (adId: string) => {
   if (!favorites.value.includes(adId)) {
@@ -117,10 +118,10 @@ const handleFavorite = (adId: string) => {
 }
 
 const images = ref([
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-  "https://placehold.co/600x400",
-]);
+"https://random.imagecdn.app/500/300",
+  "https://random.imagecdn.app/500/300",
+  "https://random.imagecdn.app/500/300",
+])
 
 </script>
 
@@ -134,7 +135,7 @@ const images = ref([
         <div class="li-container">
 
           <div class="li-item">
-            <ProductImage />
+            <ProductImage :images="images" />
             
             <div class="ads-info-inner">
               <div class="ads-title">
@@ -153,8 +154,8 @@ const images = ref([
       </li>
     </ul>
   </section>
-
-  <AdsSkeleton v-if="isLoading" />
+  <TitleSkeleton v-if="isLoading" />
+  <ProductCardSkeleton v-if="isLoading" />
 
 </template>
 
