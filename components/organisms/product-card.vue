@@ -30,9 +30,8 @@ const firstNewItemRef = ref<HTMLElement | null>(null)
 
 setTimeout(() => {
   isLoading.value = false
-}, 3000)
+}, 300)
 
-// Swipe detection
 let touchStartX = 0
 let touchEndX = 0
 
@@ -42,13 +41,12 @@ const handleTouchStart = (event: TouchEvent) => {
 
 const handleTouchEnd = () => {
   if (touchStartX - touchEndX > 50) {
-    // Left swipe detected
     loadMoreAds()
   }
 }
 
 const loadMoreAds = async () => {
-  const firstNewIndex = ads.value.length // Store the index of the first new item
+  const firstNewIndex = ads.value.length
 
   ads.value.push(
     {
@@ -70,12 +68,39 @@ const loadMoreAds = async () => {
       location: 'New Location',
       date: new Date().toISOString().split('T')[0],
       url: ''
+    },
+    {
+      id: String(ads.value.length + 3),
+      title: 'New Item ' + (ads.value.length + 3),
+      description: 'Dynamically added item.',
+      image: '/ads/default.jpg',
+      price: 950,
+      location: 'New Location',
+      date: new Date().toISOString().split('T')[0],
+      url: ''
+    },
+    {
+      id: String(ads.value.length + 4),
+      title: 'New Item ' + (ads.value.length + 4),
+      description: 'Dynamically added item.',
+      image: '/ads/default.jpg',
+      price: 950,
+      location: 'New Location',
+      date: new Date().toISOString().split('T')[0],
+      url: ''
+    },
+    {
+      id: String(ads.value.length + 5),
+      title: 'New Item ' + (ads.value.length + 5),
+      description: 'Dynamically added item.',
+      image: '/ads/default.jpg',
+      price: 950,
+      location: 'New Location',
+      date: new Date().toISOString().split('T')[0],
+      url: ''
     }
   )
 
-  ads.value.push(
-    { id: String(ads.value.length + 1), title: 'New Item ' + (ads.value.length + 1), description: 'Dynamically added item.', image: '/ads/default.jpg', price: 900, location: 'New Location', date: new Date().toISOString().split('T')[0], url: '' }
-  )
 
   await nextTick() // Wait for DOM update
 
@@ -92,8 +117,7 @@ const loadMoreAds = async () => {
 
     <!-- Scrollable container -->
     <ul class="product-card">
-      <li v-for="(ad, index) in ads" :key="ad.id"
-        :ref="index === ads.length - 2 ? (el) => (firstNewItemRef = el) : null"
+      <li v-for="(ad, index) in ads" :key="ad.id" :ref="index === ads.length - 5 ? (el) => (firstNewItemRef = el) : null"
         @touchstart="index === ads.length - 1 ? handleTouchStart($event) : null"
         @touchend="index === ads.length - 1 ? handleTouchEnd() : null">
         <div class="items">
@@ -114,6 +138,7 @@ const loadMoreAds = async () => {
       </li>
     </ul>
   </section>
+
   <TitleSkeleton v-if="isLoading" />
   <ProductCardSkeleton v-if="isLoading" />
 </template>
