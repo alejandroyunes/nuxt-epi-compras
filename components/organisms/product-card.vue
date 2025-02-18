@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
-import Title from '~/components/atoms/title/Title.vue'
+import { nextTick, ref } from 'vue'
 import ProductCardSkeleton from '~/components/atoms/loaders/skeleton/product-card.vue'
 import TitleSkeleton from '~/components/atoms/loaders/skeleton/title.vue'
 import ProductImage from '~/components/atoms/product-image.vue'
+import Title from '~/components/atoms/title/Title.vue'
 import RightArrowSvg from '~/components/icons/arrows/RightArrowSvg.vue'
 
 interface AdType {
@@ -30,7 +30,7 @@ const isLoading = ref(true)
 
 setTimeout(() => {
   isLoading.value = false
-}, 300)
+}, 3000)
 
 
 const loadMoreAds = async () => {
@@ -60,9 +60,10 @@ const loadMoreAds = async () => {
 
 <template>
   <section v-if="!isLoading">
+
     <Title :view="'ver más'" :title="'Anuncios Recientes'" />
 
-    <ul class="product-card">
+    <ul>
       <li v-for="ad in ads" :key="ad.id" :data-ad-id="ad.id">
         <div class="items">
           <div class="item">
@@ -80,33 +81,37 @@ const loadMoreAds = async () => {
           </div>
         </div>
       </li>
-      <div class="load-more">
+      <li>
         <button @click="loadMoreAds">
           <span>
             <RightArrowSvg />
             Cargar más
           </span>
         </button>
-      </div>
+      </li>
     </ul>
+
   </section>
 
   <TitleSkeleton v-if="isLoading" />
   <ProductCardSkeleton v-if="isLoading" />
+
+
 </template>
 
 
 <style scoped lang="scss">
-.product-card {
+
+ul {
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 12px;
-  margin: 20px auto 0;
-  max-width: var(--max-width);
-  list-style: none;
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
+  justify-content: space-between;
+  list-style: none;
+  max-width: var(--max-width);
+  margin: 1.2rem auto 1rem;
+  padding: 0.7rem .7rem .7rem 0;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -172,11 +177,6 @@ const loadMoreAds = async () => {
         }
       }
     }
-  }
-
-  .load-more {
-    display: flex;
-    justify-content: center;
 
     button {
       background-color: var(--primary);
@@ -188,6 +188,7 @@ const loadMoreAds = async () => {
       font-size: 16px;
       font-weight: bold;
       transition: background-color 0.3s ease-in-out;
+      height: 100%;
 
       span {
         font-weight: 600;

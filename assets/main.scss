@@ -14,10 +14,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  section {
-    padding: 0 1rem;
-  }
-
   .desktop-only {
     @media (max-width: 768px) {
         display: none;

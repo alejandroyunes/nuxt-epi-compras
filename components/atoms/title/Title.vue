@@ -28,6 +28,7 @@ const { view, title } = defineProps<Props>()
   color: var(--color-heading);
   margin: 24px auto 0; 
   max-width: var(--max-width);
+  padding: 0 1rem;
 }
 
 </style>
