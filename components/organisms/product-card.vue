@@ -19,12 +19,14 @@ interface AdType {
 const ads = ref<AdType[]>([
   { id: '1', title: 'Car for Sale', description: 'Low mileage and excellent condition.', image: '/ads/carro.jpg', price: 100, location: 'New York, NY', date: '2021-01-01', url: '' },
   { id: '2', title: 'Spacious House', description: 'Beautiful house for rent.', image: '/ads/casa.jpg', price: 200, location: 'Los Angeles, CA', date: '2021-01-02', url: '' },
-  { id: '3', title: 'Kitchen Stove', description: 'Brand new kitchen stove.', image: '/ads/estufa.jpg', price: 300, location: 'Chicago, IL', date: '2021-01-03', url: '' }
+  { id: '3', title: 'Kitchen Stove', description: 'Brand new kitchen stove.', image: '/ads/estufa.jpg', price: 300, location: 'Chicago, IL', date: '2021-01-03', url: '' },
+  { id: '4', title: 'New Car', description: 'Brand new car.', image: '/ads/carro.jpg', price: 400, location: 'San Francisco, CA', date: '2021-01-04', url: '' },
+  { id: '5', title: 'Used Car', description: 'Used car for sale.', image: '/ads/carro.jpg', price: 500, location: 'Miami, FL', date: '2021-01-05', url: '' },
+  { id: '6', title: 'New House', description: 'New house for rent.', image: '/ads/casa.jpg', price: 600, location: 'Seattle, WA', date: '2021-01-06', url: '' },
 ])
 
 const isLoading = ref(true)
-const adsListRef = ref<HTMLElement | null>(null) // Reference for the list container
-const lastItemRef = ref<HTMLElement | null>(null) // Reference for the last item
+const firstNewItemRef = ref<HTMLElement | null>(null)
 
 setTimeout(() => {
   isLoading.value = false
@@ -46,6 +48,8 @@ const handleTouchEnd = () => {
 }
 
 const loadMoreAds = async () => {
+  const firstNewIndex = ads.value.length // Store the index of the first new item
+
   ads.value.push(
     {
       id: String(ads.value.length + 1),
@@ -69,11 +73,15 @@ const loadMoreAds = async () => {
     }
   )
 
-  await nextTick() // Wait for DOM to update
+  ads.value.push(
+    { id: String(ads.value.length + 1), title: 'New Item ' + (ads.value.length + 1), description: 'Dynamically added item.', image: '/ads/default.jpg', price: 900, location: 'New Location', date: new Date().toISOString().split('T')[0], url: '' }
+  )
 
-  // Scroll to the newly added last item
-  if (lastItemRef.value) {
-    lastItemRef.value.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+  await nextTick() // Wait for DOM update
+
+  // Ensure it's an HTML element before scrolling
+  if (firstNewItemRef.value instanceof HTMLElement) {
+    firstNewItemRef.value.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
   }
 }
 </script>
@@ -83,17 +91,16 @@ const loadMoreAds = async () => {
     <Title :view="'ver más'" :title="'Anuncios Recientes'" />
 
     <!-- Scrollable container -->
-    <ul ref="adsListRef" class="product-card">
-      <li
-        v-for="(ad, index) in ads"
-        :key="ad.id"
-        :ref="index === ads.length - 1 ? (el) => (lastItemRef = el) : null"
+    <ul class="product-card">
+      <li v-for="(ad, index) in ads" :key="ad.id"
+        :ref="index === ads.length - 2 ? (el) => (firstNewItemRef = el) : null"
         @touchstart="index === ads.length - 1 ? handleTouchStart($event) : null"
-        @touchend="index === ads.length - 1 ? handleTouchEnd() : null"
-      >
+        @touchend="index === ads.length - 1 ? handleTouchEnd() : null">
         <div class="items">
           <div class="item">
-            <div class="condition"><p>usado</p></div>
+            <div class="condition">
+              <p>usado</p>
+            </div>
             <ProductImage />
             <div class="details">
               <h3>{{ ad.title }}</h3>
