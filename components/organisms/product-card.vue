@@ -4,6 +4,7 @@ import Title from '~/components/atoms/title/Title.vue'
 import ProductCardSkeleton from '~/components/atoms/loaders/skeleton/product-card.vue'
 import TitleSkeleton from '~/components/atoms/loaders/skeleton/title.vue'
 import ProductImage from '~/components/atoms/product-image.vue'
+import RightArrowSvg from '~/components/icons/arrows/RightArrowSvg.vue'
 
 interface AdType {
   id: string
@@ -26,100 +27,43 @@ const ads = ref<AdType[]>([
 ])
 
 const isLoading = ref(true)
-const firstNewItemRef = ref<HTMLElement | null>(null)
 
 setTimeout(() => {
   isLoading.value = false
 }, 300)
 
-let touchStartX = 0
-let touchEndX = 0
-
-const handleTouchStart = (event: TouchEvent) => {
-  touchStartX = event.touches[0].clientX
-}
-
-const handleTouchEnd = () => {
-  if (touchStartX - touchEndX > 50) {
-    loadMoreAds()
-  }
-}
 
 const loadMoreAds = async () => {
-  const firstNewIndex = ads.value.length
+  const newAds = Array.from({ length: 5 }).map((_, i) => ({
+    id: String(ads.value.length + i + 1),
+    title: 'New Item ' + (ads.value.length + i + 1),
+    description: 'Dynamically added item.',
+    image: '/ads/default.jpg',
+    price: 950,
+    location: 'New Location',
+    date: new Date().toISOString().split('T')[0],
+    url: ''
+  }))
 
-  ads.value.push(
-    {
-      id: String(ads.value.length + 1),
-      title: 'New Item ' + (ads.value.length + 1),
-      description: 'Dynamically added item.',
-      image: '/ads/default.jpg',
-      price: 900,
-      location: 'New Location',
-      date: new Date().toISOString().split('T')[0],
-      url: ''
-    },
-    {
-      id: String(ads.value.length + 2),
-      title: 'New Item ' + (ads.value.length + 2),
-      description: 'Dynamically added item.',
-      image: '/ads/default.jpg',
-      price: 950,
-      location: 'New Location',
-      date: new Date().toISOString().split('T')[0],
-      url: ''
-    },
-    {
-      id: String(ads.value.length + 3),
-      title: 'New Item ' + (ads.value.length + 3),
-      description: 'Dynamically added item.',
-      image: '/ads/default.jpg',
-      price: 950,
-      location: 'New Location',
-      date: new Date().toISOString().split('T')[0],
-      url: ''
-    },
-    {
-      id: String(ads.value.length + 4),
-      title: 'New Item ' + (ads.value.length + 4),
-      description: 'Dynamically added item.',
-      image: '/ads/default.jpg',
-      price: 950,
-      location: 'New Location',
-      date: new Date().toISOString().split('T')[0],
-      url: ''
-    },
-    {
-      id: String(ads.value.length + 5),
-      title: 'New Item ' + (ads.value.length + 5),
-      description: 'Dynamically added item.',
-      image: '/ads/default.jpg',
-      price: 950,
-      location: 'New Location',
-      date: new Date().toISOString().split('T')[0],
-      url: ''
-    }
-  )
+  ads.value.push(...newAds)
 
+  await nextTick()
 
-  await nextTick() // Wait for DOM update
+  const firstNewAd = document.querySelector(`li[data-ad-id="${newAds[0].id}"]`) as HTMLElement
 
-  // Ensure it's an HTML element before scrolling
-  if (firstNewItemRef.value instanceof HTMLElement) {
-    firstNewItemRef.value.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+  if (firstNewAd) {
+    firstNewAd.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
   }
 }
+
 </script>
 
 <template>
   <section v-if="!isLoading">
     <Title :view="'ver más'" :title="'Anuncios Recientes'" />
 
-    <!-- Scrollable container -->
     <ul class="product-card">
-      <li v-for="(ad, index) in ads" :key="ad.id" :ref="index === ads.length - 5 ? (el) => (firstNewItemRef = el) : null"
-        @touchstart="index === ads.length - 1 ? handleTouchStart($event) : null"
-        @touchend="index === ads.length - 1 ? handleTouchEnd() : null">
+      <li v-for="ad in ads" :key="ad.id" :data-ad-id="ad.id">
         <div class="items">
           <div class="item">
             <div class="condition">
@@ -136,12 +80,21 @@ const loadMoreAds = async () => {
           </div>
         </div>
       </li>
+      <div class="load-more">
+        <button @click="loadMoreAds">
+          <span>
+            <RightArrowSvg />
+            Cargar más
+          </span>
+        </button>
+      </div>
     </ul>
   </section>
 
   <TitleSkeleton v-if="isLoading" />
   <ProductCardSkeleton v-if="isLoading" />
 </template>
+
 
 <style scoped lang="scss">
 .product-card {
@@ -218,6 +171,36 @@ const loadMoreAds = async () => {
           justify-content: space-between;
         }
       }
+    }
+  }
+
+  .load-more {
+    display: flex;
+    justify-content: center;
+
+    button {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease-in-out;
+
+      span {
+        font-weight: 600;
+      }
+
+      &:hover {
+        background-color: var(--secondary);
+      }
+    }
+
+    svg {
+      width: 28px;
+      height: 28px;
     }
   }
 }
