@@ -81,11 +81,11 @@ const loadMoreAds = async () => {
           </div>
         </div>
       </li>
-      <li>
+      <li class="button">
         <button @click="loadMoreAds">
           <span>
             <RightArrowSvg />
-            Cargar más
+            Más
           </span>
         </button>
       </li>
@@ -101,6 +101,10 @@ const loadMoreAds = async () => {
 
 
 <style scoped lang="scss">
+
+section {
+  margin-left: .6rem;
+}
 
 ul {
   display: flex;
@@ -137,7 +141,7 @@ ul {
       box-shadow: var(--shadow);
       border-radius: 12px;
       background-color: var(--background);
-      width: 300px;
+      min-width: 260px;
       height: 100%;
 
       .condition {
@@ -157,6 +161,7 @@ ul {
 
       .details {
         padding: .5rem .9rem;
+        height: 240px;
 
         h3 {
           font-size: 1.25rem;
@@ -178,30 +183,17 @@ ul {
       }
     }
 
+  }
+
+  .button {
+    display: flex;
+
+
     button {
-      background-color: var(--primary);
+      background: var(--primary);
       color: var(--white);
-      padding: 10px 20px;
       border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      transition: background-color 0.3s ease-in-out;
-      height: 100%;
-
-      span {
-        font-weight: 600;
-      }
-
-      &:hover {
-        background-color: var(--secondary);
-      }
-    }
-
-    svg {
-      width: 28px;
-      height: 28px;
+      border-radius: .7rem;
     }
   }
 }

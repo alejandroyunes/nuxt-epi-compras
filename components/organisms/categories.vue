@@ -113,6 +113,11 @@ const categories: Category[] = [
 </template>
 
 <style scoped lang="scss">
+
+section {
+  margin-left: .6rem;
+}
+
 ul {
   display: flex;
   justify-content: space-between;
