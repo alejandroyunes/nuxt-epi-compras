@@ -76,6 +76,10 @@ const handleTheme = () => {
   background-color: var(--background);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 
+  @media(max-width: 1290px) {
+    padding: 0 .6rem 0;
+  }
+
   @media(max-width: 1024px) {
     box-shadow: none;
   }
@@ -91,7 +95,6 @@ const handleTheme = () => {
     @media (max-width: 1024px) {
       flex-direction: column;
       gap: .4rem;
-      padding: .6rem;
 
       .nav-one {
         order: 1;

@@ -3,7 +3,7 @@ import { nextTick, ref } from 'vue'
 import ProductCardSkeleton from '~/components/atoms/loaders/skeleton/product-card.vue'
 import TitleSkeleton from '~/components/atoms/loaders/skeleton/title.vue'
 import ProductImage from '~/components/atoms/product-image.vue'
-import Title from '~/components/atoms/title/Title.vue'
+import Title from '~/components/atoms/title.vue'
 import RightArrowSvg from '~/components/icons/arrows/RightArrowSvg.vue'
 
 interface AdType {
@@ -65,19 +65,17 @@ const loadMoreAds = async () => {
 
     <ul>
       <li v-for="ad in ads" :key="ad.id" :data-ad-id="ad.id">
-        <div class="items">
-          <div class="item">
-            <div class="condition">
-              <p>usado</p>
-            </div>
-            <ProductImage />
-            <div class="details">
-              <h3>{{ ad.title }}</h3>
-              <p>{{ ad.description }}</p>
-              <p class="price">Precio: {{ ad.price }}</p>
-              <p>{{ ad.location }}</p>
-              <p>{{ ad.date }}</p>
-            </div>
+        <div class="item">
+          <div class="condition">
+            <p>usado</p>
+          </div>
+          <ProductImage />
+          <div class="details">
+            <h3>{{ ad.title }}</h3>
+            <p>{{ ad.description }}</p>
+            <p class="price">Precio: {{ ad.price }}</p>
+            <p>{{ ad.location }}</p>
+            <p>{{ ad.date }}</p>
           </div>
         </div>
       </li>
@@ -101,11 +99,6 @@ const loadMoreAds = async () => {
 
 
 <style scoped lang="scss">
-
-section {
-  margin-left: .6rem;
-}
-
 ul {
   display: flex;
   overflow-x: scroll;
@@ -115,7 +108,11 @@ ul {
   list-style: none;
   max-width: var(--max-width);
   margin: 1.2rem auto 1rem;
-  padding: 0.7rem .7rem .7rem 0;
+  padding-bottom: .7rem;
+
+  @media (max-width: 1290px) {
+    padding: 0 .6rem .7rem;
+  }
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -129,17 +126,19 @@ ul {
   }
 
   li {
-    .items {
-      scroll-snap-align: start;
+    padding: 0 .5rem;
+    scroll-snap-align: start;
+
+    &:first-child {
+      padding-left: .5rem;
     }
 
+
     .item {
-      margin-left: 5px;
-      margin-right: 16px;
       position: relative;
       list-style-type: none;
       box-shadow: var(--shadow);
-      border-radius: 12px;
+      border-radius: .8rem;
       background-color: var(--background);
       min-width: 260px;
       height: 100%;
@@ -187,7 +186,7 @@ ul {
 
   .button {
     display: flex;
-
+    padding: 0;
 
     button {
       background: var(--primary);

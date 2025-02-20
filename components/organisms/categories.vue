@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Title from '~/components/atoms/title/Title.vue'
+import Title from '~/components/atoms/title.vue'
 
 interface Category {
   name: string
@@ -114,10 +114,6 @@ const categories: Category[] = [
 
 <style scoped lang="scss">
 
-section {
-  margin-left: .6rem;
-}
-
 ul {
   display: flex;
   justify-content: space-between;
@@ -140,6 +136,7 @@ ul {
   }
 }
 
+
 li {
   scroll-snap-align: start;
   text-align: center;
@@ -147,15 +144,12 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-right: 32px;
-
-  @media (max-width: 768px) {
-    padding: 0 16px;
+  padding: 0 1rem;
+  
+  @media (max-width: 1290px) {
+    padding: 0 1rem;
   }
 
-  &:last-child {
-    padding-right: 0;
-  }
 }
 
 img {

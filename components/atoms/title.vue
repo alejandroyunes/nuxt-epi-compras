@@ -26,9 +26,15 @@ const { view, title } = defineProps<Props>()
   justify-content: space-between;
   align-items: center;
   color: var(--color-heading);
-  margin: 24px auto 0; 
+  margin: 1.5rem auto 0;
   max-width: var(--max-width);
-  padding: 0 1rem;
-}
 
+  p {
+    font-size: 1.125rem;
+  }
+
+  @media (max-width: 1290px) {
+    margin: 1.5rem .6rem 0;
+  }
+}
 </style>
