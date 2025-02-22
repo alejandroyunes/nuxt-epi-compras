@@ -7,7 +7,6 @@
       <li v-for="index in 5" :key="index">
 
         <div class="li-container">
-
           <div class="li-item">
             <div class="shine-line card-img">
               <span class="circle"></span>
@@ -46,6 +45,10 @@
 
 .ads-skeleton {
 
+  @media (max-width: 1290px) {
+    padding: 0 .6rem .7rem;
+  }
+
   ul {
     display: flex;
     justify-content: space-between;
@@ -72,6 +75,7 @@
       .li-container {
         scroll-snap-align: start;
       }
+
       .li-item {
         position: relative;
         margin-left: 5px;
@@ -83,16 +87,17 @@
         border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
         background-color: var(--background);
-        width: 300px;
+        min-width: 260px;
         height: 100%;
 
         .card-img {
           height: 165px;
-          width: 280px;
+          min-width: 260px;
           position: relative;
           background-color: var(--card-background);
           border-top-left-radius: 12px;
           border-top-right-radius: 12px;
+
           .circle {
             height: 75px;
             width: 75px;
@@ -108,8 +113,10 @@
             margin-right: auto;
           }
         }
+
         .ads-info-inner {
           padding: 16px;
+
           .card-title {
             min-height: 18px;
             max-width: 180px;
@@ -117,12 +124,14 @@
             border-radius: 8px;
             background-color: var(--text-soft);
           }
+
           .card-description-long {
             min-height: 8px;
             max-width: 230px;
             border-radius: 8px;
             background-color: var(--text-soft);
           }
+
           .card-description-medium {
             margin-top: 8px;
             min-height: 8px;
@@ -131,6 +140,7 @@
             border-radius: 8px;
             background-color: var(--text-soft);
           }
+
           .card-description-short {
             margin-top: 8px;
             border-radius: 8px;
@@ -139,6 +149,7 @@
             margin: 10px 0 36px;
             background-color: var(--text-soft);
           }
+
           .card-description-shorter {
             margin-top: 8px;
             min-height: 6px;
@@ -156,5 +167,4 @@
     }
   }
 }
-
 </style>

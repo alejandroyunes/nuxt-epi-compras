@@ -30,7 +30,7 @@ const isLoading = ref(true)
 
 setTimeout(() => {
   isLoading.value = false
-}, 3000)
+}, 1000)
 
 
 const loadMoreAds = async () => {
@@ -132,7 +132,6 @@ ul {
     &:first-child {
       padding-left: .5rem;
     }
-
 
     .item {
       position: relative;

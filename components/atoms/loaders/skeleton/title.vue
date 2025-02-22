@@ -19,9 +19,10 @@
   justify-content: space-between;
   align-items: center;
   color: var(--heading);
-  margin: 24px auto 0; 
+  margin: 1rem auto 0; 
   max-width: var(--max-width);
- 
+  padding: 0 .6rem;
+
   .shine-line {
     background-image: linear-gradient(90deg, rgba(#fff, 0), rgba(#fff, 0.5), rgba(#fff, 0));
     background-size: 40px 100%;

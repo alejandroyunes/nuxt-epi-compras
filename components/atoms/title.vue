@@ -26,7 +26,7 @@ const { view, title } = defineProps<Props>()
   justify-content: space-between;
   align-items: center;
   color: var(--color-heading);
-  margin: 1.5rem auto 0;
+  margin: 1rem auto 0;
   max-width: var(--max-width);
 
   p {
