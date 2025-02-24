@@ -39,7 +39,7 @@
   .card-title {
     min-height: 1rem;
     width: 180px;
-    margin: 1rem .6rem .6rem;
+    margin: 1rem .6rem 0;
     border-radius: 8px;
     background-color: var(--text-soft);
   }

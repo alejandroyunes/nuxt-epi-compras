@@ -4,9 +4,9 @@ import { ref } from "vue"
 // const { images } = defineProps(['images'])
 
 const images = ref([
-  "https://random.imagecdn.app/500/300",
-  "https://random.imagecdn.app/500/300",
-  "https://random.imagecdn.app/500/300",
+  "/images/image.png",
+  "/images/image.png",
+  "/images/image.png",
 ])
 
 const currentIndex = ref(0);
