@@ -2,17 +2,17 @@
 import AdPost from '~/components/organisms/ad-post/ad-posts.vue'
 import SafetyTips from '~/components/organisms/safety-tips.vue'
 
-const title = 'Expert advice and products to improve your oral health'
-const description = 'Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions'
+const title = 'Publica totalmente gratis'
+const description = 'EpiCompras te ayuda a publicar tus productos de manera gratuita'
 
 useSeoMeta({
   title: title,
   description: description,
-  ogSiteName: 'https://epicompras.com',
+  ogSiteName: 'https://epicompras.com/publicar',
   ogTitle: title,
   ogDescription: description,
   ogImage: '/open-graph.webp',
-  ogUrl: 'https://epicompras.com',
+  ogUrl: 'https://epicompras.com/publicar',
   ogLocale: 'es_CO',
   twitterTitle: title,
   twitterDescription: description,

@@ -35,6 +35,10 @@ const handleGoBack = () => {
   display: flex;
   max-width: var(--max-width);
   margin: 1rem auto 0;
+  
+  @media (max-width: 1290px) {
+    padding: 0 .6rem;
+  }
 
   @media (max-width: 1024px) {
     justify-content: flex-end;

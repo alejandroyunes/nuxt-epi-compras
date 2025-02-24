@@ -34,6 +34,7 @@ const handleTheme = () => {
 
       <div class="nav-one">
         <NuxtLink to="/" class="logo">
+          <NuxtImg src="/logo.webp" alt="Logo de páginas profesionales" format="webp" />
           <h1>Epi<span>Compras</span></h1>
         </NuxtLink>
         <InputSearch />
@@ -43,6 +44,7 @@ const handleTheme = () => {
 
         <div class="nav-left">
           <NuxtLink to="/" class="nav-logo-mobile">
+            <NuxtImg src="/logo.webp" alt="Logo de páginas profesionales" format="webp" />
             <h1>Epi<span>Compras</span></h1>
           </NuxtLink>
           <div>
@@ -113,8 +115,15 @@ const handleTheme = () => {
       .logo {
         flex: 0;
         margin-right: 8px;
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
+
+        img {
+          width: 60px;
+          height: auto;
+        }
 
         h1 {
           color: var(--primary);
@@ -128,6 +137,7 @@ const handleTheme = () => {
         @media (max-width: 1024px) {
           display: none;
         }
+
       }
     }
 
@@ -150,9 +160,19 @@ const handleTheme = () => {
             margin-right: 8px;
             cursor: pointer;
 
+            img {
+              width: 60px;
+              height: auto;
+            }
+
             h1 {
               color: var(--primary);
               font-weight: 600;
+              align-self: center;
+
+              @media (max-width: 500px) {
+                display: none;
+              }
             }
 
             span {
