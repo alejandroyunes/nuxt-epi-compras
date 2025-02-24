@@ -1,5 +1,4 @@
 .contact-form {
-  width: 100%;
   margin: 1rem .6rem;
   display: flex;
   justify-content: center;
@@ -7,8 +6,8 @@
   .contact-form-inner {
     padding: 1rem 1rem .8rem;
     border-radius: .6rem;
-    box-shadow: var(--shadow-card);
-    
+    box-shadow: var(--shadow);
+
     .formkit-form .formkit-actions {
       display: none;
     }
@@ -28,7 +27,7 @@
 
     .form-group-input {
       position: relative;
-      margin: 20px 0 28px;
+      margin: 1rem 0 1.5rem;
       width: 100%;
 
       label {
@@ -68,6 +67,7 @@
               height: 44px;
               font-size: 1rem;
               width: 300px;
+
               &:hover {
                 background-color: var(--background);
                 outline: none;
@@ -182,16 +182,6 @@
       line-height: 1.5rem;
     }
 
-  }
-}
-
-@media screen and (max-width: 1024px) {
-
-  .contact-form {
-
-    .contact-form-inner {
-      // width: 100%;
-    }
   }
 }
 
