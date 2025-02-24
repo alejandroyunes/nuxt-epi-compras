@@ -4,7 +4,7 @@ import Categories from '~/components/organisms/categories.vue'
 import ProductCard from '~/components/organisms/product-card.vue'
 import SafetyTips from '~/components/organisms/safety-tips.vue'
 
-const title = 'Compra y venta de productos, totalmente gratis'
+const title = 'Publica totalmente gratis en EpiCompras'
 const description = 'Compra y venta de productos'
 
 useSeoMeta({

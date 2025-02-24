@@ -123,7 +123,7 @@ const handleTheme = () => {
         img {
           width: 60px;
           height: auto;
-  
+          padding-right: .6rem;
         }
 
         h1 {

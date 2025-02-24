@@ -2,7 +2,7 @@
 import AdPost from '~/components/organisms/ad-post/ad-posts.vue'
 import SafetyTips from '~/components/organisms/safety-tips.vue'
 
-const title = 'Publica totalmente gratis'
+const title = 'Publica totalmente gratis en EpiCompras'
 const description = 'EpiCompras te ayuda a publicar tus productos de manera gratuita'
 
 useSeoMeta({

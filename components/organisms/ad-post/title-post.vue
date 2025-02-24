@@ -12,12 +12,12 @@ const { title } = defineProps<{ title: String }>()
 <style lang="scss" scoped>
 .title-post {
   font-size: 1.8rem;
-  margin-top: 40px;
+  margin-top: 1rem;
   text-align: center;
   color: var(--heading);
 
   @media (max-width: 1024px) {
-    margin-top: 24px;
+    margin-top: 1rem;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 import ContractAgreeSvg from '~/components/icons/ad-post/real-estate/rental-or-sell/ContractAgreeSvg.vue'
 import HandWithKeySvg from '~/components/icons/ad-post//real-estate/rental-or-sell/HandWithKeySvg.vue'
@@ -9,14 +9,13 @@ import BuildingColorSvg from '~/components/icons/ad-post//real-estate/type-of-pr
 import ConsultorioColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ConsultorioColorSvg.vue'
 import FincaColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/FincaColorSvg.vue'
 import HotelColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/HotelColorSvg.vue'
-import HouseColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/HouseColorSvg.vue'
-import ShopColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ShopColorSvg.vue'
+ import ShopColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ShopColorSvg.vue'
 import TerrenoColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/TerrenoColorSvg.vue'
 import WareHouseSvg from '~/components/icons/ad-post//real-estate/type-of-property/WareHouseSvg.vue'
-
+import HouseColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/HouseColorSvg.vue'
 import TitlePost from './title-post.vue'
 import GoBack from './go-back.vue'
-import ContactForm from '../contact-form/contact-form.vue'
+import ContactForm from '~/components/organisms/ad-post/contact-form/contact-form.vue'
 
 interface PropertyAddress {
   propertyAddress: string
@@ -97,6 +96,11 @@ const submitHandler = async (form: any) => {
   //   console.log('submit', form)
   // }
 }
+
+watchEffect(() => {
+  console.log(typeOfPost.value)
+  console.log(selectedPropertyType.value)
+})
 
 </script>
 
@@ -202,6 +206,7 @@ const submitHandler = async (form: any) => {
       color: var(--heading);
       font-size: 1.2rem;
       outline: 10px solid red;
+
       &:focus {
         outline: 1px solid var(--primary);
       }
@@ -287,6 +292,8 @@ const submitHandler = async (form: any) => {
 
   p {
     color: var(--text);
+    font-size: 1.125rem;
+    font-weight: 600;
   }
 }
 

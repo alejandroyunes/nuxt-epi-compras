@@ -32,6 +32,7 @@ import PostSvg from '~/components/icons/safety-tips/PostSvg.vue'
   gap: 20px;
   max-width: var(--max-width);
   margin: 100px auto 0;
+  padding: 0 .6rem;
 
   .column {
     text-align: center;

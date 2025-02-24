@@ -1,13 +1,14 @@
 .contact-form {
   width: 100%;
-  margin-top: 40px;
+  margin: 1rem .6rem;
+  display: flex;
+  justify-content: center;
 
   .contact-form-inner {
-    margin: 0 auto;
-    padding: 40px 24px 30px;
+    padding: 1rem 1rem .8rem;
+    border-radius: .6rem;
     box-shadow: var(--shadow-card);
-    max-width: var(--tablet-width);
-
+    
     .formkit-form .formkit-actions {
       display: none;
     }
@@ -66,7 +67,7 @@
               border-radius: 5px;
               height: 44px;
               font-size: 1rem;
-
+              width: 300px;
               &:hover {
                 background-color: var(--background);
                 outline: none;
@@ -184,10 +185,19 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+
+  .contact-form {
+
+    .contact-form-inner {
+      // width: 100%;
+    }
+  }
+}
+
 @media screen and (max-width: 758px) {
 
   .contact-form {
-    padding: 0 16px;
 
     .contact-form-inner {
       .form-group-inline {

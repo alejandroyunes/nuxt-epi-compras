@@ -76,6 +76,8 @@ import GoBack from './go-back.vue'
 
     p {
       color: var(--text);
+      font-size: 1.125rem;
+      font-weight: 600;
     }
   }
 
