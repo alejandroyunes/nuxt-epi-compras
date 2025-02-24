@@ -19,7 +19,7 @@
   justify-content: space-between;
   align-items: center;
   color: var(--heading);
-  margin: 1rem auto 0; 
+  margin: 0 auto 0; 
   max-width: var(--max-width);
 
   .shine-line {

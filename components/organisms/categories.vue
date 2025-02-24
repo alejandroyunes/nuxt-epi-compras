@@ -121,7 +121,7 @@ ul {
   list-style: none;
   overflow-x: scroll;
   overflow-y: hidden;
-  margin: 24px auto 0; 
+  margin: 1rem auto .6rem; 
   max-width: var(--max-width);
   scroll-snap-type: x mandatory;
   padding-left: .6rem;

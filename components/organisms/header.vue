@@ -123,6 +123,7 @@ const handleTheme = () => {
         img {
           width: 60px;
           height: auto;
+  
         }
 
         h1 {
@@ -163,12 +164,13 @@ const handleTheme = () => {
             img {
               width: 60px;
               height: auto;
+              padding-right: .6rem;
             }
 
             h1 {
               color: var(--primary);
               font-weight: 600;
-              align-self: center;
+              align-self: flex-end;
 
               @media (max-width: 500px) {
                 display: none;
