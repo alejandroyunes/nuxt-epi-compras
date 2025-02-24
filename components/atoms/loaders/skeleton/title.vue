@@ -21,7 +21,6 @@
   color: var(--heading);
   margin: 1rem auto 0; 
   max-width: var(--max-width);
-  padding: 0 .6rem;
 
   .shine-line {
     background-image: linear-gradient(90deg, rgba(#fff, 0), rgba(#fff, 0.5), rgba(#fff, 0));
@@ -38,9 +37,9 @@
   }
 
   .card-title {
-    min-height: 18px;
+    min-height: 1rem;
     width: 180px;
-    margin: 16px 0 20px;
+    margin: 1rem .6rem .6rem;
     border-radius: 8px;
     background-color: var(--text-soft);
   }

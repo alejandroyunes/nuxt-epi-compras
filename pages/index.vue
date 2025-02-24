@@ -3,10 +3,9 @@
 import Categories from '~/components/organisms/categories.vue'
 import ProductCard from '~/components/organisms/product-card.vue'
 import SafetyTips from '~/components/organisms/safety-tips.vue'
-import ProductImage from '~/components/atoms/product-image.vue'
 
-const title = 'Expert advice and products to improve your oral health'
-const description = 'Improve your oral health with our: ✓ Detailed user guides ✓ Expert advice ✓ Comparisons ✓ Reviews ✓ Promotions'
+const title = 'Compra y venta de productos, totalmente gratis'
+const description = 'Compra y venta de productos'
 
 useSeoMeta({
   title: title,

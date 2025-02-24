@@ -30,7 +30,7 @@ const isLoading = ref(true)
 
 setTimeout(() => {
   isLoading.value = false
-}, 1000)
+}, 5000)
 
 
 const loadMoreAds = async () => {

@@ -124,10 +124,12 @@ ul {
   margin: 24px auto 0; 
   max-width: var(--max-width);
   scroll-snap-type: x mandatory;
-
+  padding-left: .6rem;
+  
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
+
   }
 
   &::-webkit-scrollbar-thumb {
