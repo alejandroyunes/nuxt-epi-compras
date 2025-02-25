@@ -112,7 +112,9 @@ onMounted(() => {
             </div>
           </div>
 
-          <Button :disabled="!state.valid" text="Enviar" type="submit" />
+          <div class="form-group-button">
+            <Button :disabled="!state.valid" text="Publicar" type="submit" />
+          </div>
 
         </FormKit>
 
