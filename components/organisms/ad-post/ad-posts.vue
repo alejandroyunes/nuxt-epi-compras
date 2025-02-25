@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 import GoBack from './go-back.vue';
-import TitlePost from './title-post.vue'; /* PartiallyEnd: #3632/scriptSetup.vue */
 import TitlePost from './title-post.vue'
 
 </script>
