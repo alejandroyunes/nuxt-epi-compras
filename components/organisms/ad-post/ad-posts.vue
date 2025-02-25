@@ -1,17 +1,17 @@
 <script setup lang="ts">
 
+import CarServiceSvg from '~/components/icons/ad-post/CarServiceSvg.vue';
+import GamePadSvg from '~/components/icons/ad-post/GamePadSvg.vue';
+import HouseServiceSvg from '~/components/icons/ad-post/HouseServiceSvg.vue';
+import ServicesSvg from '~/components/icons/ad-post/ServicesSvg.vue';
 import GoBack from './go-back.vue';
-import HouseServiceSvg from '~/components/icons/ad-post/HouseServiceSvg.vue'
-import GamePadSvg from '~/components/icons/ad-post/GamePadSvg.vue'
-import CarServiceSvg from '~/components/icons/ad-post/CarServiceSvg.vue'
-import ServicesSvg from '~/components/icons/ad-post/ServicesSvg.vue'
-// import TitlePost from './title-post.vue'
+import TitlePost from './title-post.vue'
 
 </script>
 
 <template>
   <section>
-    <!-- <TitlePost title="¡Hola! ¿qué vas a publicar?" /> -->
+    <TitlePost title="¡Hola! ¿qué vas a publicar?" />
     <GoBack :goBackUrl="'/'" />
 
     <div class="post">
