@@ -68,25 +68,42 @@ const submitHandler = async (createForm: Props) => {
 
         <FormKit type="group" name="contact">
 
+          <div class="form-group-textarea">
+            <label for="message">Título</label>
+            <FormKit type="textarea" name="message"
+              placeholder="ejemplo: Amplio apartamento de 3 habitaciones en el centro de Bogotá" maxLength="85"
+              v-model="message" validation="required" />
+          </div>
+
           <div class="form-group-inline">
             <div class="form-group-input">
-              <label for="name">Nombre</label>
-              <FormKit type="text" placeholder="Ana" maxLength="30" minLength="3" v-model="name" name="name"
+              <label for="name">Ubicación</label>
+              <FormKit type="text" placeholder="Bogotá" maxLength="30" minLength="3" v-model="name" name="name"
                 validation="required" />
             </div>
 
             <div class="form-group-input">
-              <label for="email">Email</label>
-              <FormKit type="email" placeholder="ana@email.com" v-model="email" name="email"
-                validation="required|email" />
+              <label for="name">Precio</label>
+              <FormKit type="text" placeholder="$ 1.000.000" maxLength="30" minLength="3" v-model="name" name="name"
+                validation="required" />
             </div>
           </div>
 
-          <div class="form-group-textarea">
-            <label for="message">Mensaje</label>
-            <FormKit type="textarea" name="message" placeholder="Mensaje" maxLength="85" v-model="message"
-              validation="required" />
+          <div class="form-group-inline">
+            <div class="form-group-input">
+              <label for="name">Número de habitaciones</label>
+              <FormKit type="number" placeholder="Bogotá" maxLength="30" minLength="3" v-model="name" name="name"
+                validation="required" />
+            </div>
+
+            <div class="form-group-input">
+              <label for="name">Número de baños</label>
+              <FormKit type="number" placeholder="$ 1.000.000" maxLength="30" minLength="3" v-model="name" name="name"
+                validation="required" />
+            </div>
           </div>
+
+
 
           <Button :disabled="!state.valid" text="Enviar" type="submit" />
 
