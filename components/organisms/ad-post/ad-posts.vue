@@ -1,10 +1,7 @@
 <script setup lang="ts">
 
-import CarServiceSvg from '~/components/icons/ad-post/CarServiceSvg.vue'
-import GamePadSvg from '~/components/icons/ad-post/GamePadSvg.vue'
-import HouseServiceSvg from '~/components/icons/ad-post/HouseServiceSvg.vue'
-import ServicesSvg from '~/components/icons/ad-post/ServicesSvg.vue'
 
+import GoBack from './go-back.vue'; /* PartiallyEnd: #3632/scriptSetup.vue */
 import TitlePost from './title-post.vue'
 import GoBack from './go-back.vue'
 
@@ -25,7 +22,7 @@ import GoBack from './go-back.vue'
           </div>
         </div>
       </NuxtLink> -->
-
+<!-- 
       <div class="item">
         <p>Productos</p>
         <div class="ad-post-svg">
@@ -45,8 +42,8 @@ import GoBack from './go-back.vue'
         <div class="ad-post-svg">
           <ServicesSvg />
         </div>
-      </div>
-
+      </div> -->
+<h1>hola</h1>
     </div>
 
   </section>
