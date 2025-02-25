@@ -10,7 +10,7 @@ import TitlePost from './title-post.vue'
     <TitlePost title="¡Hola! ¿qué vas a publicar?" />
     <GoBack :goBackUrl="'/'" />
 
-    <div class="">
+    <div class="ad-post">
       <p>hello wrold</p>
 
       <!-- <NuxtLink :to="'/publicar/inmuebles'">
@@ -88,10 +88,8 @@ import TitlePost from './title-post.vue'
     border: 1px solid var(--primary);
     cursor: pointer;
 
-    @media (hover: hover) {
-      &:hover {
-        background-color: var(--primary);
-      }
+    &:hover {
+      background-color: var(--primary);
     }
 
     @media (max-width: 768px) {
