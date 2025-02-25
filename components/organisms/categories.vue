@@ -148,7 +148,7 @@ li {
   align-items: center;
   padding: 0 1rem;
   
-  @media (max-width: 1290px) {
+  @media (max-width: 1314px) {
     padding: 0 1rem;
   }
 

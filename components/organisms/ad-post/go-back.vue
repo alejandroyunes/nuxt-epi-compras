@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ArrowRightSvg from '~/components/icons/shared/ArrowRightSvg.vue'
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
+import ArrowRightSvg from '~/components/icons/shared/ArrowRightSvg.vue';
 
 const router = useRouter()
 
@@ -36,7 +36,7 @@ const handleGoBack = () => {
   max-width: var(--max-width);
   margin: 1rem auto 0;
   
-  @media (max-width: 1290px) {
+  @media (max-width: 1314px) {
     padding: 0 .6rem;
   }
 

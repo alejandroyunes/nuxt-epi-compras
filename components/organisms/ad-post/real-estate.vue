@@ -9,7 +9,7 @@ import BuildingColorSvg from '~/components/icons/ad-post//real-estate/type-of-pr
 import ConsultorioColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ConsultorioColorSvg.vue'
 import FincaColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/FincaColorSvg.vue'
 import HotelColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/HotelColorSvg.vue'
- import ShopColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ShopColorSvg.vue'
+import ShopColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/ShopColorSvg.vue'
 import TerrenoColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/TerrenoColorSvg.vue'
 import WareHouseSvg from '~/components/icons/ad-post//real-estate/type-of-property/WareHouseSvg.vue'
 import HouseColorSvg from '~/components/icons/ad-post//real-estate/type-of-property/HouseColorSvg.vue'
@@ -17,21 +17,9 @@ import TitlePost from './title-post.vue'
 import GoBack from './go-back.vue'
 import ContactForm from '~/components/organisms/ad-post/contact-form/contact-form.vue'
 
-interface PropertyAddress {
-  propertyAddress: string
-  propertyTown: string
-  propertyState: string
-  propertyCity: string
-}
-
-export interface RealEstateTypes {
-  [isFormDetails: string]: PropertyAddress
-}
-
 const isRentingOrSelling = ref(true)
 const isTypeOfProperySelected = ref(false)
 const isFormDetails = ref(false)
-const isFormSubmitting = ref(false)
 
 const typeOfPost = ref<'isRenting' | 'isSelling' | undefined>(undefined)
 const selectedPropertyType = ref<string | undefined>(undefined)
@@ -67,7 +55,6 @@ const goBackSecondStep = () => {
 }
 
 const getPropertyIcon = (property: string | number) => {
-
   return {
     'Apartmentos': ApartmentColorSvg,
     'Casas': HouseColorSvg,
@@ -79,23 +66,9 @@ const getPropertyIcon = (property: string | number) => {
     'Fincas': FincaColorSvg,
     'Consultorios': ConsultorioColorSvg,
     'Terrenos y Lotes': TerrenoColorSvg
-
   }[property] || null
 }
 
-const submitHandler = async (form: any) => {
-  console.log('submit', form)
-
-  // try {
-  //   isFormSubmitting.value = true
-  //   console.log('submit', form)
-  // } catch (error) {
-  //   console.log('error', error)
-  // } finally {
-  //   isFormSubmitting.value = false
-  //   console.log('submit', form)
-  // }
-}
 
 watchEffect(() => {
   console.log(typeOfPost.value)

@@ -78,7 +78,7 @@ const handleTheme = () => {
   background-color: var(--background);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
 
-  @media(max-width: 1290px) {
+  @media(max-width: 1314px) {
     padding: 0 .6rem 0;
   }
 

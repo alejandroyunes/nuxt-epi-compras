@@ -32,7 +32,7 @@ const { view, title } = defineProps<Props>()
     font-size: 1.125rem;
   }
 
-  @media (max-width: 1290px) {
+  @media (max-width: 1314px) {
     margin: .6rem .6rem 0;
   }
 

@@ -50,7 +50,7 @@ ul {
   margin: 1.2rem auto 1rem;
   padding-bottom: .7rem;
 
-  @media (max-width: 1290px) {
+  @media (max-width: 1314px) {
     padding: 0 .6rem .7rem;
   }
 

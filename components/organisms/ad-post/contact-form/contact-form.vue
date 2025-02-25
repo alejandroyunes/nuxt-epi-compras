@@ -103,8 +103,6 @@ const submitHandler = async (createForm: Props) => {
             </div>
           </div>
 
-
-
           <Button :disabled="!state.valid" text="Enviar" type="submit" />
 
         </FormKit>
