@@ -13,15 +13,15 @@ import GoBack from './go-back.vue';
     <div class="post">
       <p>hello wrold</p>
 
-      <!-- <NuxtLink :to="'/publicar/inmuebles'">
+      <NuxtLink :to="'/publicar/inmuebles'">
         <div class="item">
           <p>Inmuebles</p>
           <div class="ad-post-svg">
             <HouseServiceSvg />
           </div>
         </div>
-      </NuxtLink> -->
-      <!-- 
+      </NuxtLink>
+
       <div class="item">
         <p>Productos</p>
         <div class="ad-post-svg">
@@ -41,7 +41,7 @@ import GoBack from './go-back.vue';
         <div class="ad-post-svg">
           <ServicesSvg />
         </div>
-      </div> -->
+      </div>
       <h1>hola</h1>
     </div>
 
