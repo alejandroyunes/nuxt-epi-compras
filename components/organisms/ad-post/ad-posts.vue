@@ -11,12 +11,11 @@ import GoBack from './go-back.vue';
     <GoBack :goBackUrl="'/'" />
 
     <div class="post">
-      <p>hello wrold</p>
 
       <NuxtLink :to="'/publicar/inmuebles'">
         <div class="item">
           <p>Inmuebles</p>
-          <div class="ad-post-svg">
+          <div class="post-svg">
             <HouseServiceSvg />
           </div>
         </div>
@@ -24,21 +23,21 @@ import GoBack from './go-back.vue';
 
       <div class="item">
         <p>Productos</p>
-        <div class="ad-post-svg">
+        <div class="post-svg">
           <GamePadSvg />
         </div>
       </div>
 
       <div class="item">
         <p>Vehículos</p>
-        <div class="ad-post-svg">
+        <div class="post-svg">
           <CarServiceSvg />
         </div>
       </div>
 
       <div class="item">
         <p>Servicios</p>
-        <div class="ad-post-svg">
+        <div class="post-svg">
           <ServicesSvg />
         </div>
       </div>
@@ -76,7 +75,7 @@ import GoBack from './go-back.vue';
     }
   }
 
-  .ad-post-svg {
+  .post-svg {
     width: 180px;
     height: 150px;
     display: flex;
