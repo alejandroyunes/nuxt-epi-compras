@@ -103,13 +103,12 @@ onMounted(() => {
           <div class="form-group-inline">
             <div class="form-group-input">
               <label for="rooms">Número de habitaciones</label>
-              <FormKit type="number" placeholder="2" maxLength="2" minLength="2" v-model.number="rooms" name="rooms" validation="required" />
+              <FormKit type="number" value="2" v-model.number="rooms" name="rooms" validation="required" />
             </div>
 
             <div class="form-group-input">
               <label for="baths">Número de baños</label>
-              <FormKit type="number" pattern="^[0-9]*$" placeholder="1" maxLength="30" minLength="2" v-model.number="baths" name="baths" validation="required" />
-
+              <FormKit type="number" value="2" v-model.number="baths" name="baths" validation="required" />
             </div>
           </div>
 
