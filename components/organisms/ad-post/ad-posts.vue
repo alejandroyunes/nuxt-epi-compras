@@ -1,6 +1,10 @@
 <script setup lang="ts">
 
 import GoBack from './go-back.vue';
+import HouseServiceSvg from '~/components/icons/ad-post/HouseServiceSvg.vue'
+import GamePadSvg from '~/components/icons/ad-post/GamePadSvg.vue'
+import CarServiceSvg from '~/components/icons/ad-post/CarServiceSvg.vue'
+import ServicesSvg from '~/components/icons/ad-post/ServicesSvg.vue'
 // import TitlePost from './title-post.vue'
 
 </script>
