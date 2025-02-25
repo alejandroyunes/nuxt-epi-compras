@@ -4,12 +4,22 @@ import { ref } from 'vue'
 import { AxiosError } from 'axios'
 import { reset } from '@formkit/core'
 import Loading from '~/components/atoms/loading/loading-icon/index.vue'
-// import { formPostServicesPost } from '~/services/formPostServices'
 import Button from '~/components/atoms/buttons/fill/index.vue'
 
-const name = ref('')
-const email = ref('')
-const message = ref('')
+type PostType = {
+  typeOfPost: string
+  selectedPropertyType: string
+}
+
+const router = useRouter()
+const param = ref<string | undefined>(undefined)
+const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
+
+const title = ref('')
+const location = ref('')
+const price = ref('')
+const rooms = ref()
+const baths = ref()
 
 const isResponseError = ref(true)
 const isRequestError = ref(false)
@@ -17,15 +27,7 @@ const isSuccess = ref(false)
 const isLoading = ref(false)
 const isConfirmInfoVisible = ref(false)
 
-type Props = {
-  contact: {
-    name: string
-    email: string
-    message: string
-  }
-}
-
-const submitHandler = async (createForm: Props) => {
+const submitHandler = async (createForm: any) => {
   isLoading.value = true
   isConfirmInfoVisible.value = true
 
@@ -57,6 +59,15 @@ const submitHandler = async (createForm: Props) => {
   isLoading.value = false
 }
 
+watchEffect(() => {
+  console.log(typeOfPost)
+  console.log(selectedPropertyType)
+})
+
+onMounted(() => {
+  param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
+})
+
 </script>
 
 <template>
@@ -69,37 +80,36 @@ const submitHandler = async (createForm: Props) => {
         <FormKit type="group" name="contact">
 
           <div class="form-group-textarea">
-            <label for="message">Título</label>
-            <FormKit type="textarea" name="message"
+            <label for="title">Título</label>
+            <FormKit type="textarea" name="title"
               placeholder="ejemplo: Amplio apartamento de 3 habitaciones en el centro de Bogotá" maxLength="85"
-              v-model="message" validation="required" />
+              v-model="title" validation="required" />
           </div>
 
           <div class="form-group-inline">
             <div class="form-group-input">
-              <label for="name">Ubicación</label>
-              <FormKit type="text" placeholder="Bogotá" maxLength="30" minLength="3" v-model="name" name="name"
+              <label for="location">Ubicación</label>
+              <FormKit type="text" placeholder="Bogotá" maxLength="15" minLength="3" v-model="location" name="location"
                 validation="required" />
             </div>
 
             <div class="form-group-input">
-              <label for="name">Precio</label>
-              <FormKit type="text" placeholder="$ 1.000.000" maxLength="30" minLength="3" v-model="name" name="name"
+              <label for="price">Precio</label>
+              <FormKit type="number" placeholder="$ 1.000.000" maxLength="6" minLength="3" v-model="price" name="location"
                 validation="required" />
             </div>
           </div>
 
           <div class="form-group-inline">
             <div class="form-group-input">
-              <label for="name">Número de habitaciones</label>
-              <FormKit type="number" placeholder="Bogotá" maxLength="30" minLength="3" v-model="name" name="name"
-                validation="required" />
+              <label for="rooms">Número de habitaciones</label>
+              <FormKit type="number" placeholder="2" maxLength="2" minLength="2" v-model.number="rooms" name="rooms" validation="required" />
             </div>
 
             <div class="form-group-input">
-              <label for="name">Número de baños</label>
-              <FormKit type="number" placeholder="$ 1.000.000" maxLength="30" minLength="3" v-model="name" name="name"
-                validation="required" />
+              <label for="baths">Número de baños</label>
+              <FormKit type="number" pattern="^[0-9]*$" placeholder="1" maxLength="30" minLength="2" v-model.number="baths" name="baths" validation="required" />
+
             </div>
           </div>
 

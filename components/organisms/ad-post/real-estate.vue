@@ -21,9 +21,9 @@ const isRentingOrSelling = ref(true)
 const isTypeOfProperySelected = ref(false)
 const isFormDetails = ref(false)
 
+const propertyTypes = ref(['Apartmentos', 'Casas', 'Bodega', 'Locales', 'Edificio', 'Habitaciones', 'Hoteles', 'Fincas', 'Consultorios', 'Terrenos y Lotes'])
 const typeOfPost = ref<'isRenting' | 'isSelling' | undefined>(undefined)
 const selectedPropertyType = ref<string | undefined>(undefined)
-const propertyTypes = ref(['Apartmentos', 'Casas', 'Bodega', 'Locales', 'Edificio', 'Habitaciones', 'Hoteles', 'Fincas', 'Consultorios', 'Terrenos y Lotes'])
 
 const selectPostType = (selection: 'isRenting' | 'isSelling') => {
   typeOfPost.value = selection
@@ -69,12 +69,6 @@ const getPropertyIcon = (property: string | number) => {
   }[property] || null
 }
 
-
-watchEffect(() => {
-  console.log(typeOfPost.value)
-  console.log(selectedPropertyType.value)
-})
-
 </script>
 
 <template>
@@ -118,7 +112,7 @@ watchEffect(() => {
   <section v-if="isFormDetails">
     <TitlePost title="Empezemos describiendo el inmueble" />
     <GoBack :goBack="goBackSecondStep" />
-    <ContactForm />
+    <ContactForm v-if="typeOfPost && selectedPropertyType" :typeOfPost="typeOfPost" :selectedPropertyType="selectedPropertyType" />
   </section>
 </template>
 
