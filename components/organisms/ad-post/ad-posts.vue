@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import GoBack from './go-back.vue';
+import TitlePost from './title-post.vue'; /* PartiallyEnd: #3632/scriptSetup.vue */
 import TitlePost from './title-post.vue'
 
 </script>
@@ -10,7 +11,7 @@ import TitlePost from './title-post.vue'
     <TitlePost title="¡Hola! ¿qué vas a publicar?" />
     <GoBack :goBackUrl="'/'" />
 
-    <div class="ad-post">
+    <div class="">
       <p>hello wrold</p>
 
       <!-- <NuxtLink :to="'/publicar/inmuebles'">
