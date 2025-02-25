@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
-import GoBack from './go-back.vue'
-import TitlePost from './title-post.vue'
+import GoBack from './go-back.vue';
+// import TitlePost from './title-post.vue'
 
 </script>
 
 <template>
   <section>
-    <TitlePost title="¡Hola! ¿qué vas a publicar?" />
+    <!-- <TitlePost title="¡Hola! ¿qué vas a publicar?" /> -->
     <GoBack :goBackUrl="'/'" />
 
-    <div class="ad-post">
+    <div class="post">
       <p>hello wrold</p>
 
       <!-- <NuxtLink :to="'/publicar/inmuebles'">
@@ -49,8 +49,8 @@ import TitlePost from './title-post.vue'
 </template>
 
 <style lang="scss" scoped>
-.ad-post {
-  // display: grid;
+.post {
+  display: grid;
   // grid-template-columns: repeat(4, 1fr);
   // margin: 20px auto 0;
   // gap: 20px;
