@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import GoBack from './go-back.vue';
+import GoBack from './go-back.vue'
 import TitlePost from './title-post.vue'
 
 </script>
@@ -50,11 +50,11 @@ import TitlePost from './title-post.vue'
 
 <style lang="scss" scoped>
 .ad-post {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin: 20px auto 0;
-  gap: 20px;
-  max-width: var(--max-width);
+  // display: grid;
+  // grid-template-columns: repeat(4, 1fr);
+  // margin: 20px auto 0;
+  // gap: 20px;
+  // max-width: var(--max-width);
 
   // @media (max-width: 1024px) {
   //   grid-template-columns: repeat(3, 1fr);
