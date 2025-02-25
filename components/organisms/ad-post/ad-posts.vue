@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import GoBack from './go-back.vue'; 
+import GoBack from './go-back.vue';
 import TitlePost from './title-post.vue'
 
 </script>
@@ -11,6 +11,7 @@ import TitlePost from './title-post.vue'
     <GoBack :goBackUrl="'/'" />
 
     <div class="ad-post">
+      <p>hello wrold</p>
 
       <!-- <NuxtLink :to="'/publicar/inmuebles'">
         <div class="item">
@@ -20,7 +21,7 @@ import TitlePost from './title-post.vue'
           </div>
         </div>
       </NuxtLink> -->
-<!-- 
+      <!-- 
       <div class="item">
         <p>Productos</p>
         <div class="ad-post-svg">
@@ -41,7 +42,7 @@ import TitlePost from './title-post.vue'
           <ServicesSvg />
         </div>
       </div> -->
-<h1>hola</h1>
+      <h1>hola</h1>
     </div>
 
   </section>
