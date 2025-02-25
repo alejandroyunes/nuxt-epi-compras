@@ -26,7 +26,7 @@ import GoBack from './go-back.vue'
         </div>
       </NuxtLink>
 
-      <div class="item">
+      <!-- <div class="item">
         <p>Productos</p>
         <div class="ad-post-svg">
           <GamePadSvg />
@@ -45,7 +45,7 @@ import GoBack from './go-back.vue'
         <div class="ad-post-svg">
           <ServicesSvg />
         </div>
-      </div>
+      </div> -->
 
     </div>
 
