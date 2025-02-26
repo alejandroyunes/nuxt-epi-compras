@@ -20,6 +20,8 @@ const location = ref('')
 const price = ref('')
 const rooms = ref()
 const baths = ref()
+const area = ref()
+
 
 const isResponseError = ref(true)
 const isRequestError = ref(false)
@@ -68,6 +70,8 @@ onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
 })
 
+const zeroToFiveDigits = /^.{0,5}$/
+
 </script>
 
 <template>
@@ -81,34 +85,42 @@ onMounted(() => {
 
           <div class="form-group-textarea">
             <label for="title">Título</label>
-            <FormKit type="textarea" name="title"
-              placeholder="ejemplo: Amplio apartamento de 3 habitaciones en el centro de Bogotá" maxLength="85"
-              v-model="title" validation="required" />
+            <FormKit type="textarea" name="title" placeholder="ejemplo: Amplio apartamento de 3 habitaciones en el centro de Bogotá" maxLength="85" v-model="title" validation="required" />
           </div>
 
           <div class="form-group-inline">
             <div class="form-group-input">
-              <label for="location">Ubicación</label>
-              <FormKit type="text" placeholder="Bogotá" maxLength="15" minLength="3" v-model="location" name="location"
-                validation="required" />
+              <label for="location">Ciudad</label>
+              <FormKit type="text" placeholder="Bogotá" maxLength="15" minLength="3" v-model="location" name="location" validation="required" />
             </div>
 
             <div class="form-group-input">
               <label for="price">Precio</label>
-              <FormKit type="number" placeholder="$ 1.000.000" maxLength="6" minLength="3" v-model="price" name="location"
-                validation="required" />
+              <FormKit type="text" inputmode="numeric" maxLength="7" placeholder="$ 1.000.000" v-model="price" name="location" validation="required" />
             </div>
           </div>
 
           <div class="form-group-inline">
             <div class="form-group-input">
               <label for="rooms">Número de habitaciones</label>
-              <FormKit type="number" value="2" v-model.number="rooms" name="rooms" validation="required" />
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="rooms" name="rooms" validation="required" />
             </div>
 
             <div class="form-group-input">
               <label for="baths">Número de baños</label>
-              <FormKit type="number" value="2" v-model.number="baths" name="baths" validation="required" />
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="baths" name="baths" validation="required" />
+            </div>
+          </div>
+
+          <div class="form-group-inline">
+            <div class="form-group-input">
+              <label for="area">Metros cuadrados</label>
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="50²" v-model.number="area" name="area" validation="required" />
+            </div>
+
+            <div class="form-group-input">
+              <label for="baths">Número de baños</label>
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="baths" name="baths" validation="required" />
             </div>
           </div>
 
