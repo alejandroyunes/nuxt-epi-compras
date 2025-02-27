@@ -5,6 +5,7 @@ import { AxiosError } from 'axios'
 import { reset } from '@formkit/core'
 import Loading from '~/components/atoms/loading/loading-icon/index.vue'
 import Button from '~/components/atoms/buttons/fill/index.vue'
+import imageUploader from '../image-uploader.vue'
 
 type PostType = {
   typeOfPost: string
@@ -17,10 +18,13 @@ const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
 
 const title = ref('')
 const location = ref('')
-const price = ref('')
+const price = ref()
 const rooms = ref()
 const baths = ref()
 const area = ref()
+const parking = ref()
+const utilityRoom = ref()
+const phone = ref()
 
 
 const isResponseError = ref(true)
@@ -85,44 +89,69 @@ const zeroToFiveDigits = /^.{0,5}$/
 
           <div class="form-group-textarea">
             <label for="title">Título</label>
-            <FormKit type="textarea" name="title" placeholder="ejemplo: Amplio apartamento de 3 habitaciones en el centro de Bogotá" maxLength="85" v-model="title" validation="required" />
+            <FormKit type="textarea" name="title"
+              placeholder="ejemplo: Amplio apartamento de 2 habitaciones en el centro de Bogotá" maxLength="85"
+              v-model="title" validation="required" />
           </div>
 
           <div class="form-group-inline">
             <div class="form-group-input">
               <label for="location">Ciudad</label>
-              <FormKit type="text" placeholder="Bogotá" maxLength="15" minLength="3" v-model="location" name="location" validation="required" />
+              <FormKit type="text" placeholder="Bogotá" maxLength="15" minLength="3" v-model="location" name="location"
+                validation="required" />
             </div>
 
             <div class="form-group-input">
               <label for="price">Precio</label>
-              <FormKit type="text" inputmode="numeric" maxLength="7" placeholder="$ 1.000.000" v-model="price" name="location" validation="required" />
-            </div>
-          </div>
-
-          <div class="form-group-inline">
-            <div class="form-group-input">
-              <label for="rooms">Número de habitaciones</label>
-              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="rooms" name="rooms" validation="required" />
-            </div>
-
-            <div class="form-group-input">
-              <label for="baths">Número de baños</label>
-              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="baths" name="baths" validation="required" />
+              <FormKit type="text" inputmode="numeric" maxLength="7" placeholder="$ 1.000.000" v-model="price"
+                name="price" validation="required" />
             </div>
           </div>
 
           <div class="form-group-inline">
             <div class="form-group-input">
               <label for="area">Metros cuadrados</label>
-              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="50²" v-model.number="area" name="area" validation="required" />
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="50²" v-model.number="area" name="area"
+                validation="required" />
             </div>
 
             <div class="form-group-input">
-              <label for="baths">Número de baños</label>
-              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="baths" name="baths" validation="required" />
+              <label for="rooms">Número de habitaciones</label>
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="rooms" name="rooms"
+                validation="required" />
             </div>
           </div>
+
+          <div class="form-group-inline">
+            <div class="form-group-input">
+              <label for="baths">Número de baños</label>
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="baths" name="baths"
+                validation="required" />
+            </div>
+
+            <div class="form-group-input">
+              <label for="parking">Número de parqueaderos</label>
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="1" v-model.number="parking"
+                name="parking" validation="required" />
+            </div>
+          </div>
+
+          <div class="form-group-inline">
+            <div class="form-group-input">
+              <label for="utilityRoom">Número de cuartos útiles</label>
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="1" v-model.number="utilityRoom" name="utilityRoom"
+                validation="required" />
+            </div>
+
+            <div class="form-group-input">
+              <label for="phone">Teléfono de contacto</label>
+              <FormKit type="text" inputmode="numeric" maxLength="10" placeholder="304 123 4567" v-model.number="phone"
+                name="phone" validation="required" />
+            </div>
+
+          </div>
+
+          <imageUploader />
 
           <div class="form-group-button">
             <Button :disabled="!state.valid" text="Publicar" type="submit" />

@@ -192,6 +192,7 @@ const loadMoreAds = async () => {
       color: var(--white);
       border: none;
       border-radius: .7rem;
+      cursor: pointer;
     }
   }
 }

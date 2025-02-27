@@ -22,8 +22,8 @@ const handleGoBack = () => {
 </script>
 
 <template>
-  <div class="go-back" @click="handleGoBack">
-    <div class="inner">
+  <div class="go-back">
+    <div class="inner" @click="handleGoBack">
       <ArrowRightSvg class="icon" />
       <p>Volver</p>
     </div>
