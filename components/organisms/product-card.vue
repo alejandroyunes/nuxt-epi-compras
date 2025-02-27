@@ -63,7 +63,7 @@ const loadMoreAds = async () => {
 
     <Title :view="'ver más'" :title="'Anuncios Recientes'" />
 
-    <ul>
+    <ul class="post-ads">
       <li v-for="ad in ads" :key="ad.id" :data-ad-id="ad.id">
         <div class="item">
           <div class="condition">
@@ -99,7 +99,7 @@ const loadMoreAds = async () => {
 
 
 <style scoped lang="scss">
-ul {
+.post-ads {
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -107,7 +107,7 @@ ul {
   justify-content: space-between;
   list-style: none;
   max-width: var(--max-width);
-  margin: 1.2rem auto 1rem;
+  margin: .8rem auto 1rem;
   padding-bottom: .7rem;
 
   @media (max-width: 1314px) {

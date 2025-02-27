@@ -39,7 +39,7 @@
   }
 }
 
-ul {
+.ads-skeleton {
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -50,9 +50,9 @@ ul {
   margin: 1.2rem auto 1rem;
   padding-bottom: .7rem;
 
-  @media (max-width: 1314px) {
-    padding: 0 .6rem .7rem;
-  }
+  // @media (max-width: 1314px) {
+  //   padding: 0 .6rem .7rem;
+  // }
 
   &::-webkit-scrollbar {
     width: 8px;

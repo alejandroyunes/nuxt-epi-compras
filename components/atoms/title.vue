@@ -37,7 +37,7 @@ const { view, title } = defineProps<Props>()
   }
 
   @media (max-width: 1024px) {
-    margin: 0rem .6rem 0;
+    margin: .3rem .6rem 0;
   }
 }
 </style>
