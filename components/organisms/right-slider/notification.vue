@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import './scss/styles.scss'
-import './scss/notification.scss'
-import { ref } from 'vue'
-import NotificationBellSvg from '@/components/icons/shared/NotificationBellSvg.vue'
 import NoNotificationBellSvg from '@/components//icons/shared/NoNotificationBellSvg.vue'
-import ExitSvg from './icons/ExitSvg.vue'
+import NotificationBellSvg from '@/components/icons/shared/NotificationBellSvg.vue'
+import { ref } from 'vue'
+import ExitSvg from '../../icons/ExitSvg.vue'
+import './scss/notification.scss'
+import './scss/styles.scss'
 
 const showNotification = ref(false)
 const notifications = ref(false)

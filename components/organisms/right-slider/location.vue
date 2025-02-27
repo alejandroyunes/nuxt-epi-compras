@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import './scss/styles.scss'
-import './scss/location.scss'
 import { ref } from 'vue'
-import LocationSvg from './icons/LocationSvg.vue'
-import ExitSvg from './icons/ExitSvg.vue'
-import SearchSvg from '~/components/icons/shared/SearchSvg.vue'
-import ArrowRightSvg from '~/components/icons/shared/ArrowRightSvg.vue'
 import CircleLoader from '~/components/atoms/loaders/circle-icon/CircleLoader.vue'
+import ArrowRightSvg from '~/components/icons/shared/ArrowRightSvg.vue'
+import SearchSvg from '~/components/icons/shared/SearchSvg.vue'
+import ExitSvg from '../../icons/ExitSvg.vue'
+import LocationSvg from './icons/LocationSvg.vue'
+import './scss/location.scss'
+import './scss/styles.scss'
 
 interface LocationType {
   latitude: number
