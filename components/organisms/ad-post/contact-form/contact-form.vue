@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import './contact-form.scss'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { AxiosError } from 'axios'
 import { reset } from '@formkit/core'
 import Loading from '~/components/atoms/loading/loading-icon/index.vue'
@@ -18,20 +18,44 @@ const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
 
 const title = ref('')
 const location = ref('')
-const price = ref()
-const rooms = ref()
-const baths = ref()
-const area = ref()
-const parking = ref()
-const utilityRoom = ref()
-const phone = ref()
+const price = ref<string | undefined>(undefined)
+const rooms = ref<string | undefined>(undefined)
+const baths = ref<string | undefined>(undefined)
+const area = ref<string | undefined>(undefined)
+const parking = ref<string | undefined>(undefined)
+const utilityRoom = ref<string | undefined>(undefined)
+const phone = ref<string | undefined>(undefined)
 const files = ref<{ file: File, url: string | undefined }[]>([])
 
-const isResponseError = ref(true)
+const isResponseError = ref(false)
 const isRequestError = ref(false)
 const isSuccess = ref(false)
 const isLoading = ref(false)
 const isConfirmInfoVisible = ref(false)
+
+// Function to format phone number
+const formatPhoneNumber = (value: string | undefined): string => {
+  if (!value) return '' // Handle undefined or empty input
+
+  const cleanedValue = value.replace(/\D/g, '') // Remove non-digits
+  if (cleanedValue.length > 10) return phone.value || '' // Return current phone value if over max length
+
+  let formattedValue = cleanedValue
+  if (cleanedValue.length > 6) {
+    formattedValue = `${cleanedValue.slice(0, 3)} ${cleanedValue.slice(3, 6)} ${cleanedValue.slice(6)}`
+  } else if (cleanedValue.length > 3) {
+    formattedValue = `${cleanedValue.slice(0, 3)} ${cleanedValue.slice(3)}`
+  }
+  return formattedValue
+}
+
+// Watch phone value and format it
+watch(phone, (newValue) => {
+  const formatted = formatPhoneNumber(newValue)
+  if (formatted !== newValue) {
+    phone.value = formatted
+  }
+})
 
 const submitHandler = async (createForm: any) => {
   isLoading.value = true
@@ -42,6 +66,7 @@ const submitHandler = async (createForm: any) => {
     isRequestError.value = false
     isResponseError.value = false
 
+    // Uncomment and implement your API call here
     // const { contact } = createForm
     // await formPost(contact)
 
@@ -49,12 +74,10 @@ const submitHandler = async (createForm: any) => {
     isSuccess.value = true
 
     reset('contact-page')
-
   } catch (error) {
     isLoading.value = false
 
     const axiosError = error as AxiosError<Error>
-
     if (axiosError.response) {
       isResponseError.value = true
     } else if (axiosError.request) {
@@ -65,19 +88,9 @@ const submitHandler = async (createForm: any) => {
   isLoading.value = false
 }
 
-watch(files.value, (newValue) => {
-  console.log(newValue)
-}, { deep: true })
-
-watchEffect(() => {
-  console.log(files.value)
-
-})
-
 onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
 })
-
 </script>
 
 <template>
@@ -86,7 +99,6 @@ onMounted(() => {
     <div class="contact-form-inner" v-if="true">
 
       <FormKit type="form" id="contact-page" #default="{ state }" @submit="submitHandler">
-
         <FormKit type="group" name="contact">
 
           <div class="form-group-textarea">
@@ -106,7 +118,7 @@ onMounted(() => {
             <div class="form-group-input">
               <label for="price">Precio</label>
               <FormKit type="text" inputmode="numeric" maxLength="7" placeholder="$ 1.000.000" v-model="price"
-                name="price" validation="required" />
+                name="price" validation="required" oninput="this.value = this.value.replace(/\D/g, '')" />
             </div>
           </div>
 
@@ -114,13 +126,13 @@ onMounted(() => {
             <div class="form-group-input">
               <label for="area">Metros cuadrados</label>
               <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="50²" v-model.number="area" name="area"
-                validation="required" />
+                validation="required" oninput="this.value = this.value.replace(/\D/g, '')" />
             </div>
 
             <div class="form-group-input">
               <label for="rooms">Número de habitaciones</label>
               <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="rooms" name="rooms"
-                validation="required" />
+                validation="required" oninput="this.value = this.value.replace(/\D/g, '')" />
             </div>
           </div>
 
@@ -128,27 +140,28 @@ onMounted(() => {
             <div class="form-group-input">
               <label for="baths">Número de baños</label>
               <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="2" v-model.number="baths" name="baths"
-                validation="required" />
+                validation="required" oninput="this.value = this.value.replace(/\D/g, '')" />
             </div>
 
             <div class="form-group-input">
               <label for="parking">Número de parqueaderos</label>
               <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="1" v-model.number="parking"
-                name="parking" validation="required" />
+                name="parking" validation="required" oninput="this.value = this.value.replace(/\D/g, '')" />
             </div>
           </div>
 
           <div class="form-group-inline">
             <div class="form-group-input">
               <label for="utilityRoom">Número de cuartos útiles</label>
-              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="1" v-model.number="utilityRoom" name="utilityRoom"
-                validation="required" />
+              <FormKit type="text" inputmode="numeric" maxLength="3" placeholder="1" v-model.number="utilityRoom"
+                name="utilityRoom" validation="required" oninput="this.value = this.value.replace(/\D/g, '')" />
             </div>
 
             <div class="form-group-input">
               <label for="phone">Teléfono de contacto</label>
-              <FormKit type="text" inputmode="numeric" maxLength="10" placeholder="304 123 4567" v-model.number="phone"
-                name="phone" validation="required" />
+              <FormKit type="text" inputmode="numeric" :maxLength="12" placeholder="304 123 4567" v-model="phone"
+                name="phone" :validation="[['required'], ['matches', /^\d{3} \d{3} \d{4}$/]]"
+                oninput="this.value = this.value.replace(/\D/g, '')" @input="formatPhoneNumber" />
             </div>
 
           </div>
@@ -156,7 +169,7 @@ onMounted(() => {
           <imageUploader v-model:files="files" />
 
           <div class="form-group-button">
-            <Button :disabled="!state.valid" text="Publicar" type="submit" />
+            <Button :disabled="!state.valid && files.values.length !== 0" text="Publicar" type="submit" />
           </div>
 
         </FormKit>

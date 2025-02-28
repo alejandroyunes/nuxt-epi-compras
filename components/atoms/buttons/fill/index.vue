@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import './fill.scss'
 
 type ButtonProps = {
   text: string
@@ -33,3 +32,24 @@ const handleClick = () => {
     {{ text }}
   </button>
 </template>
+
+<style scoped lang="scss">
+.fill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary);
+  color: var(--white);
+  margin-top: 32px;
+  padding: 1rem;
+  border-radius: 48px;
+  border: none;
+  cursor: pointer;
+  margin: 0 auto;
+  font-size: 1rem;
+
+  &.btn-disabled {
+    opacity: 0.7;
+  }
+}
+</style>

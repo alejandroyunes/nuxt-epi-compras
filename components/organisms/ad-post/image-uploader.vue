@@ -142,7 +142,7 @@ onUnmounted(() => {
     :class="{ 'is-dragging': isDragging }">
     <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" multiple style="display: none;" />
     <div class="upload-area">
-      <p class="select-device">Suelta las imágenes aquí o</p>
+      <p class="select-device">Suelta las imágenes aquí o </p>
       <p><span @click="triggerFileInput">selecciona desde tu dispositivo</span></p>
     </div>
     <div class="preview-container" v-if="files.length > 0">
@@ -164,6 +164,7 @@ onUnmounted(() => {
   padding: 1.2rem;
   text-align: center;
   transition: border-color 0.3s ease;
+  margin-top: .6rem;
 
   &.is-dragging {
     outline-color: var(--success);
