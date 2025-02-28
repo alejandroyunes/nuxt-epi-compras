@@ -1,59 +1,140 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import ExitSvg from '~/components/icons/ExitSvg.vue'
+import { ref, onUnmounted } from 'vue';
+import ExitSvg from '~/components/icons/ExitSvg.vue';
 
-const { files } = defineProps<{ files: { file: File, url: string | undefined }[] }>()
+const props = defineProps<{ files: { file: File; url: string | undefined }[] }>();
+const emit = defineEmits(['update:files']); // Define the emit event for updating files
 
-const isDragging = ref(false)
-const fileInput = ref()
+const isDragging = ref(false);
+const fileInput = ref<HTMLInputElement>();
+
+const MAX_WIDTH = 600; // Maximum width in pixels
+const MAX_HEIGHT = 580; // Maximum height in pixels
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 function triggerFileInput() {
-  fileInput.value.click()
+  fileInput.value?.click();
 }
 
 function onFileChange(event: Event) {
-  const selectedFiles = (event.target as HTMLInputElement).files
-  if (selectedFiles) {
-    handleFiles(selectedFiles)
-  }
+  const selectedFiles = (event.target as HTMLInputElement).files;
+  if (selectedFiles) handleFiles(selectedFiles);
 }
 
 function onDragOver() {
-  isDragging.value = true
+  isDragging.value = true;
 }
 
 function onDragLeave() {
-  isDragging.value = false
+  isDragging.value = false;
 }
 
 function onDrop(event: DragEvent) {
-  isDragging.value = false
-  const droppedFiles = event.dataTransfer?.files
-  if (droppedFiles) {
-    handleFiles(droppedFiles)
-  }
+  isDragging.value = false;
+  const droppedFiles = event.dataTransfer?.files;
+  if (droppedFiles) handleFiles(droppedFiles);
 }
 
+async function resizeImage(file: File): Promise<File> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const reader = new FileReader();
 
-function handleFiles(filesList: FileList | File[]) {
-  const remainingSlots = 3 - files.length
+    reader.onload = (e) => {
+      img.src = e.target?.result as string;
+    };
 
-  for (let i = 0; i < filesList.length && i < remainingSlots; i++) {
-    const file = filesList[i]
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d')!;
+      let { width, height } = img;
+
+      // Calculate new dimensions while preserving aspect ratio
+      if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+        const aspectRatio = width / height;
+        if (width > MAX_WIDTH) {
+          width = MAX_WIDTH;
+          height = width / aspectRatio;
+        }
+        if (height > MAX_HEIGHT) {
+          height = MAX_HEIGHT;
+          width = height * aspectRatio;
+        }
+      }
+
+      // Set canvas dimensions
+      canvas.width = width;
+      canvas.height = height;
+
+      // Draw resized image
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Convert canvas to Blob and then to File
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const resizedFile = new File([blob], file.name, {
+            type: file.type,
+            lastModified: file.lastModified,
+          });
+          resolve(resizedFile);
+        }
+      }, file.type, 0.9); // 0.9 is JPEG quality (adjustable)
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handleFiles(filesList: FileList | File[]) {
+  const remainingSlots = 3 - props.files.length;
+  if (filesList.length > remainingSlots) {
+    alert(`Solo puedes subir ${remainingSlots} imagen(es) más.`);
+    return;
+  }
+
+  const newFiles: { file: File; url: string | undefined }[] = [...props.files];
+
+  for (let i = 0; i < filesList.length; i++) {
+    const file = filesList[i];
     if (file.type.startsWith('image/')) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        files.push({ file: file, url: e.target?.result as string })
-      };
-      reader.readAsDataURL(file)
+      if (file.size > MAX_FILE_SIZE) {
+        alert(`El archivo ${file.name} excede el límite de 5MB.`);
+        continue;
+      }
+
+      try {
+        // Resize the image before adding to files
+        const resizedFile = await resizeImage(file);
+        const url = URL.createObjectURL(resizedFile);
+        newFiles.push({ file: resizedFile, url });
+      } catch (error) {
+        console.error(`Error procesando ${file.name}:`, error);
+        alert(`No se pudo cargar ${file.name}.`);
+      }
     }
   }
+
+  // Emit the updated files array to the parent
+  emit('update:files', newFiles);
 }
 
 function removeFile(index: number) {
-  files.splice(index, 1)
+  const newFiles = [...props.files];
+  if (newFiles[index].url) {
+    URL.revokeObjectURL(newFiles[index].url);
+  }
+  newFiles.splice(index, 1);
+  // Emit the updated files array to the parent
+  emit('update:files', newFiles);
 }
 
+onUnmounted(() => {
+  props.files.forEach((fileObj) => {
+    if (fileObj.url) {
+      URL.revokeObjectURL(fileObj.url);
+    }
+  });
+});
 </script>
 
 <template>
@@ -61,7 +142,7 @@ function removeFile(index: number) {
     :class="{ 'is-dragging': isDragging }">
     <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" multiple style="display: none;" />
     <div class="upload-area">
-      <p class="select-device">Suelta las imágenes aquí o </p>
+      <p class="select-device">Suelta las imágenes aquí o</p>
       <p><span @click="triggerFileInput">selecciona desde tu dispositivo</span></p>
     </div>
     <div class="preview-container" v-if="files.length > 0">

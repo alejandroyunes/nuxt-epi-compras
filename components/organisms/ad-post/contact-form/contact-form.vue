@@ -5,7 +5,7 @@ import { AxiosError } from 'axios'
 import { reset } from '@formkit/core'
 import Loading from '~/components/atoms/loading/loading-icon/index.vue'
 import Button from '~/components/atoms/buttons/fill/index.vue'
-import imageUploader from '../image-uploader.vue'
+import imageUploader from '~/components/organisms/ad-post/image-uploader.vue'
 
 type PostType = {
   typeOfPost: string
@@ -68,6 +68,11 @@ const submitHandler = async (createForm: any) => {
 watch(files.value, (newValue) => {
   console.log(newValue)
 }, { deep: true })
+
+watchEffect(() => {
+  console.log(files.value)
+
+})
 
 onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
@@ -148,7 +153,7 @@ onMounted(() => {
 
           </div>
 
-          <imageUploader :files="files" />
+          <imageUploader v-model:files="files" />
 
           <div class="form-group-button">
             <Button :disabled="!state.valid" text="Publicar" type="submit" />
