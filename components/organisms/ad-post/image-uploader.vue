@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import ExitSvg from '~/components/icons/ExitSvg.vue';
+import ExitSvg from '~/components/icons/ExitSvg.vue'
+
+const { files } = defineProps<{ files: { file: File, url: string | undefined }[] }>()
 
 const isDragging = ref(false)
-const files = ref<{ file: File, url: string | undefined }[]>([]);
 const fileInput = ref()
 
 function triggerFileInput() {
@@ -35,14 +36,14 @@ function onDrop(event: DragEvent) {
 
 
 function handleFiles(filesList: FileList | File[]) {
-  const remainingSlots = 3 - files.value.length
+  const remainingSlots = 3 - files.length
 
   for (let i = 0; i < filesList.length && i < remainingSlots; i++) {
     const file = filesList[i]
     if (file.type.startsWith('image/')) {
       const reader = new FileReader()
       reader.onload = (e) => {
-        files.value.push({ file: file, url: e.target?.result as string })
+        files.push({ file: file, url: e.target?.result as string })
       };
       reader.readAsDataURL(file)
     }
@@ -50,7 +51,7 @@ function handleFiles(filesList: FileList | File[]) {
 }
 
 function removeFile(index: number) {
-  files.value.splice(index, 1)
+  files.splice(index, 1)
 }
 
 </script>

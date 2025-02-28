@@ -25,7 +25,7 @@ const area = ref()
 const parking = ref()
 const utilityRoom = ref()
 const phone = ref()
-
+const files = ref<{ file: File, url: string | undefined }[]>([])
 
 const isResponseError = ref(true)
 const isRequestError = ref(false)
@@ -65,16 +65,13 @@ const submitHandler = async (createForm: any) => {
   isLoading.value = false
 }
 
-watchEffect(() => {
-  console.log(typeOfPost)
-  console.log(selectedPropertyType)
-})
+watch(files.value, (newValue) => {
+  console.log(newValue)
+}, { deep: true })
 
 onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
 })
-
-const zeroToFiveDigits = /^.{0,5}$/
 
 </script>
 
@@ -151,7 +148,7 @@ const zeroToFiveDigits = /^.{0,5}$/
 
           </div>
 
-          <imageUploader />
+          <imageUploader :files="files" />
 
           <div class="form-group-button">
             <Button :disabled="!state.valid" text="Publicar" type="submit" />
