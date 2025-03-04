@@ -4,13 +4,15 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   css: ["~/assets/main.scss"],
   modules: [
-    '@formkit/nuxt',
-    '@pinia/nuxt',
     '@nuxtjs/seo',
     '@nuxt/image',
     // '@zadigetvoltaire/nuxt-gtm',
     '@nuxtjs/sitemap',
+    '@nuxt/ui'
   ],
+  build: {
+    transpile: ['@nuxt/ui']
+  },
 
   app: {
     head: {

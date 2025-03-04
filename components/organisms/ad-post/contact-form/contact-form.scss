@@ -8,202 +8,238 @@
     border-radius: .6rem;
     box-shadow: var(--shadow);
 
-    .formkit-form .formkit-actions {
-      display: none;
-    }
+    // .form {
+    //   .item {
+    //     position: relative;
+    //     margin: 1rem 0 1.5rem;
+    //     width: 100%;
 
-    .formkit-messages {
-      list-style-type: none;
-      color: var(--danger);
-      padding: 8px 0 0 0;
-      text-align: center;
-    }
+    //     label {
+    //       position: absolute;
+    //       top: -11px;
+    //       padding: 0px 5px;
+    //       background-color: var(--background);
+    //       left: 10px;
+    //       font-size: .9rem;
+    //       color: var(--background-opposite);
+    //     }
 
-    .form-group-inline {
-      display: flex;
-      align-items: flex-start;
-      gap: 24px;
-    }
+    //     input {
+    //       cursor: pointer;
+    //       padding: 10px;
+    //       width: 300px;
+    //       border-radius: 4px;
+    //       color: var(--heading);
+    //       background-color: transparent;
+    //       border: 1px solid var(--border);
+    //       border-radius: 5px;
+    //       height: 44px;
+    //       font-size: 1rem;
+    //     }
 
-    .form-group-input {
-      position: relative;
-      margin: 1rem 0 1.5rem;
-      width: 100%;
+    //     .error {
+    //       color: var(--danger);
+    //       outline: 1px solid red;
+    //     }
+    //   }
+    // }
 
-      label {
-        position: absolute;
-        top: -11px;
-        padding: 0px 5px;
-        background-color: var(--background);
-        left: 10px;
-        font-size: .9rem;
-        color: var(--background-opposite);
-      }
+    // .formkit-form .formkit-actions {
+    //   display: none;
+    // }
 
-      .formkit-outer {
-        height: 52px;
+    // .formkit-messages {
+    //   list-style-type: none;
+    //   color: var(--danger);
+    //   padding: 8px 0 0 0;
+    //   text-align: center;
+    // }
 
-        .formkit-wrapper {
+    // .form-group-inline {
+    //   display: flex;
+    //   align-items: flex-start;
+    //   gap: 24px;
+    // }
 
-          .formkit-inner {
-            display: flex;
-            align-items: center;
-            background-color: var(--background);
+    // .form-group-input {
+    //   position: relative;
+    //   margin: 1rem 0 1.5rem;
+    //   width: 100%;
 
-            input:-webkit-autofill {
-              -webkit-text-fill-color: var(--heading);
-              -webkit-box-shadow: 0 0 0 100px var(--background) inset;
-            }
+    //   label {
+    //     position: absolute;
+    //     top: -11px;
+    //     padding: 0px 5px;
+    //     background-color: var(--background);
+    //     left: 10px;
+    //     font-size: .9rem;
+    //     color: var(--background-opposite);
+    //   }
 
-            input {
-              cursor: pointer;
-              padding: 10px;
-              width: 300px;
-              border-radius: 4px;
-              color: var(--heading);
-              background-color: transparent;
-              border: 1px solid var(--border);
-              border-radius: 5px;
-              height: 44px;
-              font-size: 1rem;
+    //   .formkit-outer {
+    //     height: 52px;
 
-              &:hover {
-                background-color: var(--background);
-                outline: none;
-              }
+    //     .formkit-wrapper {
 
-              &::placeholder {
-                color: var(--gray-soft);
-                font-size: .9rem;
-              }
+    //       .formkit-inner {
+    //         display: flex;
+    //         align-items: center;
+    //         background-color: var(--background);
 
-              @media (max-width: 758px) {
-                width: 100%;
-              }
+    //         input:-webkit-autofill {
+    //           -webkit-text-fill-color: var(--heading);
+    //           -webkit-box-shadow: 0 0 0 100px var(--background) inset;
+    //         }
 
-            }
+    //         input {
+    //           cursor: pointer;
+    //           padding: 10px;
+    //           width: 300px;
+    //           border-radius: 4px;
+    //           color: var(--heading);
+    //           background-color: transparent;
+    //           border: 1px solid var(--border);
+    //           border-radius: 5px;
+    //           height: 44px;
+    //           font-size: 1rem;
 
-          }
-        }
+    //           &:hover {
+    //             background-color: var(--background);
+    //             outline: none;
+    //           }
 
-        .formkit-messages {
-          list-style-type: none;
-          color: var(--danger);
-          padding: 4px 0 0 0;
-          text-align: left;
-        }
+    //           &::placeholder {
+    //             color: var(--gray-soft);
+    //             font-size: .9rem;
+    //           }
 
-      }
-    }
+    //           @media (max-width: 758px) {
+    //             width: 100%;
+    //           }
 
-    .form-group-textarea {
-      position: relative;
-      margin: 1rem 0 .6rem;
-      width: 100%;
+    //         }
 
-      label {
-        position: absolute;
-        top: -11px;
-        padding: 0px 5px;
-        background-color: var(--background);
-        left: 10px;
-        font-size: .9rem;
-        color: var(--background-opposite);
-      }
+    //       }
+    //     }
 
-      .formkit-outer {
-        height: 100px;
+    //     .formkit-messages {
+    //       list-style-type: none;
+    //       color: var(--danger);
+    //       padding: 4px 0 0 0;
+    //       text-align: left;
+    //     }
 
-        .formkit-wrapper {
+    //   }
+    // }
 
-          .formkit-inner {
-            display: flex;
-            align-items: center;
-            background-color: var(--background);
+    // .form-group-textarea {
+    //   position: relative;
+    //   margin: 1rem 0 .6rem;
+    //   width: 100%;
 
-            input:-webkit-autofill {
-              -webkit-text-fill-color: var(--heading);
-              -webkit-box-shadow: 0 0 0 100px var(--background) inset;
-            }
+    //   label {
+    //     position: absolute;
+    //     top: -11px;
+    //     padding: 0px 5px;
+    //     background-color: var(--background);
+    //     left: 10px;
+    //     font-size: .9rem;
+    //     color: var(--background-opposite);
+    //   }
 
-            textarea {
-              cursor: pointer;
-              padding: 10px;
-              width: 100%;
-              border-radius: 4px;
-              color: var(--heading);
-              background-color: transparent;
-              border: 1px solid var(--border);
-              border-radius: 5px;
-              height: 80px;
-              font-size: 1rem;
+    //   .formkit-outer {
+    //     height: 100px;
 
-              &:hover {
-                background-color: var(--background);
-                outline: none;
-              }
+    //     .formkit-wrapper {
 
-              &::placeholder {
-                color: var(--gray-soft);
-                font-size: .9rem;
-              }
-            }
+    //       .formkit-inner {
+    //         display: flex;
+    //         align-items: center;
+    //         background-color: var(--background);
 
-          }
-        }
+    //         input:-webkit-autofill {
+    //           -webkit-text-fill-color: var(--heading);
+    //           -webkit-box-shadow: 0 0 0 100px var(--background) inset;
+    //         }
 
-        .formkit-messages {
-          list-style-type: none;
-          color: var(--danger);
-          padding: 4px 0 0 0;
-          text-align: left;
-        }
+    //         textarea {
+    //           cursor: pointer;
+    //           padding: 10px;
+    //           width: 100%;
+    //           border-radius: 4px;
+    //           color: var(--heading);
+    //           background-color: transparent;
+    //           border: 1px solid var(--border);
+    //           border-radius: 5px;
+    //           height: 80px;
+    //           font-size: 1rem;
 
-      }
-    }
+    //           &:hover {
+    //             background-color: var(--background);
+    //             outline: none;
+    //           }
 
-    .form-group-button {
-      margin-top: 1.5rem;
-    }
+    //           &::placeholder {
+    //             color: var(--gray-soft);
+    //             font-size: .9rem;
+    //           }
+    //         }
+
+    //       }
+    //     }
+
+    //     .formkit-messages {
+    //       list-style-type: none;
+    //       color: var(--danger);
+    //       padding: 4px 0 0 0;
+    //       text-align: left;
+    //     }
+
+    //   }
+    // }
+
+    // .form-group-button {
+    //   margin-top: 1.5rem;
+    // }
   }
 
-  .contact-form-info {
-    margin: 0 auto;
-    max-width: var(--tablet-width);
-    padding: 40px 24px 30px;
-    box-shadow: var(--shadow-card);
+  // .contact-form-info {
+  //   margin: 0 auto;
+  //   max-width: var(--tablet-width);
+  //   padding: 40px 24px 30px;
+  //   box-shadow: var(--shadow-card);
 
-    .contact-form-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--heading-soft);
-      text-align: center;
-      margin-bottom: 8px;
-      line-height: 2.5rem;
-    }
+  //   .contact-form-title {
+  //     font-size: 1.5rem;
+  //     font-weight: 700;
+  //     color: var(--heading-soft);
+  //     text-align: center;
+  //     margin-bottom: 8px;
+  //     line-height: 2.5rem;
+  //   }
 
-    .contact-form-description {
-      font-size: 1rem;
-      color: var(--heading);
-      text-align: center;
-      margin-bottom: 24px;
-      line-height: 1.5rem;
-    }
+  //   .contact-form-description {
+  //     font-size: 1rem;
+  //     color: var(--heading);
+  //     text-align: center;
+  //     margin-bottom: 24px;
+  //     line-height: 1.5rem;
+  //   }
 
-  }
+  // }
 }
 
-@media screen and (max-width: 758px) {
+// @media screen and (max-width: 758px) {
 
-  .contact-form {
+//   .contact-form {
 
-    .contact-form-inner {
-      width: 100%;
+//     .contact-form-inner {
+//       width: 100%;
 
-      .form-group-inline {
-        flex-direction: column;
-        gap: 0;
-      }
-    }
-  }
-}
+//       .form-group-inline {
+//         flex-direction: column;
+//         gap: 0;
+//       }
+//     }
+//   }
+// }

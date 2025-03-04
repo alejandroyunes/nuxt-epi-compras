@@ -1,5 +1,5 @@
 {
-  "name": "paginas-profesionales-web",
+  "name": "epicompras",
   "author": "Alejandro Cano Yunes",
   "private": true,
   "type": "module",
@@ -12,22 +12,21 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@formkit/core": "^1.6.9",
-    "@formkit/i18n": "^1.6.9",
-    "@formkit/nuxt": "^1.6.9",
-    "@formkit/vue": "^1.6.9",
-    "@nuxt/image": "^1.9.0",
-    "@nuxtjs/i18n": "^8.5.6",
-    "@nuxtjs/seo": "^2.1.1",
-    "@nuxtjs/sitemap": "^7.2.4",
-    "@pinia/nuxt": "^0.5.5",
     "axios": "^1.7.9",
-    "nuxt": "^3.15.4",
-    "vue": "latest"
+    "install": "^0.13.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
     "prettier": "^3.5.0",
-    "sass": "^1.84.0"
+    "sass": "^1.84.0",
+    "@nuxt/image": "^1.9.0",
+    "@nuxt/devtools": "latest",
+    "@nuxt/ui": "^2.21.0",
+    "@nuxtjs/i18n": "^8.5.6",
+    "@nuxtjs/seo": "^2.1.1",
+    "@nuxtjs/sitemap": "^7.2.4",
+    "nuxt": "^3.15.4",
+    "vue": "latest"
   }
 }
