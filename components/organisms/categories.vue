@@ -104,7 +104,7 @@ const categories: Category[] = [
     <ul>
       <li v-for="category in categories" :key="category.name">
         <NuxtLink :to="category.url">
-          <img :src="category.image" :alt="category.alt" width="76px" height="76px">
+          <NuxtImg :src="category.image" :alt="category.alt" width="76px" height="76px" />
           <h3>{{ category.name }}</h3>
         </NuxtLink>
       </li>
@@ -159,6 +159,7 @@ img {
   height: 76px;
   border-radius: 50%;
   object-fit: cover;
+  max-width: none;
 }
 
 h3 {

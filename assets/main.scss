@@ -16,7 +16,7 @@ body {
 
   .desktop-only {
     @media (max-width: 768px) {
-        display: none;
+      display: none;
     }
   }
 
@@ -32,16 +32,19 @@ body {
 
   .icon {
     cursor: pointer;
-    
+
     #path-1 {
       stroke: var(--background-opposite);
     }
+
     #path-2 {
       fill: var(--background-opposite);
     }
+
     #path-3 {
       fill: var(--background);
     }
+
     #path-4 {
       stroke: var(--background);
     }
@@ -57,7 +60,7 @@ body {
       }
     }
   }
-  
+
 }
 
 .content-bg {
