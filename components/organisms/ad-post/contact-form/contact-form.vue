@@ -13,15 +13,15 @@ const router = useRouter()
 const param = ref<string | undefined>(undefined)
 const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
 
-const title = ref('')
-const location = ref('')
-const price = ref<string | undefined>(undefined)
-const rooms = ref<string | undefined>(undefined)
-const baths = ref<string | undefined>(undefined)
-const area = ref<string | undefined>(undefined)
-const parking = ref<string | undefined>(undefined)
-const utilityRoom = ref<string | undefined>(undefined)
-const phone = ref<string | undefined>(undefined)
+// const title = ref('')
+// const location = ref('')
+// const price = ref<string | undefined>(undefined)
+// const rooms = ref<string | undefined>(undefined)
+// const baths = ref<string | undefined>(undefined)
+// const area = ref<string | undefined>(undefined)
+// const parking = ref<string | undefined>(undefined)
+// const utilityRoom = ref<string | undefined>(undefined)
+// const phone = ref<string | undefined>(undefined)
 const files = ref<{ file: File, url: string | undefined }[]>([])
 
 const cities = ref([
@@ -34,59 +34,59 @@ const isSuccess = ref(false)
 const isLoading = ref(false)
 const isConfirmInfoVisible = ref(false)
 
-const formatPhoneNumber = (value: string | undefined): string => {
-  if (!value) return '' // Handle undefined or empty input
+// const formatPhoneNumber = (value: string | undefined): string => {
+//   if (!value) return '' // Handle undefined or empty input
 
-  const cleanedValue = value.replace(/\D/g, '') // Remove non-digits
-  if (cleanedValue.length > 10) return phone.value || '' // Return current phone value if over max length
+//   const cleanedValue = value.replace(/\D/g, '') // Remove non-digits
+//   if (cleanedValue.length > 10) return phone.value || '' // Return current phone value if over max length
 
-  let formattedValue = cleanedValue
-  if (cleanedValue.length > 6) {
-    formattedValue = `${cleanedValue.slice(0, 3)} ${cleanedValue.slice(3, 6)} ${cleanedValue.slice(6)}`
-  } else if (cleanedValue.length > 3) {
-    formattedValue = `${cleanedValue.slice(0, 3)} ${cleanedValue.slice(3)}`
-  }
-  return formattedValue
-}
+//   let formattedValue = cleanedValue
+//   if (cleanedValue.length > 6) {
+//     formattedValue = `${cleanedValue.slice(0, 3)} ${cleanedValue.slice(3, 6)} ${cleanedValue.slice(6)}`
+//   } else if (cleanedValue.length > 3) {
+//     formattedValue = `${cleanedValue.slice(0, 3)} ${cleanedValue.slice(3)}`
+//   }
+//   return formattedValue
+// }
 
-watch(phone, (newValue) => {
-  const formatted = formatPhoneNumber(newValue)
-  if (formatted !== newValue) {
-    phone.value = formatted
-  }
-})
+// watch(phone, (newValue) => {
+//   const formatted = formatPhoneNumber(newValue)
+//   if (formatted !== newValue) {
+//     phone.value = formatted
+//   }
+// })
 
-const formatPrice = (value: string | undefined): string => {
-  if (!value) return '' // Handle undefined or empty input
+// const formatPrice = (value: string | undefined): string => {
+//   if (!value) return '' // Handle undefined or empty input
 
-  const numericValue = value.replace(/\D/g, '') // Remove non-digits
-  if (numericValue === '') return '' // Return empty string if no digits
+//   const numericValue = value.replace(/\D/g, '') // Remove non-digits
+//   if (numericValue === '') return '' // Return empty string if no digits
 
-  // Format with thousand separators
-  return Number(numericValue).toLocaleString('es-CO') // 'es-CO' for Colombian locale, adjust as needed
-}
+//   // Format with thousand separators
+//   return Number(numericValue).toLocaleString('es-CO') // 'es-CO' for Colombian locale, adjust as needed
+// }
 
-watch(price, (newValue) => {
-  const formatted = formatPrice(newValue)
-  if (formatted !== newValue) {
-    price.value = formatted
-  }
-})
+// watch(price, (newValue) => {
+//   const formatted = formatPrice(newValue)
+//   if (formatted !== newValue) {
+//     price.value = formatted
+//   }
+// })
 
-const formatArea = (value: string | number | undefined): string => {
-  if (!value && value !== 0) return ''
-  const stringValue = String(value)
-  const numericValue = stringValue.replace(/\D/g, '')
-  if (numericValue === '') return ''
-  return `${numericValue}²`
-}
+// const formatArea = (value: string | number | undefined): string => {
+//   if (!value && value !== 0) return ''
+//   const stringValue = String(value)
+//   const numericValue = stringValue.replace(/\D/g, '')
+//   if (numericValue === '') return ''
+//   return `${numericValue}²`
+// }
 
-watch(area, (newValue) => {
-  const formatted = formatArea(newValue)
-  if (formatted !== newValue) {
-    area.value = formatted
-  }
-})
+// watch(area, (newValue) => {
+//   const formatted = formatArea(newValue)
+//   if (formatted !== newValue) {
+//     area.value = formatted
+//   }
+// })
 
 watchEffect(() => {
   console.log(files.value)
@@ -131,17 +131,29 @@ import { object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 
 const schema = object({
-  email: string().email('Invalid email').required('Required'),
-  password: string()
-    .min(8, 'Must be at least 8 characters')
-    .required('Required')
+  title: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
+  location: string().min(8, 'Must be at least 8 characters').required('Required'),
+  price: string().min(8, 'Must be at least 8 characters').required('Required'),
+  // area: string().min(8, 'Must be at least 8 characters').required('Required'),
+  // rooms: string().min(8, 'Must be at least 8 characters').required('Required'),
+  // baths: string().min(8, 'Must be at least 8 characters').required('Required'),
+  // parking: string().min(8, 'Must be at least 8 characters').required('Required'),
+  // utilityRooms: string().min(8, 'Must be at least 8 characters').required('Required'),
+  // phone: string().min(8, 'Must be at least 8 characters').required('Required'),
 })
 
 type Schema = InferType<typeof schema>
 
 const state = reactive({
-  email: undefined,
-  password: undefined
+  title: undefined,
+  location: undefined,
+  price: undefined,
+  // area: undefined,
+  // rooms: undefined,
+  // baths: undefined,
+  // parking: undefined,
+  // utiliyRooms: undefined,
+  // phone: undefined
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -153,14 +165,66 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 <template>
   <div class="contact-form">
     <div class="contact-form-inner">
-      <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-        <UFormGroup label="Email" name="email">
-          <UInput v-model="state.email" />
-        </UFormGroup>
+      <UForm :schema="schema" :state="state" @submit="onSubmit">
 
-        <UFormGroup label="Password" name="password">
-          <UInput v-model="state.password" type="password" />
-        </UFormGroup>
+        <div class="form-group-textarea">
+          <UFormGroup label="Título" name="title">
+            <UTextarea v-model="state.title" variant="none"
+              placeholder="Ejemplo: Amplio apartamento de 2 habitaciones en el centro de Bogotá" />
+          </UFormGroup>
+        </div>
+        
+        <div class="form-group-inline">
+          <div class="form-group-input">
+            <UFormGroup label="Ciudad" name="location">
+              <UInput v-model="state.location" type="location" variant="none" placeholder="Bogotá" />
+            </UFormGroup>
+          </div>
+          <div class="form-group-input">
+            <UFormGroup label="Precio" name="price">
+              <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" />
+            </UFormGroup>
+          </div>
+        </div>
+<!-- 
+        <div class="form-group-inline">
+          <div class="form-group-input">
+            <UFormGroup label="Metros cuadrados" name="area">
+              <UInput v-model="state.area" variant="none" placeholder="50²" />
+            </UFormGroup>
+          </div>
+          <div class="form-group-input">
+            <UFormGroup label="Número de habitaciones" name="rooms">
+              <UInput v-model="state.rooms" variant="none" placeholder="2" />
+            </UFormGroup>
+          </div>
+        </div>
+
+        <div class="form-group-inline">
+          <div class="form-group-input">
+            <UFormGroup label="Número de baños" name="baths">
+              <UInput v-model="state.baths" variant="none" placeholder="2" />
+            </UFormGroup>
+          </div>
+          <div class="form-group-input">
+            <UFormGroup label="Número de parqueaderos" name="parking">
+              <UInput v-model="state.parking" variant="none" placeholder="1" />
+            </UFormGroup>
+          </div>
+        </div>
+
+        <div class="form-group-inline">
+          <div class="form-group-input">
+            <UFormGroup label="Número de cuartos útiles" name="utiliyRooms">
+              <UInput v-model="state.utiliyRooms" variant="none" placeholder="1" />
+            </UFormGroup>
+          </div>
+          <div class="form-group-input">
+            <UFormGroup label="Teléfono de contacto" name="phone">
+              <UInput v-model="state.phone" variant="none" placeholder="301 123 4567" />
+            </UFormGroup>
+          </div>
+        </div> -->
 
         <UButton type="submit">
           Submit

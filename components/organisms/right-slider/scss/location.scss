@@ -4,8 +4,7 @@
   cursor: pointer;
 
   .location-icon {
-    margin-right: 10px;
-    @media (max-width: 1024px) {
+    @media (max-width: 758px) {
       order: 1;
     }
   }
