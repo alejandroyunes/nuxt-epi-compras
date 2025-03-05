@@ -65,19 +65,19 @@ onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
 })
 
-const schema = object({
-  description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
-  location: string().min(8, 'Must be at least 8 characters').required('Required'),
-  price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres'),
-  area: string().required('Requerido'),
-  rooms: string().required('Requerido'),
-  baths: string().required('Requerido'),
-  parking: string(),
-  utilityRooms: string(),
-  phone: string().required('Requerido').min(10, 'Debe de tener 10 digitos').required('Required'),
-})
+// const schema = object({
+//   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
+//   location: string().min(8, 'Must be at least 8 characters').required('Required'),
+//   price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres'),
+//   area: string().required('Requerido'),
+//   rooms: string().required('Requerido'),
+//   baths: string().required('Requerido'),
+//   parking: string(),
+//   utilityRooms: string(),
+//   phone: string().required('Requerido').min(10, 'Debe de tener 10 digitos').required('Required'),
+// })
 
-type Schema = InferType<typeof schema>
+// type Schema = InferType<typeof schema>
 
 const state = reactive({
   description: undefined,
@@ -145,16 +145,16 @@ watch(() => state.phone, (newValue) => {
   }
 })
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-  // Do something with event.data
-  console.log(event.data)
-}
+// async function onSubmit(event: FormSubmitEvent<Schema>) {
+//   // Do something with event.data
+//   console.log(event.data)
+// }
 </script>
 
 <template>
   <div class="contact-form">
     <div class="contact-form-inner">
-      <UForm :schema="schema" :state="state" @submit="onSubmit">
+      <!-- <UForm :schema="schema" :state="state" @submit="onSubmit">
 
         <div class="form-group-textarea">
           <UFormGroup label="Descripción" name="description">
@@ -229,7 +229,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </UButton>
         </div>
 
-      </UForm>
+      </UForm> -->
     </div>
 
   </div>

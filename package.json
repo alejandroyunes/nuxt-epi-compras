@@ -5,7 +5,7 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "build": "nuxt build",
+    "build": "nuxt build  --no-deprecation",
     "dev": "nuxt dev --port 3004",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
