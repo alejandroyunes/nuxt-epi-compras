@@ -6,9 +6,9 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/seo',
     '@nuxt/image',
-    // '@zadigetvoltaire/nuxt-gtm',
     '@nuxtjs/sitemap',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    // '@zadigetvoltaire/nuxt-gtm',
   ],
   build: {
     transpile: ['@nuxt/ui']
