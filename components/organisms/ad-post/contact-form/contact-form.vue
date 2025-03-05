@@ -30,7 +30,6 @@ watchEffect(() => {
   console.log(files.value)
 })
 
-
 const submitHandler = async (createForm: any) => {
   isLoading.value = true
   isConfirmInfoVisible.value = true
@@ -149,6 +148,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Do something with event.data
   console.log(event.data)
 }
+
 </script>
 
 <template>
@@ -221,7 +221,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             </UFormGroup>
           </div>
         </div>
-
 
         <div class="form-group-button">
           <UButton type="submit">

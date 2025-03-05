@@ -133,7 +133,8 @@ const getPropertyIcon = (property: string | number) => {
   gap: 20px;
   max-width: var(--max-width);
   margin: 20px auto 0;
-
+  padding: 0 .6rem;
+  
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
