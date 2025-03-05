@@ -43,7 +43,7 @@
         height: 80px;
         font-size: 1rem;
         margin-bottom: 2.1rem;
-        
+
         &:hover {
           background-color: var(--background);
           outline: none;
@@ -119,12 +119,21 @@
         bottom: -24px;
         color: var(--danger);
         right: 0;
+        font-size: .95rem;
       }
 
     }
 
     .form-group-button {
-      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+
+      button {
+        background: var(--primary);
+        color: var(--heading);
+        padding: .8rem 1rem;
+        font-size: 1rem;
+      }
     }
   }
 }
