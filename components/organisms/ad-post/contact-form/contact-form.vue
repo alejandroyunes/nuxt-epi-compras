@@ -67,7 +67,7 @@ onMounted(() => {
 const schema = object({
   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
   location: string().min(8, 'Must be at least 8 characters').required('Required'),
-  price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(9, 'Debe tener menos de 11 caracteres'),
+  price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(11, 'Debe tener menos de 11 caracteres'),
   area: string().required('Requerido'),
   rooms: string().required('Requerido'),
   baths: string().required('Requerido'),
@@ -91,18 +91,21 @@ const state = reactive({
 })
 
 const formatPrice = (value: string | undefined): string => {
-  if (!value) return '' // Handle undefined or empty input
+  if (!value) return ''
 
-  const numericValue = value.replace(/\D/g, '') // Remove non-digits
-  if (numericValue === '') return '' // Return empty string if no digits
+  const numericValue = value.replace(/\D/g, '')
+  if (numericValue === '') return ''
 
-  // Format with thousand separators
   return Number(numericValue).toLocaleString('es-CO') // 'es-CO' for Colombian locale, adjust as needed
 }
 
 watch(() => state.price, (newValue) => {
   const formatted = formatPrice(newValue)
+
   if (formatted !== newValue) {
+    if (newValue.length > 11) {
+      newValue = newValue.slice(0, 11);
+    }
     state.price = formatted
   }
 })
