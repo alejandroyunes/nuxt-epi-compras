@@ -90,22 +90,24 @@ const state = reactive({
   phone: ''
 })
 
-const formatPrice = (value: string | undefined): string => {
-  if (!value) return ''
+const formatPrice = (value: string | undefined, maxLength: number = 11): string => {
+  if (!value) return '';
 
-  const numericValue = value.replace(/\D/g, '')
+  let numericValue = value.replace(/\D/g, '')
+
+  if (numericValue.length > maxLength) {
+    numericValue = numericValue.slice(0, maxLength)
+  }
+
   if (numericValue === '') return ''
 
-  return Number(numericValue).toLocaleString('es-CO') // 'es-CO' for Colombian locale, adjust as needed
+  return Number(numericValue).toLocaleString('es-CO')
 }
 
 watch(() => state.price, (newValue) => {
   const formatted = formatPrice(newValue)
 
   if (formatted !== newValue) {
-    if (newValue.length > 11) {
-      newValue = newValue.slice(0, 11);
-    }
     state.price = formatted
   }
 })
