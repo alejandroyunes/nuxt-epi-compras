@@ -93,12 +93,11 @@ const state = reactive({
 const formatPrice = (value: string | undefined, maxLength: number = 11): string => {
   if (!value) return '';
 
-  let numericValue = value.replace(/\D/g, '')
-
-  if (numericValue.length > maxLength) {
-    numericValue = numericValue.slice(0, maxLength)
+  if (value.length > 11) {
+    value = value.slice(0, 11);
   }
 
+  let numericValue = value.replace(/\D/g, '')
   if (numericValue === '') return ''
 
   return Number(numericValue).toLocaleString('es-CO')
