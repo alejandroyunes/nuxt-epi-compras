@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import './contact-form.scss'
 import { AxiosError } from 'axios'
 import { ref } from 'vue'
 import { object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
-import './contact-form.scss'
+import { formatPrice, restrictNonDigits, handleInput } from '~/components/organisms/ad-post/utils'
 
 type PostType = {
   typeOfPost: string
@@ -12,53 +13,10 @@ type PostType = {
 
 const router = useRouter()
 const param = ref<string | undefined>(undefined)
+
 const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
 const files = ref<{ file: File, url: string | undefined }[]>([])
 
-const cities = ref([
-  'Bogotá', 'Medellín', 'Cali', 'Barranquilla', 'Cartagena', 'Bucaramanga', 'Pereira', 'Manizales', 'Santa Marta', 'Ibagué'
-])
-
-const isResponseError = ref(false)
-const isRequestError = ref(false)
-const isSuccess = ref(false)
-const isLoading = ref(false)
-const isConfirmInfoVisible = ref(false)
-
-
-watchEffect(() => {
-  console.log(files.value)
-})
-
-const submitHandler = async (createForm: any) => {
-  isLoading.value = true
-  isConfirmInfoVisible.value = true
-
-  try {
-    isSuccess.value = false
-    isRequestError.value = false
-    isResponseError.value = false
-
-    // Uncomment and implement your API call here
-    const { contact } = createForm
-    // await formPost(contact)
-
-    isLoading.value = false
-    isSuccess.value = true
-
-  } catch (error) {
-    isLoading.value = false
-
-    const axiosError = error as AxiosError<Error>
-    if (axiosError.response) {
-      isResponseError.value = true
-    } else if (axiosError.request) {
-      isRequestError.value = true
-    }
-  }
-
-  isLoading.value = false
-}
 
 onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
@@ -90,42 +48,20 @@ const state = reactive({
   phone: ''
 })
 
-const formatPrice = (value: string | undefined): string => {
-  if (!value) return '';
+// const handleInput = (event: Event) => {
+//   const input = event.target as HTMLInputElement
+//   let rawValue = input.value.replace(/\D/g, '')
 
-  const numericValue = value.replace(/\D/g, '');
-  if (!numericValue) return '';
+//   if (rawValue.length > 11) {
+//     rawValue = rawValue.slice(0, 11)
+//   }
 
-  return Number(numericValue).toLocaleString('es-CO', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  });
-};
-
-const restrictNonDigits = (event: KeyboardEvent) => {
-  // Allow control keys (backspace, delete, arrows, etc.)
-  if (event.ctrlKey || event.altKey || event.key.length > 1) return;
-
-  // Prevent non-digit characters
-  if (!/[0-9]/.test(event.key)) {
-    event.preventDefault();
-  }
-};
-
-const handleInput = (event: Event) => {
-  const input = event.target as HTMLInputElement;
-  let rawValue = input.value.replace(/\D/g, '');
-
-  if (rawValue.length > 11) {
-    rawValue = rawValue.slice(0, 11);
-  }
-
-  state.price = formatPrice(rawValue);
-};
+//   state.price = formatPrice(rawValue)
+// }
 
 const formatOnBlur = () => {
-  state.price = formatPrice(state.price);
-};
+  state.price = formatPrice(state.price)
+}
 
 watch(
   () => state.price,
@@ -135,7 +71,7 @@ watch(
       state.price = formatted;
     }
   }
-);
+)
 
 const formatArea = (value: string | number | undefined): string => {
   if (!value && value !== 0) return ''
@@ -202,7 +138,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="11"
-                @input="handleInput" @blur="formatOnBlur" @keypress="restrictNonDigits" />
+                @input="(e: InputEvent) => handleInput(e, state, 'price')" @blur="formatOnBlur" @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
         </div>
