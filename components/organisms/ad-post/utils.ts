@@ -37,6 +37,18 @@ export const formatOnBlurPrice = (price: string) => {
   price = formatPrice(price)
 }
 
+
+export const handleInputArea = (
+  event: Event
+) => {
+  const input = event.target as HTMLInputElement
+
+  
+  return input + ' ²'
+
+
+}
+
 export const formatArea = (value: string | number | undefined): string => {
   if (!value && value !== 0) return ''
 

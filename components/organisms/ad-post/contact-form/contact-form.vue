@@ -4,7 +4,7 @@ import { AxiosError } from 'axios'
 import { ref } from 'vue'
 import { object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
-import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlurPrice, formatArea } from '~/components/organisms/ad-post/utils'
+import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlurPrice, formatArea, handleInputArea } from '~/components/organisms/ad-post/utils'
 
 type PostType = {
   typeOfPost: string
@@ -113,7 +113,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="13"
-                @input="(e: InputEvent) => handleInputPrice(e)" @blur="formatOnBlurPrice((state.price))"
+                @input="(e: InputEvent) => handleInputPrice(e)" 
                 @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
@@ -122,7 +122,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Metros cuadrados" name="area">
-              <UInput v-model="state.area" variant="none" placeholder="50²" />
+              <UInput v-model="state.area" variant="none" placeholder="50²" inputmode="numeric" maxLength="3"
+                @input="(e: InputEvent) => handleInputArea(e)" @keypress="restrictNonDigits" />
 
             </UFormGroup>
           </div>
