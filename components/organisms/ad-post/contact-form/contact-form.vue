@@ -93,36 +93,40 @@ const state = reactive({
 const formatPrice = (value: string | undefined): string => {
   if (!value) return '';
 
-  // Remove all non-digits
   const numericValue = value.replace(/\D/g, '');
   if (!numericValue) return '';
 
-  // Convert to number and format with Colombian locale
   return Number(numericValue).toLocaleString('es-CO', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
   });
 };
 
+const restrictNonDigits = (event: KeyboardEvent) => {
+  // Allow control keys (backspace, delete, arrows, etc.)
+  if (event.ctrlKey || event.altKey || event.key.length > 1) return;
+
+  // Prevent non-digit characters
+  if (!/[0-9]/.test(event.key)) {
+    event.preventDefault();
+  }
+};
+
 const handleInput = (event: Event) => {
   const input = event.target as HTMLInputElement;
-  let rawValue = input.value.replace(/\D/g, ''); // Strip non-digits as they type
+  let rawValue = input.value.replace(/\D/g, '');
 
-  // Limit length of raw numeric value
   if (rawValue.length > 11) {
     rawValue = rawValue.slice(0, 11);
   }
 
-  // Update the state with the formatted value
   state.price = formatPrice(rawValue);
 };
 
 const formatOnBlur = () => {
-  // Ensure final formatting when user leaves the field
   state.price = formatPrice(state.price);
 };
 
-// Optional: If you still want to use watch for other reactive purposes
 watch(
   () => state.price,
   (newValue) => {
@@ -198,7 +202,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="11"
-                @input="handleInput" @blur="formatOnBlur" oninput="this.value = this.value.replace(/\D/g, '')" />
+                @input="handleInput" @blur="formatOnBlur" @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
         </div>
