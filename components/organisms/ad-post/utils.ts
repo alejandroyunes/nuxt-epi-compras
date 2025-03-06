@@ -20,7 +20,6 @@ export const restrictNonDigits = (event: KeyboardEvent) => {
 
 export const handleInputPrice = (
   event: Event,
-  price: string,
   maxLength: number = 11
 ) => {
   const input = event.target as HTMLInputElement
@@ -30,10 +29,11 @@ export const handleInputPrice = (
     rawValue = rawValue.slice(0, maxLength)
   }
 
-  price = formatPrice(rawValue)
+  rawValue = formatPrice(rawValue)
 }
 
 export const formatOnBlurPrice = (price: string) => {
+  console.log(price)
   price = formatPrice(price)
 }
 

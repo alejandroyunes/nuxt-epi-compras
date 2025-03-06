@@ -25,7 +25,7 @@ onMounted(() => {
 const schema = object({
   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
   location: string().min(8, 'Must be at least 8 characters').required('Required'),
-  price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(11, 'Debe tener menos de 11 caracteres'),
+  price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(13, 'Debe tener menos de 11 caracteres'),
   area: string().required('Requerido'),
   rooms: string().required('Requerido'),
   baths: string().required('Requerido'),
@@ -112,8 +112,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </div>
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
-              <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="11"
-                @input="(e: InputEvent) => handleInputPrice(e, state.price)" @blur="formatOnBlurPrice((state.price))"
+              <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="13"
+                @input="(e: InputEvent) => handleInputPrice(e)" @blur="formatOnBlurPrice((state.price))"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
