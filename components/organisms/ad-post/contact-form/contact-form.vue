@@ -90,26 +90,48 @@ const state = reactive({
   phone: ''
 })
 
-const formatPrice = (value: string | undefined, maxLength: number = 11): string => {
+const formatPrice = (value: string | undefined): string => {
   if (!value) return '';
 
-  if (value.length > 11) {
-    value = value.slice(0, 11);
+  // Remove all non-digits
+  const numericValue = value.replace(/\D/g, '');
+  if (!numericValue) return '';
+
+  // Convert to number and format with Colombian locale
+  return Number(numericValue).toLocaleString('es-CO', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  });
+};
+
+const handleInput = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  let rawValue = input.value.replace(/\D/g, ''); // Strip non-digits as they type
+
+  // Limit length of raw numeric value
+  if (rawValue.length > 11) {
+    rawValue = rawValue.slice(0, 11);
   }
 
-  let numericValue = value.replace(/\D/g, '')
-  if (numericValue === '') return ''
+  // Update the state with the formatted value
+  state.price = formatPrice(rawValue);
+};
 
-  return Number(numericValue).toLocaleString('es-CO')
-}
+const formatOnBlur = () => {
+  // Ensure final formatting when user leaves the field
+  state.price = formatPrice(state.price);
+};
 
-watch(() => state.price, (newValue) => {
-  const formatted = formatPrice(newValue)
-
-  if (formatted !== newValue) {
-    state.price = formatted
+// Optional: If you still want to use watch for other reactive purposes
+watch(
+  () => state.price,
+  (newValue) => {
+    const formatted = formatPrice(newValue);
+    if (formatted !== newValue) {
+      state.price = formatted;
+    }
   }
-})
+);
 
 const formatArea = (value: string | number | undefined): string => {
   if (!value && value !== 0) return ''
@@ -176,7 +198,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="11"
-                oninput="this.value = this.value.replace(/\D/g, '')" />
+                @input="handleInput" @blur="formatOnBlur" />
             </UFormGroup>
           </div>
         </div>
