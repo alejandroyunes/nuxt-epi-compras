@@ -33,8 +33,7 @@ export const restrictNonDigits = (event: KeyboardEvent) => {
 
 export const handleInput = (
   event: Event,
-  state: FormState,
-  field: keyof FormState,
+  state: string,
   maxLength: number = 11
 ) => {
   const input = event.target as HTMLInputElement
@@ -44,5 +43,5 @@ export const handleInput = (
     rawValue = rawValue.slice(0, maxLength)
   }
 
-  state[field] = formatPrice(rawValue)
+  state = formatPrice(rawValue)
 }

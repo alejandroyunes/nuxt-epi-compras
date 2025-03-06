@@ -138,7 +138,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="11"
-                @input="(e: InputEvent) => handleInput(e, state, 'price')" @blur="formatOnBlur" @keypress="restrictNonDigits" />
+                @input="(e: InputEvent) => handleInput(e, state.price)" @blur="formatOnBlur" @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
         </div>
