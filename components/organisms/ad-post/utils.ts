@@ -4,7 +4,7 @@ export const formatPrice = (value: string | undefined): string => {
   const numericValue = value.replace(/\D/g, '')
   if (!numericValue) return ''
 
-  return Number(numericValue).toLocaleString('es-CO', {
+  return '$ ' + Number(numericValue).toLocaleString('es-CO', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
   })
@@ -35,4 +35,13 @@ export const handleInputPrice = (
 
 export const formatOnBlurPrice = (price: string) => {
   price = formatPrice(price)
+}
+
+export const formatArea = (value: string | number | undefined): string => {
+  if (!value && value !== 0) return ''
+
+  const stringValue = String(value)
+  const numericValue = stringValue.replace(/\D/g, '')
+  if (numericValue === '') return ''
+  return `${numericValue}²`
 }

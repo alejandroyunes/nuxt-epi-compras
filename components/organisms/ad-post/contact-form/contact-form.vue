@@ -4,7 +4,7 @@ import { AxiosError } from 'axios'
 import { ref } from 'vue'
 import { object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
-import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlurPrice } from '~/components/organisms/ad-post/utils'
+import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlurPrice, formatArea } from '~/components/organisms/ad-post/utils'
 
 type PostType = {
   typeOfPost: string
@@ -49,30 +49,19 @@ const state = reactive({
 })
 
 
-watch(
-  () => state.price,
-  (newValue) => {
-    const formatted = formatPrice(newValue);
-    if (formatted !== newValue) {
-      state.price = formatted;
-    }
-  }
-)
-
-const formatArea = (value: string | number | undefined): string => {
-  if (!value && value !== 0) return ''
-  const stringValue = String(value)
-  const numericValue = stringValue.replace(/\D/g, '')
-  if (numericValue === '') return ''
-  return `${numericValue}²`
-}
-
-watch(() => state.area, (newValue) => {
-  const formatted = formatArea(newValue)
+watch(() => state.price, (newValue) => {
+  const formatted = formatPrice(newValue);
   if (formatted !== newValue) {
-    state.area = formatted
+    state.price = formatted
   }
 })
+
+// watch(() => state.area, (newValue) => {
+//   const formatted = formatArea(newValue)
+//   if (formatted !== newValue) {
+//     state.area = formatted
+//   }
+// })
 
 const formatPhoneNumber = (value: string | undefined): string => {
   if (!value) return '' // Handle undefined or empty input
@@ -124,7 +113,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="11"
-                @input="(e: InputEvent) => handleInputPrice(e, state.price)" @blur="formatOnBlurPrice((state.price))" @keypress="restrictNonDigits" />
+                @input="(e: InputEvent) => handleInputPrice(e, state.price)" @blur="formatOnBlurPrice((state.price))"
+                @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
         </div>
@@ -132,8 +122,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Metros cuadrados" name="area">
-              <UInput v-model="state.area" variant="none" placeholder="50²" maxLength="4" inputmode="numeric"
-                oninput="this.value = this.value.replace(/\D/g, '')" />
+              <UInput v-model="state.area" variant="none" placeholder="50²" />
+
             </UFormGroup>
           </div>
           <div class="form-group-input">
