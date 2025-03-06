@@ -1,15 +1,3 @@
-interface FormState {
-  description: string | undefined
-  location: string | undefined
-  price: string
-  area: string
-  rooms: string
-  baths: string
-  parking: string
-  utiliyRooms: string
-  phone: string
-}
-
 export const formatPrice = (value: string | undefined): string => {
   if (!value) return ''
 
@@ -31,9 +19,9 @@ export const restrictNonDigits = (event: KeyboardEvent) => {
 }
 
 
-export const handleInput = (
+export const handleInputPrice = (
   event: Event,
-  state: string,
+  price: string,
   maxLength: number = 11
 ) => {
   const input = event.target as HTMLInputElement
@@ -43,5 +31,9 @@ export const handleInput = (
     rawValue = rawValue.slice(0, maxLength)
   }
 
-  state = formatPrice(rawValue)
+  price = formatPrice(rawValue)
+}
+
+export const formatOnBlur = (price: string) => {
+  price = formatPrice(price)
 }
