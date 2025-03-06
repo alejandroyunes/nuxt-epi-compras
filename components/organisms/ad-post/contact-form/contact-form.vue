@@ -198,7 +198,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="11"
-                @input="handleInput" @blur="formatOnBlur" />
+                @input="handleInput" @blur="formatOnBlur" oninput="this.value = this.value.replace(/\D/g, '')" />
             </UFormGroup>
           </div>
         </div>
