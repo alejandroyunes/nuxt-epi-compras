@@ -4,7 +4,7 @@ import { AxiosError } from 'axios'
 import { ref } from 'vue'
 import { object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
-import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlur } from '~/components/organisms/ad-post/utils'
+import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlurPrice } from '~/components/organisms/ad-post/utils'
 
 type PostType = {
   typeOfPost: string
@@ -47,18 +47,6 @@ const state = reactive({
   utiliyRooms: '',
   phone: ''
 })
-
-// const handleInput = (event: Event) => {
-//   const input = event.target as HTMLInputElement
-//   let rawValue = input.value.replace(/\D/g, '')
-
-//   if (rawValue.length > 11) {
-//     rawValue = rawValue.slice(0, 11)
-//   }
-
-//   state.price = formatPrice(rawValue)
-// }
-
 
 
 watch(
@@ -136,7 +124,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="11"
-                @input="(e: InputEvent) => handleInputPrice(e, state.price)" @blur="formatOnBlur((state.price))" @keypress="restrictNonDigits" />
+                @input="(e: InputEvent) => handleInputPrice(e, state.price)" @blur="formatOnBlurPrice((state.price))" @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
         </div>

@@ -18,7 +18,6 @@ export const restrictNonDigits = (event: KeyboardEvent) => {
   }
 }
 
-
 export const handleInputPrice = (
   event: Event,
   price: string,
@@ -34,6 +33,6 @@ export const handleInputPrice = (
   price = formatPrice(rawValue)
 }
 
-export const formatOnBlur = (price: string) => {
+export const formatOnBlurPrice = (price: string) => {
   price = formatPrice(price)
 }
