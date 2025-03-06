@@ -66,7 +66,7 @@ onMounted(() => {
 
 const schema = object({
   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
-  location: string().min(8, 'Must be at least 8 characters').max(11, 'Debe tener menos de 11 caracteres').required('Required'),
+  location: string().min(8, 'Must be at least 8 characters').max(9, 'Debe tener menos de 11 caracteres').required('Required'),
   price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres'),
   area: string().required('Requerido'),
   rooms: string().required('Requerido'),
