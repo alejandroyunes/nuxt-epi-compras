@@ -11,12 +11,8 @@ const { view, title } = defineProps<Props>()
 
 <template>
   <div class="title">
-    <div>
-      <h2>{{ title }}</h2>
-    </div>
-    <div>
-      <p>{{ view }}</p>
-    </div>
+    <h2>{{ title }}</h2>
+    <p>{{ view }}</p>
   </div>
 </template>
 
@@ -28,12 +24,22 @@ const { view, title } = defineProps<Props>()
   margin: 1rem auto 0;
   max-width: var(--max-width);
 
+  h2 {
+    font-size: 1.3rem;
+    color: var(--heading);
+    padding-left: .6rem;
+  }
+
   p {
     font-size: 1.125rem;
   }
 
-  @media (max-width: 1314px) {
+  @media (max-width: 1292px) {
     margin: .6rem .6rem 0;
+
+    h2 {
+      padding-left: 0;
+    }
   }
 
   @media (max-width: 1024px) {

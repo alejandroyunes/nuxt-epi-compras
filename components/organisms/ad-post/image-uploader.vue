@@ -142,8 +142,8 @@ onUnmounted(() => {
     :class="{ 'is-dragging': isDragging }">
     <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" multiple style="display: none;" />
     <div class="upload-area">
-      <p class="select-device">Suelta las imágenes aquí o </p>
-      <p><span @click="triggerFileInput">selecciona desde tu dispositivo</span></p>
+      <span class="select-device">Suelta las imágenes aquí o </span>
+      <span class="select-file" @click="triggerFileInput">selecciona desde tu dispositivo</span>
     </div>
     <div class="preview-container" v-if="files.length > 0">
       <div v-for="(file, index) in files" :key="index" class="preview-item">
@@ -166,22 +166,24 @@ onUnmounted(() => {
   transition: border-color 0.3s ease;
   margin-top: .6rem;
 
+
   &.is-dragging {
     outline-color: var(--success);
     outline-width: .3rem;
   }
 
   .upload-area {
-    p {
+
+    span {
       margin: 0;
       font-size: 1rem;
       display: inline;
+    }
 
-      span {
-        color: var(--success);
-        cursor: pointer;
-        text-decoration: underline;
-      }
+    .select-file {
+      color: var(--success);
+      cursor: pointer;
+      text-decoration: underline;
     }
 
     @media screen and (max-width: 758px) {
@@ -189,7 +191,6 @@ onUnmounted(() => {
         display: none;
       }
     }
-
 
     .limit-message {
       color: var(--error);

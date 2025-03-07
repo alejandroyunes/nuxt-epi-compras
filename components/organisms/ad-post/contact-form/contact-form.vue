@@ -166,16 +166,18 @@ watchEffect(() => {
           </div>
         </div>
 
-        <UFormGroup name="files">
-          <ImageUploader v-model:files="state.files" />
-        </UFormGroup>
+        <div class="form-group-image">
+          <UFormGroup name="files">
+            <ImageUploader v-model:files="state.files" />
+          </UFormGroup>
+        </div>
 
         <div class="form-group-button">
           <UButton type="submit">
             Publicar
           </UButton>
         </div>
-        
+
       </UForm>
     </div>
 
