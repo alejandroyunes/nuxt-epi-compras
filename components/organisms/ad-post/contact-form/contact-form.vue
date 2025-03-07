@@ -4,7 +4,7 @@ import { AxiosError } from 'axios'
 import { ref } from 'vue'
 import { number, object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
-import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlurPrice } from '~/components/organisms/ad-post/utils'
+import { formatPrice, restrictNonDigits } from '~/components/organisms/ad-post/utils'
 
 type PostType = {
   typeOfPost: string
@@ -17,7 +17,6 @@ const param = ref<string | undefined>(undefined)
 const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
 const files = ref<{ file: File, url: string | undefined }[]>([])
 
-
 onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
 })
@@ -26,7 +25,7 @@ const schema = object({
   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
   location: string().min(8, 'Must be at least 8 characters').required('Required'),
   price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(13, 'Debe tener menos de 11 caracteres'),
-  area: number().required('Requerido'),
+  area: string().required('Requerido'),
   rooms: string().required('Requerido'),
   baths: string().required('Requerido'),
   parking: string(),
@@ -48,9 +47,9 @@ const state = reactive({
   phone: ''
 })
 
-
 watch(() => state.price, (newValue) => {
-  const formatted = formatPrice(newValue);
+  const formatted = formatPrice(newValue)
+  
   if (formatted !== newValue) {
     state.price = formatted
   }

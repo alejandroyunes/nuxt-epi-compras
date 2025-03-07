@@ -11,23 +11,9 @@ export const formatPrice = (value: string | undefined): string => {
 }
 
 export const restrictNonDigits = (event: KeyboardEvent) => {
-  if (event.ctrlKey || event.altKey || event.key.length > 1) return
+  if (event.ctrlKey || event.altKey || event.key.length > 1) return ''
 
   if (!/[0-9]/.test(event.key)) {
     event.preventDefault()
   }
-}
-
-export const handleInputPrice = (
-  event: Event,
-  maxLength: number = 11
-) => {
-  const input = event.target as HTMLInputElement
-  let rawValue = input.value.replace(/\D/g, '')
-
-  if (rawValue.length > maxLength) {
-    rawValue = rawValue.slice(0, maxLength)
-  }
-
-  rawValue = formatPrice(rawValue)
 }
