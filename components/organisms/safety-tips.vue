@@ -39,7 +39,7 @@ import PostSvg from '~/components/icons/safety-tips/PostSvg.vue'
 
     h2 {
       font-size: 20px;
-      margin-bottom: 10px;
+      margin: 1.25rem 0 .6rem;
       color: var(--heading);
     }
 
@@ -48,6 +48,7 @@ import PostSvg from '~/components/icons/safety-tips/PostSvg.vue'
     }
 
     svg {
+      justify-self: center;
       width: 60px;
       height: 60px;
     }
