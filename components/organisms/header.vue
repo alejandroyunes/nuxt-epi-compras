@@ -44,7 +44,7 @@ const handleTheme = () => {
       <div class="nav-two">
 
         <div class="nav-left">
-          <NuxtLink to="/" class="nav-logo-mobile">
+          <NuxtLink to="/">
             <NuxtImg src="/logo.webp" alt="Logo de epi compras" format="webp" />
             <h1>Epi<span>Compras</span></h1>
           </NuxtLink>
@@ -101,7 +101,8 @@ header {
       a {
         display: flex;
         align-items: center;
-        
+        font-size: 1.25rem;
+
         .image {
           width: 60px;
           height: auto;
@@ -136,13 +137,15 @@ header {
         justify-content: space-between;
         align-items: center;
 
-        .nav-logo-mobile {
+
+       a {
           display: none;
 
           @media (max-width: 758px) {
             display: flex;
             margin-right: 8px;
             cursor: pointer;
+            font-size: 1.25rem;
 
             img {
               width: 60px;
