@@ -188,6 +188,7 @@
         li {
           color: var(--heading);
           font-size: 1rem;
+          background: transparent;
 
           &:hover {
             background-color: var(--background-soft);
@@ -199,20 +200,10 @@
           }
         }
 
-        li:first-child {
-          background: transparent;
-
-          &:hover {
-            background-color: var(--background-soft);
-            cursor: pointer;
-          }
-        }
-
         li[aria-selected="true"] {
           background-color: var(--primary);
           font-weight: bold;
         }
-
       }
 
       @media (max-width: 758px) {
