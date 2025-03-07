@@ -199,6 +199,15 @@
           }
         }
 
+        li:first-child {
+          background: transparent;
+
+          &:hover {
+            background-color: var(--background-soft);
+            cursor: pointer;
+          }
+        }
+
         li[aria-selected="true"] {
           background-color: var(--primary);
           font-weight: bold;
