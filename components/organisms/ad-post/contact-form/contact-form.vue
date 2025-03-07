@@ -2,11 +2,10 @@
 import './contact-form.scss'
 import { AxiosError } from 'axios'
 import { ref } from 'vue'
-import { object, string, type InferType } from 'yup'
+import { array, object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
 import ImageUploader from '~/components/organisms/ad-post/image-uploader.vue'
-
 
 type PostType = {
   typeOfPost: string
@@ -17,7 +16,6 @@ const router = useRouter()
 const param = ref<string | undefined>(undefined)
 
 const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
-const files = ref<{ file: File, url: string | undefined }[]>([])
 
 onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
@@ -33,11 +31,31 @@ const schema = object({
   parking: string(),
   utilityRooms: string(),
   phone: string().required('Requerido').min(10, 'Debe de tener 10 digitos').required('Required'),
+  files: array()
+    .of(
+      object({
+        file: object().required('El archivo es requerido'),
+        url: string().nullable()
+      })
+    )
+    .min(1, 'Debes subir al menos una imagen')
+    .required('Imágenes son requeridas')
 })
 
 type Schema = InferType<typeof schema>
 
-const state = reactive({
+const state = reactive<{
+  description: string | undefined
+  location: string | undefined
+  price: string
+  area: string
+  rooms: string
+  baths: string
+  parking: string
+  utiliyRooms: string
+  phone: string
+  files: { file: File; url: string | undefined }[]
+}>({
   description: undefined,
   location: undefined,
   price: '',
@@ -46,7 +64,8 @@ const state = reactive({
   baths: '',
   parking: '',
   utiliyRooms: '',
-  phone: ''
+  phone: '',
+  files: []
 })
 
 watch(() => state.price, (newValue) => {
@@ -147,13 +166,16 @@ watchEffect(() => {
           </div>
         </div>
 
-        <ImageUploader v-model:files="files" />
+        <UFormGroup name="files">
+          <ImageUploader v-model:files="state.files" />
+        </UFormGroup>
 
         <div class="form-group-button">
           <UButton type="submit">
             Publicar
           </UButton>
         </div>
+        
       </UForm>
     </div>
 
