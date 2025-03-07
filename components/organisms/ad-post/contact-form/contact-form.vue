@@ -4,7 +4,7 @@ import { AxiosError } from 'axios'
 import { ref } from 'vue'
 import { number, object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
-import { formatPrice, restrictNonDigits } from '~/components/organisms/ad-post/utils'
+import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
 
 type PostType = {
   typeOfPost: string
@@ -54,21 +54,6 @@ watch(() => state.price, (newValue) => {
     state.price = formatted
   }
 })
-
-const formatPhoneNumber = (value: string | undefined): string => {
-  if (!value) return '' // Handle undefined or empty input
-
-  const cleanedValue = value.replace(/\D/g, '') // Remove non-digits
-  if (cleanedValue.length > 10) return state.phone || '' // Return current phone value if over max length
-
-  let formattedValue = cleanedValue
-  if (cleanedValue.length > 6) {
-    formattedValue = `${cleanedValue.slice(0, 3)} ${cleanedValue.slice(3, 6)} ${cleanedValue.slice(6)}`
-  } else if (cleanedValue.length > 3) {
-    formattedValue = `${cleanedValue.slice(0, 3)} ${cleanedValue.slice(3)}`
-  }
-  return formattedValue
-}
 
 watch(() => state.phone, (newValue) => {
   const formatted = formatPhoneNumber(newValue)

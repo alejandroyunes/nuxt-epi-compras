@@ -17,3 +17,19 @@ export const restrictNonDigits = (event: KeyboardEvent) => {
     event.preventDefault()
   }
 }
+
+
+export const formatPhoneNumber = (value: string | undefined): string => {
+  if (!value) return '' 
+
+  if (value.length > 10) return value || '' 
+  value = value.replace(/\D/g, '')
+  let formattedValue = value
+
+  if (value.length > 6) {
+    formattedValue = `${value.slice(0, 3)} ${value.slice(3, 6)} ${value.slice(6)}`
+  } else if (value.length > 3) {
+    formattedValue = `${value.slice(0, 3)} ${value.slice(3)}`
+  }
+  return formattedValue
+}
