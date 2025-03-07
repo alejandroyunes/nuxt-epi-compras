@@ -49,7 +49,7 @@ const state = reactive({
 
 watch(() => state.price, (newValue) => {
   const formatted = formatPrice(newValue)
-  
+
   if (formatted !== newValue) {
     state.price = formatted
   }
@@ -121,7 +121,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Número de habitaciones" name="rooms">
               <UInput v-model="state.rooms" variant="none" placeholder="2" maxLength="1" inputmode="numeric"
-                oninput="this.value = this.value.replace(/\D/g, '')" />
+                @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
         </div>
@@ -130,13 +130,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Número de baños" name="baths">
               <UInput v-model="state.baths" variant="none" placeholder="2" maxLength="1" inputmode="numeric"
-                oninput="this.value = this.value.replace(/\D/g, '')" />
+                @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
           <div class="form-group-input">
             <UFormGroup label="Número de parqueaderos" name="parking">
               <UInput v-model="state.parking" variant="none" placeholder="1" maxLength="1" inputmode="numeric"
-                oninput="this.value = this.value.replace(/\D/g, '')" />
+                @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
         </div>
@@ -145,13 +145,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Número de cuartos útiles" name="utiliyRooms">
               <UInput v-model="state.utiliyRooms" variant="none" placeholder="1" maxLength="1" inputmode="numeric"
-                oninput="this.value = this.value.replace(/\D/g, '')" />
+                @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
           <div class="form-group-input">
             <UFormGroup label="Teléfono de contacto" name="phone">
               <UInput v-model="state.phone" variant="none" placeholder="301 123 4567" maxLength="12" inputmode="numeric"
-                oninput="this.value = this.value.replace(/\D/g, '')" />
+                @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
         </div>
