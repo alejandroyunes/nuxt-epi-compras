@@ -109,6 +109,10 @@
 
       }
 
+      span {
+        color: var(--heading);
+      }
+
       input:-webkit-autofill {
         -webkit-text-fill-color: var(--heading);
         -webkit-box-shadow: 0 0 0 100px var(--background) inset;
@@ -127,6 +131,7 @@
     .form-group-button {
       display: flex;
       justify-content: center;
+      margin-top: 1.5rem;
 
       button {
         background: var(--primary);

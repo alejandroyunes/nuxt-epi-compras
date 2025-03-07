@@ -2,9 +2,11 @@
 import './contact-form.scss'
 import { AxiosError } from 'axios'
 import { ref } from 'vue'
-import { number, object, string, type InferType } from 'yup'
+import { object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
+import ImageUploader from '~/components/organisms/ad-post/image-uploader.vue'
+
 
 type PostType = {
   typeOfPost: string
@@ -67,6 +69,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 
+watchEffect(() => {
+  console.log(typeOfPost, selectedPropertyType)
+})
+
 </script>
 
 <template>
@@ -100,7 +106,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             <UFormGroup label="Metros cuadrados" name="area">
               <UInput v-model="state.area" variant="none" placeholder="50²" inputmode="numeric" maxLength="3"
                 @keypress="restrictNonDigits" />
-              <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">m²</span>
+              <span class="absolute right-2 top-1/2 -translate-y-1/2">m²</span>
             </UFormGroup>
           </div>
           <div class="form-group-input">
@@ -141,12 +147,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </div>
         </div>
 
+        <ImageUploader v-model:files="files" />
+
         <div class="form-group-button">
           <UButton type="submit">
             Publicar
           </UButton>
         </div>
-
       </UForm>
     </div>
 

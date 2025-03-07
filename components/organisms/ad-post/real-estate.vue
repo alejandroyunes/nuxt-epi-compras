@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 
 import ContractAgreeSvg from '~/components/icons/ad-post/real-estate/rental-or-sell/ContractAgreeSvg.vue'
 import HandWithKeySvg from '~/components/icons/ad-post//real-estate/rental-or-sell/HandWithKeySvg.vue'
@@ -72,7 +72,6 @@ const getPropertyIcon = (property: string | number) => {
 </script>
 
 <template>
-
   <section v-if="isRentingOrSelling">
     <TitlePost title="¿Está buscando vender o arrendar su propiedad?" />
     <GoBack :goBackUrl="'/publicar'" />
@@ -137,118 +136,6 @@ const getPropertyIcon = (property: string | number) => {
   
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  }
-}
-
-.form-details {
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-  margin: 24px auto 0;
-
-
-  .formkit-form {
-    // display: none;
-    // border: 1px solid red;
-    // outline: 1px solid red;
-
-    .formkit-messages {
-      list-style-type: none;
-      color: var(--warning);
-    }
-
-    .label {
-      color: var(--heading);
-      font-size: 1rem;
-    }
-
-    input {
-      margin-top: 6px;
-      height: 40px;
-      border-radius: 12px;
-      padding: 10px;
-      border: none;
-      outline: 1px solid var(--border);
-      width: 100%;
-      background-color: transparent;
-      color: var(--heading);
-      font-size: 1.2rem;
-      outline: 10px solid red;
-
-      &:focus {
-        outline: 1px solid var(--primary);
-      }
-
-      &::placeholder {
-        color: var(--text);
-        font-size: 1rem;
-      }
-    }
-  }
-
-
-  .grid-column {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 28px;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-
-    .option {
-      position: relative;
-
-      .formkit-messages {
-        position: absolute;
-        top: 70px;
-        background: transparent;
-        list-style-type: none;
-        left: -29px;
-        color: var(--warning);
-      }
-    }
-  }
-
-  .grid-column:first-of-type {
-    margin-top: 20px;
-  }
-
-  .form-action-buttons {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0 12px;
-    width: 100%;
-    max-width: 830px;
-    gap: 28px;
-
-    .btn-disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .btn-custom {
-      width: 100%;
-      height: 50px;
-      font-size: 15px;
-      border-radius: 5px;
-      font-weight: 700;
-      margin-top: 30px;
-      cursor: pointer;
-      background-color: var(--primary);
-    }
-
-    .btn-cancel-previous {
-      border: 1px solid var(--primary);
-      background-color: transparent;
-      color: var(--color-heading);
-    }
-
-    .btn-next-submit {
-      border: none;
-      color: white;
-    }
   }
 }
 
