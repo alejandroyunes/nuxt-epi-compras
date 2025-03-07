@@ -51,7 +51,7 @@
 
         &::placeholder {
           color: var(--gray-soft);
-          font-size: .9rem;
+          font-size: 1rem;
         }
       }
 
@@ -138,7 +138,7 @@
         padding: 0px 5px;
         background-color: var(--background);
         left: 10px;
-        font-size: 1rem;
+        font-size: 1.125rem;
         color: var(--background-opposite);
         z-index: 1;
         font-weight: 400;
@@ -155,10 +155,9 @@
         height: 44px;
         font-size: 1rem;
 
-
         &::placeholder {
           color: var(--gray-soft);
-          font-size: .9rem;
+          font-size: 1rem;
         }
 
         @media (max-width: 758px) {
