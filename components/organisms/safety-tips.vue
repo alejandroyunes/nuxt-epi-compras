@@ -35,8 +35,11 @@ import PostSvg from '~/components/icons/safety-tips/PostSvg.vue'
   padding: 0 .6rem;
 
   .column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-
+    
     h2 {
       font-size: 20px;
       margin: 1.25rem 0 .6rem;
@@ -48,7 +51,6 @@ import PostSvg from '~/components/icons/safety-tips/PostSvg.vue'
     }
 
     svg {
-      justify-self: center;
       width: 60px;
       height: 60px;
     }
