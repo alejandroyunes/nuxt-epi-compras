@@ -2,9 +2,9 @@
 import './contact-form.scss'
 import { AxiosError } from 'axios'
 import { ref } from 'vue'
-import { object, string, type InferType } from 'yup'
+import { number, object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
-import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlurPrice, formatArea, handleInputArea } from '~/components/organisms/ad-post/utils'
+import { formatPrice, restrictNonDigits, handleInputPrice, formatOnBlurPrice } from '~/components/organisms/ad-post/utils'
 
 type PostType = {
   typeOfPost: string
@@ -26,7 +26,7 @@ const schema = object({
   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
   location: string().min(8, 'Must be at least 8 characters').required('Required'),
   price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(13, 'Debe tener menos de 11 caracteres'),
-  area: string().required('Requerido'),
+  area: number().required('Requerido'),
   rooms: string().required('Requerido'),
   baths: string().required('Requerido'),
   parking: string(),
@@ -55,13 +55,6 @@ watch(() => state.price, (newValue) => {
     state.price = formatted
   }
 })
-
-// watch(() => state.area, (newValue) => {
-//   const formatted = formatArea(newValue)
-//   if (formatted !== newValue) {
-//     state.area = formatted
-//   }
-// })
 
 const formatPhoneNumber = (value: string | undefined): string => {
   if (!value) return '' // Handle undefined or empty input
@@ -113,7 +106,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
               <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="13"
-                @input="(e: InputEvent) => handleInputPrice(e)" 
                 @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
@@ -123,8 +115,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           <div class="form-group-input">
             <UFormGroup label="Metros cuadrados" name="area">
               <UInput v-model="state.area" variant="none" placeholder="50²" inputmode="numeric" maxLength="3"
-                @input="(e: InputEvent) => handleInputArea(e)" @keypress="restrictNonDigits" />
-
+                @keypress="restrictNonDigits" />
+              <span class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">m²</span>
             </UFormGroup>
           </div>
           <div class="form-group-input">
