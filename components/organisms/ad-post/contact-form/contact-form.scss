@@ -204,12 +204,21 @@
           font-weight: bold;
         }
 
+        li[data-headlessui-state="active"] {
+          background-color: #3b82f6; /* Example: Blue background for active state */
+          color: white; /* Example: White text for better contrast */
+        }
+        
+        li[data-headlessui-state="active"] .truncate {
+          font-weight: bold; /* Example: Bold text for active state */
+        }
+
+
       }
 
       @media (max-width: 758px) {
         width: 100%;
         margin-bottom: 2.1rem;
-
       }
 
     }
@@ -230,6 +239,10 @@
       display: flex;
       justify-content: center;
       margin-top: 2rem;
+
+      @media (max-width: 758px) {
+        margin-top: 3rem;
+      }
 
       button {
         background: var(--primary);
