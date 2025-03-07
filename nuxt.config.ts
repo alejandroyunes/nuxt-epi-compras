@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/sitemap',
     '@nuxt/ui',
+    '@pinia/nuxt',
     // '@zadigetvoltaire/nuxt-gtm',
   ],
   build: {
