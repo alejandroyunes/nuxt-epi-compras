@@ -39,7 +39,8 @@ const schema = object({
       })
     )
     .min(1, 'Debes subir al menos una imagen')
-    .required('Imágenes son requeridas')
+    .required('Imágenes son requeridas'),
+  people: array().required('Requerido')
 })
 
 type Schema = InferType<typeof schema>
@@ -55,6 +56,7 @@ const state = reactive<{
   utiliyRooms: string
   phone: string
   files: { file: File; url: string | undefined }[]
+  people: string[]
 }>({
   description: undefined,
   location: undefined,
@@ -65,7 +67,8 @@ const state = reactive<{
   parking: '',
   utiliyRooms: '',
   phone: '',
-  files: []
+  files: [],
+  people: ['Wade Cooper', 'Arlene Mccoy', 'Devon Webb', 'Tom Cook', 'Tanya Fox', 'Hellen Schmidt', 'Caroline Schultz', 'Mason Heaney', 'Claudie Smitham', 'Emil Schaefer']
 })
 
 watch(() => state.price, (newValue) => {
@@ -92,6 +95,9 @@ watchEffect(() => {
   console.log(typeOfPost, selectedPropertyType)
 })
 
+const selected = ref(state.people[0])
+
+
 </script>
 
 <template>
@@ -107,9 +113,9 @@ watchEffect(() => {
         </div>
 
         <div class="form-group-inline">
-          <div class="form-group-input">
-            <UFormGroup label="Ciudad" name="location">
-              <UInput v-model="state.location" type="location" variant="none" placeholder="Bogotá" />
+          <div class="form-group-dropdown">
+            <UFormGroup label="Ciudad" name="people">
+              <UInputMenu v-model="selected" :options="state.people" variant="none" />
             </UFormGroup>
           </div>
           <div class="form-group-input">
