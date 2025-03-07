@@ -23,7 +23,7 @@ onMounted(() => {
 
 const schema = object({
   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
-  location: string().min(8, 'Must be at least 8 characters').required('Required'),
+  location: string().required('Requerido'),
   price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(13, 'Debe tener menos de 11 caracteres'),
   area: string().required('Requerido'),
   rooms: string().required('Requerido'),
@@ -47,7 +47,7 @@ type Schema = InferType<typeof schema>
 
 const state = reactive<{
   description: string | undefined
-  location: string | undefined
+  location: string
   price: string
   area: string
   rooms: string
@@ -59,7 +59,7 @@ const state = reactive<{
   people: string[]
 }>({
   description: undefined,
-  location: undefined,
+  location: '',
   price: '',
   area: '',
   rooms: '',
@@ -68,7 +68,7 @@ const state = reactive<{
   utiliyRooms: '',
   phone: '',
   files: [],
-  people: ['Wade Cooper', 'Arlene Mccoy', 'Devon Webb', 'Tom Cook', 'Tanya Fox', 'Hellen Schmidt', 'Caroline Schultz', 'Mason Heaney', 'Claudie Smitham', 'Emil Schaefer']
+  people: ['Wade Cooper', 'Arlene Mccoy', 'Devon Webb', 'Tom Cook', 'Tanya Fox', 'Hellen Schmidt', 'Caroline Schultz', 'Mason Heaney', 'Claudie Smitham', 'Emil Schaefer'],
 })
 
 watch(() => state.price, (newValue) => {
@@ -95,9 +95,6 @@ watchEffect(() => {
   console.log(typeOfPost, selectedPropertyType)
 })
 
-const selected = ref(state.people[0])
-
-
 </script>
 
 <template>
@@ -114,8 +111,13 @@ const selected = ref(state.people[0])
 
         <div class="form-group-inline">
           <div class="form-group-dropdown">
-            <UFormGroup label="Ciudad" name="people">
-              <UInputMenu v-model="selected" :options="state.people" variant="none" />
+            <UFormGroup label="Ciudad" name="location">
+              <UInputMenu v-model="state.location" :options="state.people" variant="none" searchable
+                placeholder="Selecciona una ciudad">
+                <template #option-empty="{ query }">
+                  <q>{{ query }}</q> ciudad no encontrada
+                </template>
+              </UInputMenu>
             </UFormGroup>
           </div>
           <div class="form-group-input">
