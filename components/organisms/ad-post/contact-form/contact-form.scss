@@ -25,7 +25,7 @@
         padding: 0px 5px;
         background-color: var(--background);
         left: 10px;
-        font-size: .9rem;
+        font-size: 1.125rem;
         color: var(--background-opposite);
         z-index: 1;
         font-weight: 400;
@@ -74,7 +74,7 @@
         padding: 0px 5px;
         background-color: var(--background);
         left: 10px;
-        font-size: .9rem;
+        font-size: 1.125rem;
         color: var(--background-opposite);
         z-index: 1;
         font-weight: 400;
@@ -100,7 +100,7 @@
 
         &::placeholder {
           color: var(--gray-soft);
-          font-size: .9rem;
+          font-size: 1rem;
         }
 
         @media (max-width: 758px) {
@@ -138,7 +138,7 @@
         padding: 0px 5px;
         background-color: var(--background);
         left: 10px;
-        font-size: .9rem;
+        font-size: 1rem;
         color: var(--background-opposite);
         z-index: 1;
         font-weight: 400;
