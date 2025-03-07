@@ -52,6 +52,7 @@
         &::placeholder {
           color: var(--gray-soft);
           font-size: 1rem;
+          padding-top: .3rem;
         }
       }
 
@@ -220,7 +221,7 @@
         bottom: -24px;
         color: var(--danger);
         right: 0;
-        font-size: .95rem;
+        font-size: 1rem;
       }
     }
 

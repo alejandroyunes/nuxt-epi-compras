@@ -176,7 +176,7 @@ onUnmounted(() => {
 
     span {
       margin: 0;
-      font-size: 1rem;
+      font-size: 1.125rem;
       display: inline;
     }
 
