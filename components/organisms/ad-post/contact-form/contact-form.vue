@@ -37,9 +37,7 @@ const schema = object({
         file: object().required('El archivo es requerido'),
         url: string().nullable()
       })
-    )
-    .min(1, 'Debes subir al menos una imagen')
-    .required('Imágenes son requeridas'),
+    ).required('Requerido').min(1, 'al menos 1'),
   people: array().required('Requerido')
 })
 
@@ -86,14 +84,15 @@ watch(() => state.phone, (newValue) => {
   }
 })
 
+watch(() => state.files, (newValue) => {
+  console.log(state.files)
+  schema.validate(state.files)
+})
+
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Do something with event.data
   console.log(event.data)
 }
-
-watchEffect(() => {
-  console.log(typeOfPost, selectedPropertyType)
-})
 
 </script>
 
@@ -105,7 +104,7 @@ watchEffect(() => {
         <div class="form-group-textarea">
           <UFormGroup label="Descripción" name="description">
             <UTextarea v-model="state.description" variant="none"
-              placeholder="Ejemplo: Amplio apartamento de 2 habitaciones en el centro de Bogotá" />
+              placeholder="Ejemplo: Apartamento a 2 minutos de estación de metro con parqueadero amplio" />
           </UFormGroup>
         </div>
 
