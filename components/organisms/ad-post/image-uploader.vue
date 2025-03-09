@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onUnmounted } from 'vue';
-import ExitSvg from '~/components/icons/ExitSvg.vue';
+import ExitSvg from '~/components/icons/ExitSvg.vue'
+import Notification from '~/components/atoms/notification.vue'
 
 const props = defineProps<{ files: { file: File; url: string | undefined }[] }>()
 const emit = defineEmits(['update:files'])
@@ -65,10 +66,10 @@ async function resizeImage(file: File): Promise<File> {
 async function handleFiles(filesList: FileList | File[]) {
   const remainingSlots = 3 - props.files.length
 
-  if (filesList.length > remainingSlots) {
-    alert(`Solo se pueden subir hasta ${remainingSlots} imagenes`)
-    return;
-  }
+  // if (filesList.length > remainingSlots) {
+  //   // alert(`Solo se pueden subir hasta ${remainingSlots} imagenes`)
+  //   return;
+  // }
 
   const newFiles: { file: File; url: string | undefined }[] = [...props.files]
 
@@ -93,7 +94,6 @@ async function handleFiles(filesList: FileList | File[]) {
 
   // Emit the updated files array to the parent
   emit('update:files', newFiles)
-  console.log('here')
 }
 
 function triggerFileInput() {
@@ -134,18 +134,21 @@ onUnmounted(() => {
     if (fileObj.url) {
       URL.revokeObjectURL(fileObj.url);
     }
-  });
-});
+  })
+})
 
 
 </script>
 
 <template>
+  <Notification v-if="true" type="warning" message="Soloss se pueden subir hasta 3 imagenes" />
+
+
   <div class="upload-container" @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop"
     :class="{ 'is-dragging': isDragging }">
 
     <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" multiple style="display: none;" />
-    
+
     <div class="upload-area">
       <span class="select-device">Arrastra aquí o </span>
       <span class="select-file" @click="triggerFileInput">selecciona las imagenes de tu dispositivo</span>
@@ -158,10 +161,11 @@ onUnmounted(() => {
           <ExitSvg />
         </div>
       </div>
+      <span v-if="files.length > 3" class="limit-message">3 imágenes máximo</span>
     </div>
 
-    <p v-if="files.length >= 3" class="limit-message">Límite de 3 imágenes alcanzado.</p>
   </div>
+
 </template>
 
 <style lang="scss" scoped>
@@ -199,11 +203,6 @@ onUnmounted(() => {
       }
     }
 
-    .limit-message {
-      color: var(--error);
-      font-size: 14px;
-      margin-top: 30px;
-    }
   }
 
   .preview-container {
@@ -247,5 +246,6 @@ onUnmounted(() => {
       }
     }
   }
+
 }
 </style>

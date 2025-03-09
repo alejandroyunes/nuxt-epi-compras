@@ -6,6 +6,7 @@ import { array, object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
 import ImageUploader from '~/components/organisms/ad-post/image-uploader.vue'
+import Notification from '~/components/atoms/notification.vue'
 
 type PostType = {
   typeOfPost: string
@@ -37,7 +38,7 @@ const schema = object({
         file: object().required('El archivo es requerido'),
         url: string().nullable()
       })
-    ).required('Requerido').min(1, 'al menos 1'),
+    ).required('Requerido').min(1, 'Debe tener al menos una imagen'),
   people: array().required('Requerido')
 })
 
@@ -84,10 +85,6 @@ watch(() => state.phone, (newValue) => {
   }
 })
 
-watch(() => state.files, (newValue) => {
-  console.log(state.files)
-  schema.validate(state.files)
-})
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Do something with event.data
@@ -97,6 +94,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
+
+  <!-- <Notification v-if="state.files.length > 3" type="warning" message="Solo se pueden subir hasta 3 imagenes" /> -->
+
   <div class="contact-form">
     <div class="contact-form-inner">
       <UForm :schema="schema" :state="state" @submit="onSubmit">
@@ -189,4 +189,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     </div>
 
   </div>
+
 </template>
+
