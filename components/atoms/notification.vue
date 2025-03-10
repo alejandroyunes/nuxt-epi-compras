@@ -31,7 +31,7 @@ onMounted(() => {
         <div class="notification__icon">
           <slot name="icon">
             <span v-if="type === 'success'">✓</span>
-            <span v-if="type === 'error'">✗</span>
+            <span v-if="type === 'error'">⚠</span>
             <span v-if="type === 'warning'">⚠</span>
             <span v-if="type === 'info'">ℹ</span>
           </slot>
