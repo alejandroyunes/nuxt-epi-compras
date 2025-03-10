@@ -11,9 +11,6 @@ const visible = ref(true)
 
 const { type, message } = defineProps<NotificationType>()
 
-const showNotification = () => {
-  visible.value = true
-}
 const closeNotification = () => {
   visible.value = false
 }
@@ -27,8 +24,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="notification-container">
-    <div class="notification-outer">
+  <div class="side-notification">
+    <div class="side-notification-outer">
       <div :class="['notification', `notification--${type}`, { 'notification--visible': visible }]"
         @click="closeNotification">
         <div class="notification__icon">
@@ -47,14 +44,14 @@ onMounted(() => {
         <div class="notification__close" @click.stop="closeNotification" aria-label="Cerrar notificación">
           <ExitSvg />
         </div>
-        <div class="notification__progress"></div>
+        <div :class="['notification__progress', `notification__progress--${type}`]"></div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.notification-container {
+.side-notification {
   position: fixed;
   left: 50%;
   top: 8%;
@@ -62,7 +59,7 @@ onMounted(() => {
   width: var(--max-width);
   z-index: 3;
 
-  .notification-outer {
+  .side-notification-outer {
     position: relative;
     width: 100%;
     z-index: 3;
@@ -71,9 +68,8 @@ onMounted(() => {
       position: absolute;
       top: 0;
       right: 0;
-      min-width: 300px;
       max-width: 500px;
-      padding: 1rem;
+      padding: .4rem .5rem;
       border-radius: 0.375rem;
       box-shadow: 0 4px 6px var(--shadow);
       display: flex;
@@ -89,9 +85,10 @@ onMounted(() => {
         }
 
         100% {
-          transform: translateX(-1rem);
+          transform: translateX(-1.6rem);
         }
       }
+
 
       &--visible {
         opacity: 1;
@@ -99,15 +96,15 @@ onMounted(() => {
       }
 
       &--success {
-        background-color: #f0fdf4;
-        border: 1px solid #bbf7d0;
-        color: #166534;
+        background-color: var(--background);
+        border: 1px solid var(--border);
+        color: var(--heading);
       }
 
       &--error {
         background-color: var(--background);
         border: 1px solid var(--border);
-        color: #991b1b;
+        color: var(--heading);
       }
 
       &--warning {
@@ -117,8 +114,8 @@ onMounted(() => {
       }
 
       &--info {
-        background-color: #eff6ff;
-        border: 1px solid #bfdbfe;
+        background-color: var(--background);
+        border: 1px solid var(--border);
         color: #1e40af;
       }
 
@@ -140,9 +137,10 @@ onMounted(() => {
       &__close {
         cursor: pointer;
         background-color: var(--background-opposite-soft);
-        width: 28px;
-        height: 28px;
-        padding: 2px;
+        width: 24px;
+        height: 24px;
+        padding: 4px;
+        line-height: 24px;
         border-radius: 50%;
         fill: var(--background);
 
@@ -156,9 +154,24 @@ onMounted(() => {
         bottom: 0;
         left: 0;
         height: 4px;
-        background-color: var(--success);
         width: 100%;
         animation: shrink 5s linear 0.5s forwards;
+      }
+
+      &__progress--success {
+        background-color: var(--success);
+      }
+
+      &__progress--error {
+        background-color: var(--danger);
+      }
+
+      &__progress--warning {
+        background-color: var(--warning);
+      }
+
+      &__progress--info {
+        background-color: var(--primary);
       }
 
       @keyframes shrink {
@@ -170,6 +183,11 @@ onMounted(() => {
           width: 0%;
         }
       }
+
+      @media (max-width: 768px) {
+        max-width: 400px;
+      }
+
     }
   }
 

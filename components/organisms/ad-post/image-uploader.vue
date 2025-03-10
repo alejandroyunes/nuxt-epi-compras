@@ -71,7 +71,7 @@ async function handleFiles(filesList: FileList | File[]) {
   if (remainingSlots <= 0) {
     notification.value = null
     setTimeout(() => {
-      notification.value = { message: "Solo se pueden subir hasta 3 imágenes.", type: "warning" }
+      notification.value = { message: "Solo se pueden subir max 3 imágenes.", type: "warning" }
     }, 50)
     return
   }
@@ -100,7 +100,6 @@ async function handleFiles(filesList: FileList | File[]) {
         notification.value = null
         setTimeout(() => {
           notification.value = { message: `No se pudo cargar ${file.name}.`, type: "error" };
-
         }, 50)
       }
     }
