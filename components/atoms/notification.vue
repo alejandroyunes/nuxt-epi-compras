@@ -185,7 +185,7 @@ onMounted(() => {
       }
 
       @media (max-width: 768px) {
-        max-width: 400px;
+        max-width: 300px;
       }
 
     }

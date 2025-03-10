@@ -2,7 +2,7 @@
 import './contact-form.scss'
 import { AxiosError } from 'axios'
 import { ref } from 'vue'
-import { array, object, string, type InferType } from 'yup'
+import { array, object, string, mixed, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
 import ImageUploader from '~/components/organisms/ad-post/image-uploader.vue'
@@ -30,15 +30,18 @@ const schema = object({
   baths: string().required('Requerido'),
   parking: string(),
   utilityRooms: string(),
-  phone: string().required('Requerido').min(10, 'Debe de tener 10 digitos').required('Required'),
-  files: array()
-    .of(
-      object({
-        file: object().required('El archivo es requerido'),
-        url: string().nullable()
-      })
-    ).required('Requerido').min(1, 'Debe tener al menos una imagen'),
-  people: array().required('Requerido')
+  phone: string().min(12, 'Debe de tener 10 digitos').max(12, 'Debe de tener 10 digitos').required('Required'),
+  files: array().of(
+    object({
+      file: mixed<File>().test(
+        'fileType',
+        'El archivo debe ser una imagen válida',
+        (value: unknown) => !value || value instanceof File // Allow null or valid File
+      ),
+      url: string().nullable()
+    })
+  ).min(1, 'Debe subir al menos una imagen').max(3, 'No puede subir más de 3 imágenes'),
+  cities: array().required('Requerido')
 })
 
 type Schema = InferType<typeof schema>
@@ -46,6 +49,7 @@ type Schema = InferType<typeof schema>
 const state = reactive<{
   description: string | undefined
   location: string
+  cities: string[]
   price: string
   area: string
   rooms: string
@@ -54,10 +58,39 @@ const state = reactive<{
   utiliyRooms: string
   phone: string
   files: { file: File; url: string | undefined }[]
-  people: string[]
 }>({
   description: undefined,
   location: '',
+  cities: ['Bogotá',
+    'Medellín',
+    'Cali',
+    'Barranquilla',
+    'Cartagena',
+    'Santa Marta',
+    'Manizales',
+    'Pereira',
+    'Cúcuta',
+    'Ibagué',
+    'Neiva',
+    'Villavicencio',
+    'Bucaramanga',
+    'Pasto',
+    'Popayán',
+    'Armenia',
+    'Montería',
+    'Sincelejo',
+    'Valledupar',
+    'Tunja',
+    'Riohacha',
+    'Quibdó',
+    'Florencia',
+    'Yopal',
+    'Mocoa',
+    'Puerto Carreño',
+    'San José del Guaviare',
+    'Inírida',
+    'Mitú',
+    'Leticia'],
   price: '',
   area: '',
   rooms: '',
@@ -66,7 +99,6 @@ const state = reactive<{
   utiliyRooms: '',
   phone: '',
   files: [],
-  people: ['Wade Cooper', 'Arlene Mccoy', 'Devon Webb', 'Tom Cook', 'Tanya Fox', 'Hellen Schmidt', 'Caroline Schultz', 'Mason Heaney', 'Claudie Smitham', 'Emil Schaefer'],
 })
 
 watch(() => state.price, (newValue) => {
@@ -78,10 +110,13 @@ watch(() => state.price, (newValue) => {
 })
 
 watch(() => state.phone, (newValue) => {
+
   const formatted = formatPhoneNumber(newValue)
+
   if (formatted !== newValue) {
     state.phone = formatted
   }
+
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -107,7 +142,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <div class="form-group-inline">
           <div class="form-group-dropdown">
             <UFormGroup label="Ciudad" name="location">
-              <UInputMenu v-model="state.location" :options="state.people" variant="none" searchable
+              <UInputMenu v-model="state.location" :options="state.cities" variant="none" searchable
                 placeholder="Selecciona una ciudad">
                 <template #option-empty="{ query }">
                   <q>{{ query }}</q> ciudad no encontrada
@@ -163,7 +198,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </div>
           <div class="form-group-input">
             <UFormGroup label="Teléfono de contacto" name="phone">
-              <UInput v-model="state.phone" variant="none" placeholder="301 123 4567" maxLength="12" inputmode="numeric"
+              <UInput v-model="state.phone" variant="none" placeholder="301 123 4567" inputmode="numeric" maxLength="12"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
@@ -187,4 +222,3 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   </div>
 
 </template>
-
