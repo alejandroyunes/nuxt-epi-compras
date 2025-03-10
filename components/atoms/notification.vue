@@ -2,27 +2,23 @@
 import { ref, onMounted } from 'vue'
 import ExitSvg from '~/components/icons/ExitSvg.vue'
 
+export type NotificationType = {
+  message: string
+  type: 'success' | 'error' | 'warning' | 'info'
+}
+
 const visible = ref(true)
 
-const { type, message } = defineProps<{
-  type: 'success' | 'error' | 'warning' | 'info'
-  message: string
-}>()
-
-onMounted(() => {
-  showNotification()
-})
+const { type, message } = defineProps<NotificationType>()
 
 const showNotification = () => {
   visible.value = true
 }
-
 const closeNotification = () => {
   visible.value = false
 }
 
 onMounted(() => {
-  showNotification()
   setTimeout(() => {
     closeNotification()
   }, 5000)

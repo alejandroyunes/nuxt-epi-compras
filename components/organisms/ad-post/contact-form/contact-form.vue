@@ -6,7 +6,6 @@ import { array, object, string, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
 import ImageUploader from '~/components/organisms/ad-post/image-uploader.vue'
-import Notification from '~/components/atoms/notification.vue'
 
 type PostType = {
   typeOfPost: string
@@ -85,7 +84,6 @@ watch(() => state.phone, (newValue) => {
   }
 })
 
-
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Do something with event.data
   console.log(event.data)
@@ -94,8 +92,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-
-  <!-- <Notification v-if="state.files.length > 3" type="warning" message="Solo se pueden subir hasta 3 imagenes" /> -->
 
   <div class="contact-form">
     <div class="contact-form-inner">

@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue';
+import { ref, onUnmounted } from 'vue'
 import ExitSvg from '~/components/icons/ExitSvg.vue'
 import Notification from '~/components/atoms/notification.vue'
+import type { NotificationType } from '~/components/atoms/notification.vue'
 
 const props = defineProps<{ files: { file: File; url: string | undefined }[] }>()
 const emit = defineEmits(['update:files'])
 
 const isDragging = ref(false)
 const fileInput = ref<HTMLInputElement>()
+const notification = ref<NotificationType | null>(null)
 
-const MAX_WIDTH = 600   // Maximum width in pixels
-const MAX_HEIGHT = 580  // Maximum height in pixels
+const MAX_WIDTH = 600
+const MAX_HEIGHT = 580
 const MAX_FILE_SIZE = 5 * 1024 * 1024   // 5MB
 
 async function resizeImage(file: File): Promise<File> {
@@ -66,34 +68,45 @@ async function resizeImage(file: File): Promise<File> {
 async function handleFiles(filesList: FileList | File[]) {
   const remainingSlots = 3 - props.files.length
 
-  // if (filesList.length > remainingSlots) {
-  //   // alert(`Solo se pueden subir hasta ${remainingSlots} imagenes`)
-  //   return;
-  // }
+  if (remainingSlots <= 0) {
+    notification.value = null
+    setTimeout(() => {
+      notification.value = { message: "Solo se pueden subir hasta 3 imágenes.", type: "warning" }
+    }, 50)
+    return
+  }
 
   const newFiles: { file: File; url: string | undefined }[] = [...props.files]
 
-  for (let i = 0; i < filesList.length; i++) {
+  for (let i = 0; i < filesList.length && newFiles.length < 3; i++) {
     const file = filesList[i]
     if (file.type.startsWith('image/')) {
       if (file.size > MAX_FILE_SIZE) {
-        alert(`El archivo ${file.name} excede el límite de 5MB.`)
-        continue
+        notification.value = null
+        setTimeout(() => {
+          notification.value = { message: `El archivo ${file.name} excede el límite de 5MB.`, type: "error" }
+        }, 50)
+        console.error(`El archivo ${file.name} excede el límite de 5MB.`)
+        return
       }
 
       try {
         const resizedFile = await resizeImage(file)
         const url = URL.createObjectURL(resizedFile)
         newFiles.push({ file: resizedFile, url })
+
       } catch (error) {
-        console.error(`Error procesando ${file.name}:`, error);
-        alert(`No se pudo cargar ${file.name}.`);
+        console.error(`Error procesando ${file.name}:`, error)
+        notification.value = null
+        setTimeout(() => {
+          notification.value = { message: `No se pudo cargar ${file.name}.`, type: "error" };
+
+        }, 50)
       }
     }
   }
 
-  // Emit the updated files array to the parent
-  emit('update:files', newFiles)
+  emit('update:files', newFiles.slice(0, 3))
 }
 
 function triggerFileInput() {
@@ -120,13 +133,12 @@ function onDrop(event: DragEvent) {
 }
 
 function removeFile(index: number) {
-  const newFiles = [...props.files];
+  const newFiles = [...props.files]
   if (newFiles[index].url) {
-    URL.revokeObjectURL(newFiles[index].url);
+    URL.revokeObjectURL(newFiles[index].url)
   }
-  newFiles.splice(index, 1);
-  // Emit the updated files array to the parent
-  emit('update:files', newFiles);
+  newFiles.splice(index, 1)
+  emit('update:files', newFiles)
 }
 
 onUnmounted(() => {
@@ -137,12 +149,10 @@ onUnmounted(() => {
   })
 })
 
-
 </script>
 
 <template>
-  <Notification v-if="true" type="warning" message="Soloss se pueden subir hasta 3 imagenes" />
-
+  <Notification v-if="notification" :type="notification.type" :message="notification.message" />
 
   <div class="upload-container" @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave" @drop.prevent="onDrop"
     :class="{ 'is-dragging': isDragging }">
