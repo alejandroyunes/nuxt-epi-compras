@@ -113,6 +113,7 @@ const getPropertyIcon = (property: string | number) => {
     <GoBack :goBack="goBackSecondStep" />
     <ContactForm v-if="typeOfPost && selectedPropertyType" :typeOfPost="typeOfPost" :selectedPropertyType="selectedPropertyType" />
   </section>
+
 </template>
 
 

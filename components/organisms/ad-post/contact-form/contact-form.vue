@@ -7,6 +7,7 @@ import type { FormSubmitEvent } from '#ui/types'
 import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
 import ImageUploader from '~/components/organisms/ad-post/image-uploader.vue'
 import Checkbox from '~/components/atoms/checkbox.vue'
+import Posting from '../posting.vue'
 
 type PostType = {
   typeOfPost: string
@@ -275,5 +276,5 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     </div>
 
   </div>
-
+  <Posting />
 </template>
