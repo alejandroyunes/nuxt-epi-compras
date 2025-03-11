@@ -2,10 +2,11 @@
 import './contact-form.scss'
 import { AxiosError } from 'axios'
 import { ref } from 'vue'
-import { array, object, string, mixed, type InferType } from 'yup'
+import { array, object, string, mixed, boolean, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
 import ImageUploader from '~/components/organisms/ad-post/image-uploader.vue'
+import Checkbox from '~/components/atoms/checkbox.vue'
 
 type PostType = {
   typeOfPost: string
@@ -30,6 +31,9 @@ const schema = object({
   baths: string().required('Requerido'),
   parking: string(),
   utilityRooms: string(),
+  patio: boolean().required('Requerido'),
+  balcony: boolean(),
+  elevator: boolean(),
   phone: string().min(12, 'Debe de tener 10 digitos').max(12, 'Debe de tener 10 digitos').required('Required'),
   files: array().of(
     object({
@@ -56,6 +60,9 @@ const state = reactive<{
   baths: string
   parking: string
   utiliyRooms: string
+  patio: boolean
+  balcony: boolean
+  elevator: boolean
   phone: string
   files: { file: File; url: string | undefined }[]
 }>({
@@ -97,6 +104,9 @@ const state = reactive<{
   baths: '',
   parking: '',
   utiliyRooms: '',
+  patio: false,
+  balcony: false,
+  elevator: false,
   phone: '',
   files: [],
 })
@@ -123,6 +133,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   // Do something with event.data
   console.log(event.data)
 }
+
+watchEffect(() => { 
+  console.log('patio',state.patio)
+})	
 
 </script>
 
@@ -201,6 +215,18 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
               <UInput v-model="state.phone" variant="none" placeholder="301 123 4567" inputmode="numeric" maxLength="12"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
+          </div>
+        </div>
+
+        <div class="form-group-checkbox">
+          <div class="form-group-item">
+            <Checkbox v-model="state.patio" label="Patio" name="patio" />
+          </div>
+          <div class="form-group-item">
+            <Checkbox v-model="state.balcony" label="Balcón" name="balcony" />
+          </div>
+          <div class="form-group-item">
+            <Checkbox v-model="state.elevator" label="Asensor" name="elevator" />
           </div>
         </div>
 

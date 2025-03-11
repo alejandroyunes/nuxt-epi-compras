@@ -226,6 +226,21 @@
 
     }
 
+    .form-group-checkbox {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      width: 100%;
+      margin-bottom: 1.7rem;
+    }
+    
+    .form-group-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex: 0 0 auto; 
+    }
+
     .form-group-image {
       position: relative;
 
