@@ -25,6 +25,7 @@ onMounted(() => {
 const schema = object({
   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
   location: string().required('Requerido'),
+  town: string().min(3, 'Debe tener al menos 3 caracteres').max(20, 'Debe tener menos de 20 caracteres').required('Requerido'),
   price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(13, 'Debe tener menos de 11 caracteres'),
   area: string().required('Requerido'),
   rooms: string().required('Requerido'),
@@ -53,7 +54,9 @@ type Schema = InferType<typeof schema>
 const state = reactive<{
   description: string | undefined
   location: string
+
   cities: string[]
+  town: string
   price: string
   area: string
   rooms: string
@@ -68,6 +71,7 @@ const state = reactive<{
 }>({
   description: undefined,
   location: '',
+  town: '',
   cities: ['Bogotá',
     'Medellín',
     'Cali',
@@ -134,9 +138,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 
-watchEffect(() => { 
-  console.log('patio',state.patio)
-})	
 
 </script>
 
@@ -165,14 +166,20 @@ watchEffect(() => {
             </UFormGroup>
           </div>
           <div class="form-group-input">
-            <UFormGroup label="Precio" name="price">
-              <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="13"
-                @keypress="restrictNonDigits" />
+            <UFormGroup label="Barrio" name="town">
+              <UInput v-model="state.town" variant="none" placeholder="Engativá" maxLength="20" />
             </UFormGroup>
           </div>
         </div>
 
         <div class="form-group-inline">
+          <div class="form-group-input">
+            <UFormGroup label="Precio" name="price">
+              <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="13"
+                @keypress="restrictNonDigits" />
+            </UFormGroup>
+
+          </div>
           <div class="form-group-input">
             <UFormGroup label="Metros cuadrados" name="area">
               <UInput v-model="state.area" variant="none" placeholder="50²" inputmode="numeric" maxLength="3"
@@ -180,41 +187,49 @@ watchEffect(() => {
               <span class="absolute right-2 top-1/2 -translate-y-1/2">m²</span>
             </UFormGroup>
           </div>
+        </div>
+
+        <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Número de habitaciones" name="rooms">
               <UInput v-model="state.rooms" variant="none" placeholder="2" maxLength="1" inputmode="numeric"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
-          </div>
-        </div>
 
-        <div class="form-group-inline">
+          </div>
           <div class="form-group-input">
             <UFormGroup label="Número de baños" name="baths">
               <UInput v-model="state.baths" variant="none" placeholder="2" maxLength="1" inputmode="numeric"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
+
           </div>
+        </div>
+
+        <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Número de parqueaderos" name="parking">
               <UInput v-model="state.parking" variant="none" placeholder="1" maxLength="1" inputmode="numeric"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
-        </div>
-
-        <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Número de cuartos útiles" name="utiliyRooms">
               <UInput v-model="state.utiliyRooms" variant="none" placeholder="1" maxLength="1" inputmode="numeric"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
+
           </div>
+        </div>
+
+        <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Teléfono de contacto" name="phone">
               <UInput v-model="state.phone" variant="none" placeholder="301 123 4567" inputmode="numeric" maxLength="12"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
+          </div>
+          <div class="form-group-input">
           </div>
         </div>
 
@@ -226,7 +241,7 @@ watchEffect(() => {
             <Checkbox v-model="state.balcony" label="Balcón" name="balcony" />
           </div>
           <div class="form-group-item">
-            <Checkbox v-model="state.elevator" label="Asensor" name="elevator" />
+            <Checkbox v-model="state.elevator" label="Ascensor" name="elevator" />
           </div>
         </div>
 
