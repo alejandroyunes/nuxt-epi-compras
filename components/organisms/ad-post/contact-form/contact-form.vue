@@ -20,13 +20,14 @@ const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
 
 onMounted(() => {
   param.value = router.currentRoute.value.fullPath.substring('/publicar/'.length)
+  loadSavedState()
 })
 
 const schema = object({
   description: string().min(8, 'Debe tener al menos 8 caracteres').max(100, 'Debe tener menos de 100 caracteres').required('Requerido'),
   location: string().required('Requerido'),
   town: string().min(3, 'Debe tener al menos 3 caracteres').max(20, 'Debe tener menos de 20 caracteres').required('Requerido'),
-  price: string().required('Requerido').min(4, 'Debe tener al menos 4 caracteres').max(13, 'Debe tener menos de 11 caracteres'),
+  price: string().min(7, 'Debe tener al menos 4 caracteres').max(13, 'Debe tener menos de 11 caracteres').required('Requerido'),
   area: string().required('Requerido'),
   rooms: string().required('Requerido'),
   baths: string().required('Requerido'),
@@ -46,16 +47,44 @@ const schema = object({
       url: string().nullable()
     })
   ).min(1, 'Debe subir al menos una imagen').max(3, 'No puede subir más de 3 imágenes'),
-  cities: array().required('Requerido')
 })
 
 type Schema = InferType<typeof schema>
 
+const cities = ['Bogotá',
+  'Medellín',
+  'Cali',
+  'Barranquilla',
+  'Cartagena',
+  'Santa Marta',
+  'Manizales',
+  'Pereira',
+  'Cúcuta',
+  'Ibagué',
+  'Neiva',
+  'Villavicencio',
+  'Bucaramanga',
+  'Pasto',
+  'Popayán',
+  'Armenia',
+  'Montería',
+  'Sincelejo',
+  'Valledupar',
+  'Tunja',
+  'Riohacha',
+  'Quibdó',
+  'Florencia',
+  'Yopal',
+  'Mocoa',
+  'Puerto Carreño',
+  'San José del Guaviare',
+  'Inírida',
+  'Mitú',
+  'Leticia']
+
 const state = reactive<{
   description: string | undefined
   location: string
-
-  cities: string[]
   town: string
   price: string
   area: string
@@ -72,36 +101,6 @@ const state = reactive<{
   description: undefined,
   location: '',
   town: '',
-  cities: ['Bogotá',
-    'Medellín',
-    'Cali',
-    'Barranquilla',
-    'Cartagena',
-    'Santa Marta',
-    'Manizales',
-    'Pereira',
-    'Cúcuta',
-    'Ibagué',
-    'Neiva',
-    'Villavicencio',
-    'Bucaramanga',
-    'Pasto',
-    'Popayán',
-    'Armenia',
-    'Montería',
-    'Sincelejo',
-    'Valledupar',
-    'Tunja',
-    'Riohacha',
-    'Quibdó',
-    'Florencia',
-    'Yopal',
-    'Mocoa',
-    'Puerto Carreño',
-    'San José del Guaviare',
-    'Inírida',
-    'Mitú',
-    'Leticia'],
   price: '',
   area: '',
   rooms: '',
@@ -133,11 +132,26 @@ watch(() => state.phone, (newValue) => {
 
 })
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-  // Do something with event.data
-  console.log(event.data)
+watch(() => {
+  const { files, ...stateWithoutFiles } = state
+  return stateWithoutFiles
+}, (newStateWithoutFiles) => {
+  localStorage.setItem('formState', JSON.stringify(newStateWithoutFiles))
+}, { deep: true })
+
+
+function loadSavedState() {
+  const savedState = localStorage.getItem('formState')
+  if (savedState) {
+    const parsedState = JSON.parse(savedState)
+    Object.assign(state, { ...parsedState, files: [] }) // Exclude files when loading
+  }
 }
 
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  console.log(event.data, typeOfPost, selectedPropertyType, param.value)
+  localStorage.removeItem('formState')
+}
 
 </script>
 
@@ -157,7 +171,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <div class="form-group-inline">
           <div class="form-group-dropdown">
             <UFormGroup label="Ciudad" name="location">
-              <UInputMenu v-model="state.location" :options="state.cities" variant="none" searchable
+              <UInputMenu v-model="state.location" :options="cities" variant="none" searchable
                 placeholder="Selecciona una ciudad">
                 <template #option-empty="{ query }">
                   <q>{{ query }}</q> ciudad no encontrada
@@ -175,8 +189,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Precio" name="price">
-              <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" maxLength="13"
-                @keypress="restrictNonDigits" />
+              <UInput v-model="state.price" variant="none" placeholder="$ 1.000.000" inputmode="numeric" minLength="4"
+                maxLength="13" @keypress="restrictNonDigits" />
             </UFormGroup>
 
           </div>
