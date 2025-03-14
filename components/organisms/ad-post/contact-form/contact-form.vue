@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import './contact-form.scss'
 import { AxiosError } from 'axios'
-import { ref } from 'vue'
+import { ref, reactive, watch, onMounted } from 'vue'
 import { array, object, string, mixed, boolean, type InferType } from 'yup'
 import type { FormSubmitEvent } from '#ui/types'
 import { formatPrice, restrictNonDigits, formatPhoneNumber } from '~/components/organisms/ad-post/utils'
 import ImageUploader from '~/components/organisms/ad-post/image-uploader.vue'
 import Checkbox from '~/components/atoms/checkbox.vue'
-import Posting from '../posting.vue'
+import Posting from '~/components/atoms/posting.vue'
 
 type PostType = {
   typeOfPost: string
@@ -16,6 +16,7 @@ type PostType = {
 
 const router = useRouter()
 const param = ref<string | undefined>(undefined)
+const loading = ref<boolean>(false)
 
 const { typeOfPost, selectedPropertyType } = defineProps<PostType>()
 
@@ -83,6 +84,23 @@ const cities = ['Bogotá',
   'Mitú',
   'Leticia']
 
+const initialState = {
+  description: undefined,
+  location: '',
+  town: '',
+  price: '',
+  area: '',
+  rooms: '',
+  baths: '',
+  parking: '',
+  utiliyRooms: '',
+  patio: false,
+  balcony: false,
+  elevator: false,
+  phone: '',
+  files: [],
+}
+
 const state = reactive<{
   description: string | undefined
   location: string
@@ -98,22 +116,7 @@ const state = reactive<{
   elevator: boolean
   phone: string
   files: { file: File; url: string | undefined }[]
-}>({
-  description: undefined,
-  location: '',
-  town: '',
-  price: '',
-  area: '',
-  rooms: '',
-  baths: '',
-  parking: '',
-  utiliyRooms: '',
-  patio: false,
-  balcony: false,
-  elevator: false,
-  phone: '',
-  files: [],
-})
+}>({ ...initialState })
 
 watch(() => state.price, (newValue) => {
   const formatted = formatPrice(newValue)
@@ -140,26 +143,34 @@ watch(() => {
   localStorage.setItem('formState', JSON.stringify(newStateWithoutFiles))
 }, { deep: true })
 
-
 function loadSavedState() {
   const savedState = localStorage.getItem('formState')
   if (savedState) {
     const parsedState = JSON.parse(savedState)
-    Object.assign(state, { ...parsedState, files: [] }) // Exclude files when loading
+    Object.assign(state, { ...parsedState, files: [] })
   }
 }
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-  console.log(event.data, typeOfPost, selectedPropertyType, param.value)
-  localStorage.removeItem('formState')
+function resetForm() {
+  Object.assign(state, initialState)
 }
 
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  loading.value = true
+  console.log(event.data, typeOfPost, selectedPropertyType, param.value)
+  localStorage.removeItem('formState')
+
+  setTimeout(() => {
+    loading.value = false
+    resetForm()
+  }, 2000)
+}
 </script>
 
 <template>
 
   <div class="contact-form">
-    <div class="contact-form-inner">
+    <div v-if="!loading" class="contact-form-inner">
       <UForm :schema="schema" :state="state" @submit="onSubmit">
 
         <div class="form-group-textarea">
@@ -275,6 +286,11 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       </UForm>
     </div>
 
+    <div v-else class="form-submit">
+      <h1>Publicando...</h1>
+      <Posting />
+    </div>
+
   </div>
-  <!-- <Posting /> -->
+
 </template>
