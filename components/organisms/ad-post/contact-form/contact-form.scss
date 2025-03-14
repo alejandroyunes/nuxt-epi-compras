@@ -7,6 +7,7 @@
     padding: 1rem 1rem .8rem;
     border-radius: .6rem;
     box-shadow: var(--shadow);
+    max-width: 800px;
 
     .form-group-inline {
       display: flex;
@@ -85,7 +86,7 @@
       input {
         position: relative;
         padding: 10px;
-        width: 300px;
+        min-width: 300px;
         border-radius: 4px;
         color: var(--heading);
         background-color: transparent;
@@ -148,7 +149,7 @@
 
       input {
         padding: 10px;
-        width: 300px;
+        min-width: 300px;
         border-radius: 4px;
         color: var(--heading);
         background-color: transparent;

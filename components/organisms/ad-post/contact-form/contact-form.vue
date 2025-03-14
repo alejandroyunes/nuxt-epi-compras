@@ -38,6 +38,10 @@ const schema = object({
   patio: boolean().required('Requerido'),
   balcony: boolean(),
   elevator: boolean(),
+  pool: boolean(),
+  gym: boolean(),
+  security: boolean(),
+  socialArea: boolean(),
   phone: string().min(12, 'Debe de tener 10 digitos').max(12, 'Debe de tener 10 digitos').required('Required'),
   files: array().of(
     object({
@@ -97,6 +101,10 @@ const initialState = {
   patio: false,
   balcony: false,
   elevator: false,
+  pool: false,
+  gym: false,
+  security: false,
+  socialArea: false,
   phone: '',
   files: [],
 }
@@ -114,6 +122,10 @@ const state = reactive<{
   patio: boolean
   balcony: boolean
   elevator: boolean
+  pool: boolean
+  gym: boolean
+  security: boolean
+  socialArea: boolean
   phone: string
   files: { file: File; url: string | undefined }[]
 }>({ ...initialState })
@@ -206,7 +218,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </div>
           <div class="form-group-input">
             <UFormGroup label="Metros cuadrados" name="area">
-              <UInput v-model="state.area" variant="none" placeholder="50²" inputmode="numeric" maxLength="3"
+              <UInput v-model="state.area" variant="none" placeholder="50²" inputmode="numeric" maxLength="4"
                 @keypress="restrictNonDigits" />
               <span class="absolute right-2 top-1/2 -translate-y-1/2">m²</span>
             </UFormGroup>
@@ -259,13 +271,25 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
         <div class="form-group-checkbox">
           <div class="form-group-item">
-            <Checkbox v-model="state.patio" label="Patio" name="patio" />
+            <Checkbox v-model="state.security" label="Portería" name="Portería" />
           </div>
           <div class="form-group-item">
             <Checkbox v-model="state.balcony" label="Balcón" name="balcony" />
           </div>
           <div class="form-group-item">
             <Checkbox v-model="state.elevator" label="Ascensor" name="elevator" />
+          </div>
+          <div class="form-group-item">
+            <Checkbox v-model="state.gym" label="Gym" name="gym" />
+          </div>
+          <div class="form-group-item">
+            <Checkbox v-model="state.pool" label="Piscina" name="Piscina" />
+          </div>
+          <div class="form-group-item">
+            <Checkbox v-model="state.socialArea" label="Área social" name="Área social" />
+          </div>
+          <div class="form-group-item">
+            <Checkbox v-model="state.patio" label="Patio" name="patio" />
           </div>
         </div>
 
