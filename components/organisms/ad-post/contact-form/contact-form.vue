@@ -151,18 +151,16 @@ function loadSavedState() {
   }
 }
 
-function resetForm() {
-  Object.assign(state, initialState)
-}
-
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true
-  console.log(event.data, typeOfPost, selectedPropertyType, param.value)
-  localStorage.removeItem('formState')
+
+  const loggedData = JSON.parse(JSON.stringify(event.data))
+  console.log('Initial data:', loggedData, typeOfPost, selectedPropertyType, param.value)
 
   setTimeout(() => {
     loading.value = false
-    resetForm()
+    Object.assign(state, { ...initialState })
+    console.log('Data after reset:', loggedData, typeOfPost, selectedPropertyType, param.value)
   }, 2000)
 }
 </script>
