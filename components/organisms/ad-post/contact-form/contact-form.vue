@@ -43,6 +43,7 @@ const schema = object({
   gym: boolean(),
   security: boolean(),
   socialArea: boolean(),
+  greenAreas: boolean(),
   phone: string().min(12, 'Debe de tener 10 digitos').max(12, 'Debe de tener 10 digitos').required('Required'),
   files: array().of(
     object({
@@ -109,6 +110,7 @@ const initialState = {
   gym: false,
   security: false,
   socialArea: false,
+  greenAreas: false,
   phone: '',
   files: [],
 }
@@ -131,6 +133,7 @@ const state = reactive<{
   gym: boolean
   security: boolean
   socialArea: boolean
+  greenAreas: boolean
   phone: string
   files: { file: File; url: string | undefined }[]
 }>({ ...initialState })
@@ -303,6 +306,9 @@ watchEffect(() => {
           </div>
           <div class="form-group-item">
             <Checkbox v-model="state.socialArea" label="Área social" name="Área social" />
+          </div>
+          <div class="form-group-item">
+            <Checkbox v-model="state.greenAreas" label="Áreas verdes" name="Áreas verdes" />
           </div>
           <div class="form-group-item">
             <Checkbox v-model="state.patio" label="Patio" name="patio" />
