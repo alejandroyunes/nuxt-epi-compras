@@ -33,6 +33,7 @@ const schema = object({
   area: string().required('Requerido'),
   rooms: string().required('Requerido'),
   baths: string().required('Requerido'),
+  propertyCondition: string().required('Requerido'),
   parking: string(),
   utilityRooms: string(),
   patio: boolean().required('Requerido'),
@@ -88,6 +89,8 @@ const cities = ['Bogotá',
   'Mitú',
   'Leticia']
 
+const propertyCondition = ['Nuevo', 'Usado']
+
 const initialState = {
   description: undefined,
   location: '',
@@ -96,6 +99,7 @@ const initialState = {
   area: '',
   rooms: '',
   baths: '',
+  propertyCondition: '',
   parking: '',
   utiliyRooms: '',
   patio: false,
@@ -117,6 +121,7 @@ const state = reactive<{
   area: string
   rooms: string
   baths: string
+  propertyCondition: string
   parking: string
   utiliyRooms: string
   patio: boolean
@@ -175,6 +180,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     console.log('Data after reset:', loggedData, typeOfPost, selectedPropertyType, param.value)
   }, 2000)
 }
+
+watchEffect(() => {
+  console.log(selectedPropertyType)
+})
 </script>
 
 <template>
@@ -226,12 +235,12 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         </div>
 
         <div class="form-group-inline">
-          <div class="form-group-input">
-            <UFormGroup label="Número de habitaciones" name="rooms">
-              <UInput v-model="state.rooms" variant="none" placeholder="2" maxLength="1" inputmode="numeric"
-                @keypress="restrictNonDigits" />
+          <div class="form-group-dropdown">
+            <UFormGroup label="Estado del inmueble" name="propertyCondition">
+              <UInputMenu v-model="state.propertyCondition" :options="propertyCondition" variant="none"
+                placeholder="Estado de la propiedad">
+              </UInputMenu>
             </UFormGroup>
-
           </div>
           <div class="form-group-input">
             <UFormGroup label="Número de baños" name="baths">
@@ -244,11 +253,22 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
         <div class="form-group-inline">
           <div class="form-group-input">
-            <UFormGroup label="Número de parqueaderos" name="parking">
-              <UInput v-model="state.parking" variant="none" placeholder="1" maxLength="1" inputmode="numeric"
+            <UFormGroup label="Número de habitaciones" name="rooms">
+              <UInput v-model="state.rooms" variant="none" placeholder="2" maxLength="1" inputmode="numeric"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
+          <div class="form-group-input">
+            <div class="form-group-input">
+              <UFormGroup label="Número de parqueaderos" name="parking">
+                <UInput v-model="state.parking" variant="none" placeholder="1" maxLength="1" inputmode="numeric"
+                  @keypress="restrictNonDigits" />
+              </UFormGroup>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Número de cuartos útiles" name="utiliyRooms">
               <UInput v-model="state.utiliyRooms" variant="none" placeholder="1" maxLength="1" inputmode="numeric"
@@ -256,17 +276,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             </UFormGroup>
 
           </div>
-        </div>
-
-        <div class="form-group-inline">
           <div class="form-group-input">
             <UFormGroup label="Teléfono de contacto" name="phone">
               <UInput v-model="state.phone" variant="none" placeholder="301 123 4567" inputmode="numeric" maxLength="12"
                 @keypress="restrictNonDigits" />
             </UFormGroup>
           </div>
-          <div class="form-group-input">
-          </div>
+
         </div>
 
         <div class="form-group-checkbox">

@@ -21,7 +21,7 @@ const isRentingOrSelling = ref(true)
 const isTypeOfProperySelected = ref(false)
 const isFormDetails = ref(false)
 
-const propertyTypes = ref(['Apartmentos', 'Casas', 'Bodega', 'Locales', 'Edificio', 'Habitaciones', 'Hoteles', 'Fincas', 'Consultorios', 'Terrenos y Lotes'])
+const propertyTypes = ref(['Apartmentos', 'Casas', 'Habitaciones', 'Locales', 'Consultorios', 'Bodega', 'Edificio', 'Hoteles', 'Fincas', 'Terrenos y Lotes'])
 const typeOfPost = ref<'isRenting' | 'isSelling' | undefined>(undefined)
 const selectedPropertyType = ref<string | undefined>(undefined)
 
@@ -58,10 +58,10 @@ const getPropertyIcon = (property: string | number) => {
   return {
     'Apartmentos': ApartmentColorSvg,
     'Casas': HouseColorSvg,
-    'Bodega': WareHouseSvg,
+    'Habitaciones': BedColorSvg,
     'Locales': ShopColorSvg,
     'Edificio': BuildingColorSvg,
-    'Habitaciones': BedColorSvg,
+    'Bodega': WareHouseSvg,
     'Hoteles': HotelColorSvg,
     'Fincas': FincaColorSvg,
     'Consultorios': ConsultorioColorSvg,
@@ -111,7 +111,8 @@ const getPropertyIcon = (property: string | number) => {
   <section v-if="isFormDetails">
     <TitlePost title="Empezemos describiendo el inmueble" />
     <GoBack :goBack="goBackSecondStep" />
-    <ContactForm v-if="typeOfPost && selectedPropertyType" :typeOfPost="typeOfPost" :selectedPropertyType="selectedPropertyType" />
+    <ContactForm v-if="typeOfPost && selectedPropertyType" :typeOfPost="typeOfPost"
+      :selectedPropertyType="selectedPropertyType" />
   </section>
 
 </template>
@@ -134,7 +135,7 @@ const getPropertyIcon = (property: string | number) => {
   max-width: var(--max-width);
   margin: 20px auto 0;
   padding: 0 .6rem;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
